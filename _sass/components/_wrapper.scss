@@ -1,0 +1,11 @@
+.main {
+    margin: 0 auto;
+    padding: 0 $spacing-unit;
+    max-width: $content-max-width;
+    @include media-query($on-laptop) {
+        padding: 0 $spacing-unit / 2;
+    }
+    @include media-query($on-palm) {
+        padding: 0 $spacing-unit / 2;
+    }
+}

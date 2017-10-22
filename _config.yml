@@ -1,0 +1,75 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+## Base settings ##
+# base_url: https://www.someone.com # **required!** The site's Protocol and Hostname e.g. https://blog.someone.com
+base_path: '/'
+title: XDa
+description: > #this means to ignore newlines until "nav_lists:"
+
+nav_lists:
+  - title: 关于作者
+    url: about.html
+
+description: 自学敲代码的一路走来
+
+## GitHub repository (if the site is hosted by GitHub) ##
+github_repo: yuxianda.github.io
+github_repo_tree: gh-pages #master
+
+## Language & timezone ##
+lang: zh #the language of your site
+timezone: Asia/Shanghai
+
+## Author & social ##
+author: yuxianda
+email:  yuxianda.tl@139.com
+# facebook_username:  #your Facebook username
+# twitter_username:  #your Twitter username
+github_username:  yuxianda
+# googleplus_username:  #your Google+ username
+# weibo_username:  #your Weibo username
+# douban_username:  #your Douban username
+# linkedin_username:  #your Linkedin username
+
+## Comment system (Disqus) ##
+# disqus_shortname:  #the Disqus shortname for the site
+
+## Google Analytics ##
+# ga_tracking_id:  #Google analytics id for the site
+
+## Reading quantity (LeanCloud) ##
+app_id:  7K148tCtirfVLlFmVhRmwv0o-gzGzoHsz
+app_key:  73rq7bMQQp81kQ1cBG9JDSvl
+app_class:  default
+
+## Paginate ##
+paginate: 5
+paginate_path: /blog/page:num
+
+## Post excerpts ##
+excerpt_separator: <!--more-->
+
+## Build ##
+markdown: kramdown
+highlighter: rouge
+permalink: none
+
+## Plugins ##
+gems:
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-paginate
+  - jemoji
+
+## Server ##
+server_url: "0.0.0.0"
+
+## Development ##
+isdebug: false
+source: /_posts
+categories: default
