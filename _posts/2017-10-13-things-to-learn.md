@@ -3,7 +3,7 @@ layout: post
 title: Xianda要学习的东西
 key: 2017-10-13
 categories: 
-tags: training
+tags: links
 ---
 
 本人计划要学习的知识点

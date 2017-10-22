@@ -3,7 +3,7 @@ layout: post
 title: JavaScript学习路线
 key: 2017-10-11
 categories: ppt
-tags: training
+tags: JavaScript ES6 闭包
 ---
 
 [如何评价《深入理解ES6》这本书？](https://www.zhihu.com/question/61333866)

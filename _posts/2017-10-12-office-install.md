@@ -3,7 +3,7 @@ layout: post
 title: 官方Office下载地址(msdn)及破解方法
 key: 2017-10-12
 categories: tech
-tags: training
+tags: office
 modify_date: 2017-10-12
 ---
 

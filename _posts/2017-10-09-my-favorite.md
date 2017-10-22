@@ -3,7 +3,7 @@ layout: post
 title: 收藏夹-Xianda
 key: 2017-10-09
 categories: notes
-tags: training
+tags: links
 modify_date: 2017-10-17
 ---
 

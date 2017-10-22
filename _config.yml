@@ -48,7 +48,7 @@ app_key:  73rq7bMQQp81kQ1cBG9JDSvl
 app_class:  default
 
 ## Paginate ##
-paginate: 5
+paginate: 6
 paginate_path: /blog/page:num
 
 ## Post excerpts ##
@@ -70,6 +70,6 @@ gems:
 server_url: "0.0.0.0"
 
 ## Development ##
-isdebug: false
+isdebug: true
 source: /_posts
 categories: default

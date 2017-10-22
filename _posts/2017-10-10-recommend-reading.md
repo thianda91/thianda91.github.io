@@ -3,7 +3,7 @@ layout: post
 title: 推荐阅读-Xianda
 key: 2017-10-10
 categories: ppt
-tags: training
+tags: links
 modify_date: 2017-10-22
 ---
 
