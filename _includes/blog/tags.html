@@ -16,7 +16,7 @@
 {% endif %}
 <div class="m-tags">
     <button type="button" class="article-tag tag-show-all round-rect-button" onclick="tagSelect('')">
-        Show All<div class="tag-count"> {{ site.posts | size }} </div>
+        显示全部<div class="tag-count"> {{ site.posts | size }} </div>
     </button>
     {% for tag in site.tags %}
         {% assign cur_size = tag[1].size %}
