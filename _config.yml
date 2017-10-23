@@ -13,7 +13,7 @@ description: > #this means to ignore newlines until "nav_lists:"
 
 nav_lists:
   - title: 关于作者
-    url: about.html
+    url: about
 
 description: 自学敲代码的一路走来
 

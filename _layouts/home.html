@@ -22,7 +22,7 @@ title: Blog
         <!-- Pagination links -->
         {% if paginator.total_pages > 1 %}
         <nav class="m-pagination">
-            <p>{{ site.posts | size }} post articles | {{ paginator.total_pages }} pages. </p>
+            <p>{{ site.posts | size }} 篇文章 | 共 {{ paginator.total_pages }} 页. </p>
             <ul class="clearfix">
             {% if paginator.previous_page %}
             <li><a class="round-button" href="{{ paginator.previous_page_path | prepend: site.base_path | replace: '//', '/' }}">

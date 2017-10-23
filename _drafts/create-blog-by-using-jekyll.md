@@ -3,8 +3,8 @@ layout: post
 title: 使用 Jekyll 搭建自己的 Github Pages
 key: 2017-10-22
 categories: notes
-tags: tech
-modify_date: 2017-10-22
+tags: notes
+modify_date: 2017-10-23
 ---
 
 记录一下本人第一次搭建git pages的过程。谨以此文记录一下自己的操作过程。
@@ -28,10 +28,14 @@ modify_date: 2017-10-22
 
 [使用 GitHub, Jekyll 打造自己的免费独立博客](http://blog.csdn.net/on_1y/article/details/19259435)
 
+[liquid模板语言 wiki](https://github.com/shopify/liquid/wiki/liquid-for-designers)
+
 
 ## windows上使用jekyll
 
 [windows 使用 ruby、jekyll 搭建 github pages](http://blog.csdn.net/u013009839/article/details/43742901)
+
+> makefile的使用
 
 ### 安装Ruby
 
