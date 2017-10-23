@@ -38,7 +38,8 @@ github_username:  yuxianda
 
 ## Comment system (Disqus) ##
 # disqus_shortname:  #the Disqus shortname for the site
-
+oauth_client_id: 3cf985525bee1d5f3163
+oauth_client_secret: 4aee7da629afdb3008c839fb89bc808dce63e875
 ## Google Analytics ##
 # ga_tracking_id:  #Google analytics id for the site
 

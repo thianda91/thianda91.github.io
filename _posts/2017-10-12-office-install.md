@@ -8,7 +8,7 @@ modify_date: 2017-10-12
 ---
 
 ### Office 官方各版本下载地址
-<https://msdn.itellyou.cn/>  
+<https://msdn.itellyou.cn/>   
 <http://www.msdn.hk/>  
 
 <!--more-->

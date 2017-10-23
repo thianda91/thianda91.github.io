@@ -7,7 +7,7 @@ tags: notes
 modify_date: 2017-10-23
 ---
 
-记录一下本人第一次搭建git pages的过程。谨以此文记录一下自己的操作过程。
+记录一下本人第一次搭建git pages的过程。谨以此文记录自己的操作过程。
 
 <!--more-->
 
@@ -26,7 +26,7 @@ modify_date: 2017-10-23
 
 [jekyll-now](https://github.com/barryclark/jekyll-now)
 
-[使用 GitHub, Jekyll 打造自己的免费独立博客](http://blog.csdn.net/on_1y/article/details/19259435)
+[使用 GitHub, Jekyll 打 造自己的免费独立博客](http://blog.csdn.net/on_1y/article/details/19259435)
 
 [liquid模板语言 wiki](https://github.com/shopify/liquid/wiki/liquid-for-designers)
 
@@ -71,7 +71,7 @@ modify_date: 2017-10-23
 > 本人貌似第一步 jekyll build 就报错了，还在查找原因中
 
 ```shell
-jekyll build
+$ jekyll build
 # => 当前文件夹中的内容将会生成到 ./site 文件夹中。
 
 $ jekyll build --destination <destination>
