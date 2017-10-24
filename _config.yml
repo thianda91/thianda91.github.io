@@ -19,7 +19,7 @@ description: 自学敲代码的一路走来
 
 ## GitHub repository (if the site is hosted by GitHub) ##
 github_repo: yuxianda.github.io
-github_repo_tree: gh-pages #master
+github_repo_tree: master
 
 ## Language & timezone ##
 lang: zh #the language of your site
@@ -72,6 +72,6 @@ gems:
 server_url: "0.0.0.0"
 
 ## Development ##
-isdebug: true
+isdebug: false
 source: /_posts
 categories: default
