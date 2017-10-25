@@ -23,7 +23,7 @@
 	{% endif %}
     <div class="other-wrapper">
         <div class="view-wrapper clearfix">
-            阅读量：
+            访问量：
 			<span class="article-view" id="post-key-{{ cur_page.key }}">0</span>
             &nbsp;|
         </div>
@@ -32,7 +32,7 @@
                 <span class="article-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
             {% elsif page %}
                 <time class="article-meta" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-                    {{ page.date | date: "%Y-%b-%d" }}
+                    {{ page.date | date: "%Y-%m-%d" }}
                 </time>
             {% endif %}
         </div>

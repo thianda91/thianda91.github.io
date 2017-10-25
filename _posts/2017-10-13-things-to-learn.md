@@ -2,7 +2,7 @@
 layout: post
 title: Xianda要学习的东西
 key: 2017-10-13
-categories: 
+#categories: 
 tags: links
 ---
 
@@ -16,4 +16,4 @@ tags: links
 - vue.js
 
 
-- git回退版本，远程仓库回退
+- git回退版本，远程仓库回退(give up)

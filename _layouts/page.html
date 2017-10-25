@@ -9,7 +9,7 @@ layout: blog-default
             {{ content }}
         </div>
         {% if page.comment == null or page.comment == true %}
-            <section>{% include utils/comment-disqus.html %}</section>
+            <section>{% include utils/comment-gitment.html %}</section>
         {% endif %}
     </article>
 </div>

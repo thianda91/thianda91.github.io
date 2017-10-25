@@ -30,6 +30,15 @@
         font-size: $h3-font-size;
         line-height: 1.5;
     }
+	/**
+    * Site sub-title
+    */
+    .site-sub-title {
+		padding-left: 20px;
+        display: inline-block;
+        font-size: $small-font-size;
+        line-height: 1.5;
+    }
     /**
     * Site nav (nav)
     */

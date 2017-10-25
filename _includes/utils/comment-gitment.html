@@ -1,17 +1,17 @@
 {% if site.gitment == true and page.key != null %}
 <div id="container"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<link rel="stylesheet" href="/statics/css/gitment-default.css">
 <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
 var gitment = new Gitment({
   id: '{{ page.key }}', // 可选。默认为 location.href
   owner: 'yuxianda',
-  repo: 'comment-gitment',
+  repo: 'yuxianda.github.io',
   oauth: {
-    client_id: '{{ site.oauth_client_id }}',
+    client_id: '{{ site.o'auth_client_id }}',
     client_secret: '{{ site.oauth_client_secret }}',
   },
-})
-gitment.render('container')
+});
+gitment.render('container');
 </script>
 {% endif %}

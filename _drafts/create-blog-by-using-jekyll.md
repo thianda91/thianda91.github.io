@@ -4,7 +4,7 @@ title: 使用 Jekyll 搭建自己的 Github Pages
 key: 2017-10-22
 categories: notes
 tags: notes
-modify_date: 2017-10-23
+modify_date: 2017-10-25 14:51:46
 ---
 
 记录一下本人第一次搭建git pages的过程。谨以此文记录自己的操作过程。
@@ -29,6 +29,10 @@ modify_date: 2017-10-23
 [使用 GitHub, Jekyll 打 造自己的免费独立博客](http://blog.csdn.net/on_1y/article/details/19259435)
 
 [liquid模板语言 wiki](https://github.com/shopify/liquid/wiki/liquid-for-designers)
+
+[Jekyll搭建写作环境问题集锦](http://www.jianshu.com/p/12e7e1f8007e)
+
+[Windows安装Jekll](https://segmentfault.com/a/1190000010195733)
 
 
 ## windows上使用jekyll
@@ -97,6 +101,10 @@ C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/bundler-1.15.4/lib/bundler/resolver.rb:39
 本人安装的是`CentOS-7-x86_64-DVD-1708.iso`镜像，提前安装好 VMWare Workstation。安装时软件选择->基本环境选的`GNOME桌面`，语言`中文简体`。然后点击`开始安装`，安装时设置好root账户密码。等待安装时过程中可以设置一个非root账户，结束后需要重启。然后进入 centos，右键打开终端，开始安装 jekyll 。
 
 > 如果不是root账户，安装过程中也许会提示权限不足，请在执行的命令前加上`sudo `，本人以下操作均是在root账户下操作。
+
+### 参考：
+
+[Ruby on Rails 入门之：(1) Ruby, Rails, gem, bundler相关软件的安装](http://blog.csdn.net/watkinsong/article/details/8012742)
 
 ### 安装 rvm
 

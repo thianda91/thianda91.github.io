@@ -21,7 +21,7 @@ layout: blog-base
                     <div class="article-meta">
                         最后更新于
                         <time datetime="{{ page.modify_date | date_to_xmlschema }}" itemprop="dateModified">
-                            {{ page.modify_date | date: "%b %-d, %Y" }}
+                            {{ page.modify_date | date: "%Y-%m-%d %H:%M:%S" }}
                         </time>
                     </div>
                     {% else %}
@@ -32,7 +32,7 @@ layout: blog-base
                     </div>
                 </footer>
                 {% if page.comment == null or page.comment == true %}
-                <section>{% include utils/comment-disqus.html %}</section>
+                <section>{% include utils/comment-gitment.html %}</section>
                 {% endif %}
             </article>
             <aside class="m-article-aside js-article-aside">

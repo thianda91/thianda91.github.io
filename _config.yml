@@ -59,10 +59,11 @@ excerpt_separator: <!--more-->
 ## Build ##
 markdown: kramdown
 highlighter: rouge
+#highlighter: pygments 
 permalink: none
 
 ## Plugins ##
-gems:
+plugins:
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-paginate
@@ -72,6 +73,5 @@ gems:
 server_url: "0.0.0.0"
 
 ## Development ##
-isdebug: false
-source: /_posts
+isdebug: true
 categories: default
