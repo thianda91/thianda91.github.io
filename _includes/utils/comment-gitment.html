@@ -1,9 +1,10 @@
-{% if site.gitment == true and page.key != null and https://site.github_repo == site.url %}
+{% if site.gitment == true and page.key != null %}
 
 <div id="container"></div>
 <link rel="stylesheet" href="/statics/css/gitment-default.css">
 <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
+if("{{site.url}}"=="https://{{site.github_repo}}"){
 var gitment = new Gitment({
   id: '{{ page.key }}', // 可选。默认为 location.href
   owner: 'yuxianda',
@@ -14,6 +15,6 @@ var gitment = new Gitment({
   },
 });
 gitment.render('container');
+}
 </script>
 {% endif %}
-https://{{site.github_repo}}----{{site.url}}
