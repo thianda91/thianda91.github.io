@@ -32,7 +32,7 @@
                 <span class="article-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
             {% elsif page %}
                 <time class="article-meta" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-                    {{ page.date | date: "%Y-%m-%d" }}
+                    {{ page.date | date: "%Y-%m-%d %H:%M:%S" }}
                 </time>
             {% endif %}
         </div>

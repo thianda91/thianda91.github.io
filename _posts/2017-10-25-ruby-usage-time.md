@@ -2,10 +2,12 @@
 layout: post
 title: Ruby 时间日期用法
 key: 2017-10-25
+date: 2017-10-25 22:51:47
 categories: notes
 tags: notes
 ---
-### `Time`类相关
+
+### Time类相关
 格式化应用实例：
 
 ```ruby

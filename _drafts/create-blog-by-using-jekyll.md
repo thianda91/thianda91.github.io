@@ -2,21 +2,25 @@
 layout: post
 title: 使用 Jekyll 搭建自己的 Github Pages
 key: 2017-10-22
+date: 2017-10-26 23:47:47
 categories: notes
 tags: notes
-modify_date: 2017-10-25 14:51:46
+modify_date: 2017-10-26 23:47:47
 ---
 
 记录一下本人第一次搭建git pages的过程。谨以此文记录自己的操作过程。
 
 <!--more-->
 
-有时间我一定会仔细阅读[官方文档](http://jekyll.com.cn/docs/home/)的。也希望大家完整阅读。
+想要操作高级玩法，一定要仔细阅读[官方文档](http://jekyll.com.cn/docs/home/)。了解liquid语法，yaml语法，jekyll架构。以及相关的和天没来
+，css，javascript基础。
 
-因为需要使用ruby语言，之前从未接触过它，对此有很大的抵触。网上找了很多教程都是基于MAC或者Linux系统的，本人使用win10，很怕弄不会又没有相关资料，于是还特意折腾了虚拟机安装了centos。按照教程一步步来，结果实际情况还是和各种教程的描述不一致。搞得本人头很大。后来耐心的查阅了很多资料，对github pages、jekyll及其相关工具有了更深的认识，于是照猫画虎的搭建成功了。接下来打算慢慢的修改成自己想要的样子。
+因为需要使用ruby语言，本人之前从未接触过它，对此有很大的抵触。网上找了很多教程都是基于MAC或者Linux系统的，本人使用win10，很怕弄不会又没有相关资料，于是还特意折腾了虚拟机安装了centos。按照教程一步步来，结果实际情况还是和各种教程的描述不一致。搞得本人头很大。后来耐心的查阅了很多资料，对github pages、jekyll及其相关工具有了更深的认识，于是照猫画虎的搭建成功了。接下来打算慢慢的修改成自己想要的样子。
 
 
 ## jekyll 相关链接
+
+Liquid wiki(https://github.com/Shopify/liquid/wiki)
 
 [Xianda选的模板](https://github.com/kitian616/jekyll-TeXt-theme)
 
