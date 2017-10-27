@@ -18,7 +18,7 @@ layout: blog-base
 
                 <footer>
                     {% if page.modify_date %}
-                    <div class="article-meta">
+                    <div class="article-meta" style='font-size: 0.8em; color: #6e6;'>
                         最后更新于
                         <time datetime="{{ page.modify_date | date_to_xmlschema }}" itemprop="dateModified">
                             {{ page.modify_date | date: "%Y-%m-%d %H:%M:%S" }}

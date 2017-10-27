@@ -20,7 +20,7 @@ modify_date: 2017-10-26 23:47:47
 
 ## jekyll 相关链接
 
-Liquid wiki(https://github.com/Shopify/liquid/wiki)
+[Liquid 模板语言 wiki](https://github.com/Shopify/liquid/wiki)
 
 [Xianda选的模板](https://github.com/kitian616/jekyll-TeXt-theme)
 
@@ -30,9 +30,7 @@ Liquid wiki(https://github.com/Shopify/liquid/wiki)
 
 [jekyll-now](https://github.com/barryclark/jekyll-now)
 
-[使用 GitHub, Jekyll 打 造自己的免费独立博客](http://blog.csdn.net/on_1y/article/details/19259435)
-
-[liquid模板语言 wiki](https://github.com/shopify/liquid/wiki/liquid-for-designers)
+[使用 GitHub, Jekyll 打造自己的免费独立博客](http://blog.csdn.net/on_1y/article/details/19259435)
 
 [Jekyll搭建写作环境问题集锦](http://www.jianshu.com/p/12e7e1f8007e)
 
@@ -47,7 +45,7 @@ Liquid wiki(https://github.com/Shopify/liquid/wiki)
 
 ### 安装Ruby
 
-在官网`https://rubyinstaller.org/downloads/`下载ruby，windows系统推荐使用[RubyInstaller](https://rubyinstaller.org/downloads/)。本人下载了.exe安装，会自动添加路径到path变量中。
+在官网`https://rubyinstaller.org/downloads/`下载ruby，windows系统推荐使用[RubyInstaller](https://rubyinstaller.org/downloads/)。本人下载了`.exe`安装，会自动添加路径到path变量中。
 
 安装完毕可以输入`ruby -v`验证。
 
@@ -76,7 +74,6 @@ Liquid wiki(https://github.com/Shopify/liquid/wiki)
 
 ### Jekyll 操作教程
 
-> 本人貌似第一步 jekyll build 就报错了，还在查找原因中
 
 ```shell
 $ jekyll build
@@ -92,11 +89,6 @@ $ jekyll build --watch
 
 # => 当前文件夹中的内容将会生成到 ./site 文件夹中，
 # 查看改变，并且自动再生成。
-```
-
-报错信息：
-```shell
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/bundler-1.15.4/lib/bundler/resolver.rb:396:in `block in verify_gemfile_dependencies_are_found!': Could not find gem 'github-pages (= 104) x64-mingw32' in any of the gem sources listed in your Gemfile. (Bundler::GemNotFound)
 ```
 
 

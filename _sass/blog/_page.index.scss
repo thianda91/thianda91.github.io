@@ -12,8 +12,13 @@
                 color: $text-color-d;
             }
         }
-        margin: $spacing-unit 0;
-    }
+        /*margin: $spacing-unit 0;*/
+		.boder_bottonm{
+			height: 10px;
+			width: 100%;
+			background: linear-gradient(to right, $main-color-1 0%, $main-color-2 50%, $main-color-1 100%);
+		}
+	}
     .m-article-content {
         img {
             max-height: 200px;
