@@ -1,11 +1,11 @@
 ---
 layout: post
 title: 使用 Jekyll 搭建自己的 Github Pages
-key: 2017-10-22
-date: 2017-10-26 23:47:47
+key: 2017-10-30
+date: 2017-10-30 16:46:38
 categories: notes
-tags: notes
-modify_date: 2017-10-26 23:47:47
+tags: jekyll 
+modify_date: 2017-10-31 01:41:16
 ---
 
 记录一下本人第一次搭建git pages的过程。谨以此文记录自己的操作过程。
@@ -90,6 +90,27 @@ $ jekyll build --watch
 # => 当前文件夹中的内容将会生成到 ./site 文件夹中，
 # 查看改变，并且自动再生成。
 ```
+
+### 搭建环境问题处理
+
+搭建后执行jekyll命令如果出现报错，多为配置环境的问题。通常根据报错信息安装对应的依赖包即可，如：
+
+````shell
+gem install tzinfo-data
+````
+
+或者在根目录下的`Gemfile`文件里输入：
+
+```ruby
+gem 'tzinfo-data'
+```
+
+###　.svg 文件转 .png 和 .ico 文件工具
+
+首先需要nodejs环境，官网下载即可。然后需要使用npm下载，npm服务器下载比较慢，可以选择淘宝镜像，具体操作见：<https://npm.taobao.org/>  
+
+可参考：[网站图标生成](https://github.com/kitian616/jekyll-TeXt-theme#%E7%BD%91%E7%AB%99%E5%9B%BE%E6%A0%87)  
+
 
 
 ## CentOS上使用jekyll
