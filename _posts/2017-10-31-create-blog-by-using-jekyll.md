@@ -12,8 +12,7 @@ modify_date: 2017-10-31 01:41:16
 
 <!--more-->
 
-想要操作高级玩法，一定要仔细阅读[官方文档](http://jekyll.com.cn/docs/home/)。了解liquid语法，yaml语法，jekyll架构。以及相关的和天没来
-，css，javascript基础。
+想要操作高级玩法，一定要仔细阅读[官方文档](http://jekyll.com.cn/docs/home/)。了解`liquid`语法，`yaml`语法，`jekyll`架构。以及相关的HTML，css，javascript基础。
 
 因为需要使用ruby语言，本人之前从未接触过它，对此有很大的抵触。网上找了很多教程都是基于MAC或者Linux系统的，本人使用win10，很怕弄不会又没有相关资料，于是还特意折腾了虚拟机安装了centos。按照教程一步步来，结果实际情况还是和各种教程的描述不一致。搞得本人头很大。后来耐心的查阅了很多资料，对github pages、jekyll及其相关工具有了更深的认识，于是照猫画虎的搭建成功了。接下来打算慢慢的修改成自己想要的样子。
 

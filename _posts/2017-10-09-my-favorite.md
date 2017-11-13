@@ -35,3 +35,5 @@ modify_date: 2017-10-17
 
 [如何使用 Issue 管理软件项目？](http://www.ruanyifeng.com/blog/2017/08/issue.html)
 
+### 2017-11-06
+[Ajax的全面总结](https://segmentfault.com/a/1190000010832550)
