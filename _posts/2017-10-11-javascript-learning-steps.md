@@ -4,85 +4,31 @@ title: JavaScript学习路线
 key: 2017-10-11
 categories: ppt
 tags: JavaScript ES6
+date: 2017-10-11
+modify_date: 2017-11-14 15:13:34
 ---
 
 [如何评价《深入理解ES6》这本书？](https://www.zhihu.com/question/61333866)
+[如何循序渐进、有效地学习JavaScript？](https://www.zhihu.com/question/19713563 )
+
+### 推荐阅读的开源电子书：
+
+[JavaScript 标准参考教程](http://javascript.ruanyifeng.com)  
+[ECMAScript 6 入门](http://es6.ruanyifeng.com)
 
 <!--more-->
 
 ### javascript基础
 
+[JavaScript 参考手册](http://w3school.com.cn/jsref/ )
 
-### [JavaScript 对象参考手册](http://w3school.com.cn/jsref/ )
-
-本参考手册描述每个对象的属性和方法，并提供实例。
-
-- Array
-- Boolean
-- Date
-- Math
-- Number
-- String
-- RegExp
-- Global
-
-### Browser 对象参考手册
-
-本参考手册描述每个对象的属性和方法，并提供实例。
-
-- Window
-- Navigator
-- Screen
-- History
-- Location
-
-### HTML DOM 对象参考手册
-
-- DOM Document 文档
-- DOM Element 元素
-- DOM Attribute 属性
-- DOM Event 事件
-
-
-
-本参考手册描述每个对象的属性和方法，并提供实例。
-
-- Document
-- Anchor
-- Area
-- Base
-- Body
-- Button
-- Canvas
-- Event
-- Form
-- Frame
-- Frameset
-- IFrame
-- Image
-- Input Button
-- Input Checkbox
-- Input File
-- Input Hidden
-- Input Password
-- Input Radio
-- Input Reset
-- Input Submit
-- Input Text
-- Link
-- Meta
-- Object
-- Option
-- Select
-- Style
-- Table
-- TableCell : td
-- TableRow : tr
-- Textarea
+- JavaScript 对象参考手册
+- Browser 对象参考手册
+- HTML DOM 对象参考手册
 
 ### IIFE :immediately-invoked function expression 及时执行方法
 
-```
+```javascript
 (function (window, document, undefined) {  
 	//   
 })(window, document);  
@@ -99,11 +45,6 @@ tags: JavaScript ES6
 http://www.ruanyifeng.com/blog/2016/01/babel.html
 
 配置文件：`.babelrc`
-
-### ECMAScript 6 入门
-
-http://es6.ruanyifeng.com/  
-
 
 ### webpack
 

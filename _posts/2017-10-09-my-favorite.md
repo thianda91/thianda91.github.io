@@ -4,7 +4,8 @@ title: 收藏夹-Xianda
 key: 2017-10-09
 categories: notes
 tags: links
-modify_date: 2017-10-17
+date: 2017-10-09
+modify_date: 2017-11-14 15:14:20
 ---
 
 <!--more-->
@@ -35,5 +36,8 @@ modify_date: 2017-10-17
 
 [如何使用 Issue 管理软件项目？](http://www.ruanyifeng.com/blog/2017/08/issue.html)
 
-### 2017-11-06
+### 2017-11-06  
 [Ajax的全面总结](https://segmentfault.com/a/1190000010832550)
+
+### 2017-11-14  
+[JS中的prototype](https://www.cnblogs.com/yjf512/archive/2011/06/03/2071914.html)
