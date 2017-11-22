@@ -16,6 +16,7 @@ modify_date: 2017-11-13 11:43:39
 
 在项目的根目录下，新建文件`CHANGELOG.md`，然后根据时间倒序记录更新历史。即最新的版本更新记录写在最前面。
 
+```markdown
 {% highlight markdown %}
 #### v1.1.0 (2017-11-13)
 
@@ -39,6 +40,7 @@ modify_date: 2017-11-13 11:43:39
 
 - Initial release
 {% endhighlight %}
+```
 
 以上为例子，可以看出其特点。书写规范是本人仿的[weui](https://github.com/Tencent/weui/blob/master/CHANGELOG.md)。  
 其实规范并不是一成不变，满足需求，适合自己的习惯即可。

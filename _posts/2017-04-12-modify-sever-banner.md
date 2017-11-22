@@ -5,17 +5,30 @@ key: 2017-04-12
 tags: safe
 categories: notes
 date: 2017-04-12 10:35
-modify_date: 2017-04-12 10:35
+modify_date: 2017-11-22 10:12:30
 ---
 
 ## 干货写在前面
-httpd.conf配置
+### IIS web.config配置 
+```xml
+<!-- 下面的配置修改 HTTP RESPONSE header 中的 Server 消息-->
+  <rewrite>
+    <outboundRules>
+      <rule name="Modify RESPONSE_Server">
+        <match serverVariable="RESPONSE_Server" pattern=".+" />
+        <action type="Rewrite" value="XiandaWebServer" />
+      </rule>
+    </outboundRules>
+  </rewrite>
+```
+### Apache httpd.conf配置
 ```ini
 ServerTokens ProductOnly
 ServerSignature Off
 ProxyVia Block
 ```
-php.ini配置
+### PHP php.ini配置
+
 ```ini
 expose_php=Off
 ```

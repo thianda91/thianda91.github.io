@@ -8,7 +8,7 @@ date: 2017-10-11
 modify_date: 2017-11-14 15:13:34
 ---
 
-[如何评价《深入理解ES6》这本书？](https://www.zhihu.com/question/61333866)
+[如何评价《深入理解ES6》这本书？](https://www.zhihu.com/question/61333866 )  
 [如何循序渐进、有效地学习JavaScript？](https://www.zhihu.com/question/19713563 )
 
 ### 推荐阅读的开源电子书：

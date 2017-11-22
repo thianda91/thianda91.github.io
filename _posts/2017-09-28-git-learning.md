@@ -181,7 +181,8 @@ git branch -d dev  # 删除本地dev分支
 
 #### 其他命令：
 
-```shell
+```sh
+git push -u origin master
 git log
 git reflog
 ssh-keygen -t rsa -C "You@example.com"
