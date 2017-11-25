@@ -5,12 +5,13 @@ key: 2017-10-30
 date: 2017-10-30 16:46:38
 categories: notes
 tags: jekyll 
-modify_date: 2017-10-31 01:41:16
+modify_date: 2017-11-25 20:21:19
 ---
 
 记录一下本人第一次搭建git pages的过程。谨以此文记录自己的操作过程。
 
 <!--more-->
+
 
 想要操作高级玩法，一定要仔细阅读[官方文档](http://jekyll.com.cn/docs/home/)。了解`liquid`语法，`yaml`语法，`jekyll`架构。以及相关的HTML，css，javascript基础。
 
@@ -44,13 +45,13 @@ modify_date: 2017-10-31 01:41:16
 
 ### 安装Ruby
 
-在官网`https://rubyinstaller.org/downloads/`下载ruby，windows系统推荐使用[RubyInstaller](https://rubyinstaller.org/downloads/)。本人下载了`.exe`安装，会自动添加路径到path变量中。
+在[官网](https://rubyinstaller.org)下载ruby，windows系统推荐使用[RubyInstaller](https://rubyinstaller.org/downloads/)。本人下载了`.exe`安装，会自动添加路径到path变量中。
 
 安装完毕可以输入`ruby -v`验证。
 
 ### 安装RubyGems
 
-1. 官网下载[RubyGems](https://rubyinstaller.org/downloads/)的zip包
+1. 官网下载[RubyGems](https://rubygems.org/pages/download)的zip包
 2. 解压zip文件并在命令行（cmd/git bash均可）cd到该目录
 3. 输入`ruby setup.rb`（管理员权限）
 
@@ -76,7 +77,7 @@ modify_date: 2017-10-31 01:41:16
 
 ```shell
 $ jekyll build
-# => 当前文件夹中的内容将会生成到 ./site 文件夹中。
+# => 当前文件夹中的内容将会生成到 ./_site 文件夹中。
 
 $ jekyll build --destination <destination>
 # => 当前文件夹中的内容将会生成到目标文件夹<destination>中。
@@ -86,7 +87,7 @@ $ jekyll build --source <source> --destination <destination>
 
 $ jekyll build --watch
 
-# => 当前文件夹中的内容将会生成到 ./site 文件夹中，
+# => 当前文件夹中的内容将会生成到 ./_site 文件夹中，
 # 查看改变，并且自动再生成。
 ```
 
@@ -94,7 +95,7 @@ $ jekyll build --watch
 
 搭建后执行jekyll命令如果出现报错，多为配置环境的问题。通常根据报错信息安装对应的依赖包即可，如：
 
-````shell
+````sh
 gem install tzinfo-data
 ````
 
@@ -106,13 +107,47 @@ gem 'tzinfo-data'
 
 ###　.svg 文件转 .png 和 .ico 文件工具
 
-首先需要nodejs环境，官网下载即可。然后需要使用npm下载，npm服务器下载比较慢，可以选择淘宝镜像，具体操作见：<https://npm.taobao.org/>  
+首先需要nodejs环境，官网下载即可。然后需要使用npm下载，npm服务器下载比较慢，可以选择淘宝镜像，具体操作见：<https://npm.taobao.org/>
 
-可参考：[网站图标生成](https://github.com/kitian616/jekyll-TeXt-theme#%E7%BD%91%E7%AB%99%E5%9B%BE%E6%A0%87)  
+```bash
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+```
+
+可参考：[网站图标生成](https://github.com/kitian616/jekyll-TeXt-theme#%E7%BD%91%E7%AB%99%E5%9B%BE%E6%A0%87)  。
 
 
 
-## CentOS上使用jekyll
+
+
+## 拓展阅读
+
+### 基于php的markdown博客搭建工具-gitblog
+
+[gitblog官网](http://www.gitblog.cn/)， [github地址](https://github.com/jockchou/gitblog)
+
+### 基于NodeJs的markdown博客搭建工具-hexo
+
+[hexo官网](https://hexo.io/)，[github地址](https://github.com/hexojs/hexo)
+
+### 基于NodeJs的jekyll翻版工具-darko
+
+[github地址](https://github.com/dotnil/darko)
+
+> <https://github.com/thx/thx.github.io/blob/master/README.md>
+
+
+
+
+
+
+
+
+
+
+
+
+
+## CentOS上使用jekyll（未完待续）
 
 本人安装的是`CentOS-7-x86_64-DVD-1708.iso`镜像，提前安装好 VMWare Workstation。安装时软件选择->基本环境选的`GNOME桌面`，语言`中文简体`。然后点击`开始安装`，安装时设置好root账户密码。等待安装时过程中可以设置一个非root账户，结束后需要重启。然后进入 centos，右键打开终端，开始安装 jekyll 。
 

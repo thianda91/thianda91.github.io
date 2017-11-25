@@ -10,6 +10,18 @@ modify_date: 2017-11-14 15:14:20
 
 <!--more-->
 
+### 2017-11-25
+
+- LaTeX 基于ΤΕΧ的排版系统，优雅的编辑word
+
+### 2017-11-21
+
+基于thinkphp5的后台模板框架：
+
+- [http://www.thinkphp.cn/code/2200.html](https://github.com/xs47968224/Thinkphp-5.0-backend-template)
+- https://github.com/Aierui/tp-admin
+- EacooPHP
+
 ### 2017-11-14  
 [JS中的prototype](https://www.cnblogs.com/yjf512/archive/2011/06/03/2071914.html)
 
@@ -41,12 +53,3 @@ modify_date: 2017-11-14 15:14:20
 
 [关于 JavaScript 的好书有哪些](https://www.zhihu.com/question/19562698)  
 
-
-
-### 2017-11-21
-
-基于thinkphp5的后台模板框架：
-
-- [http://www.thinkphp.cn/code/2200.html](https://github.com/xs47968224/Thinkphp-5.0-backend-template)
-- https://github.com/Aierui/tp-admin
-- EacooPHP
