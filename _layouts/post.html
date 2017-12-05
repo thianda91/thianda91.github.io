@@ -11,13 +11,7 @@ layout: blog-base
                     <h1 itemprop="headline" class="article-title" itemprop="name headline">{{ page.title }}</h1>
                     {% include blog/article-data.html %}
                 </header>
-
-                <div class="m-article-content js-article-content" itemprop="articleBody">
-                    {{ content }}
-                </div>
-
-                <footer>
-                    {% if page.modify_date %}
+					{% if page.modify_date %}
                     <div class="article-meta" style='font-size: 0.8em; color: #6e6;'>
                         最后更新于
                         <time datetime="{{ page.modify_date | date_to_xmlschema }}" itemprop="dateModified">
@@ -27,6 +21,10 @@ layout: blog-base
                     {% else %}
                     <meta itemprop="dateModified" content="{{ page.date | date_to_xmlschema }}">
                     {% endif %}
+                <div class="m-article-content js-article-content" itemprop="articleBody">
+                    {{ content }}
+                </div>
+                <footer>
                     <div class="article-license">
                         {% include blog/license.html %}
                     </div>
@@ -181,16 +179,18 @@ layout: blog-base
                 }
 
                 function addOne(page) {
-                    page.increment('views', 1);
-                    page.fetchWhenSave(true);
-                    page.save().then(function(page) {
-                        $("#post-key-{{ page.key }}").text(page.attributes.views);
-                    }, function(error) {
-                        if (error) {
-                            throw error;
-                        }
-                    });
-                }
+					if("{{site.url}}"=="https://{{site.github_repo}}"){
+						page.increment('views', 1);
+					}
+					page.fetchWhenSave(true);
+					page.save().then(function(page) {
+						$("#post-key-{{ page.key }}").text(page.attributes.views);
+					}, function(error) {
+						if (error) {
+							throw error;
+						}
+					});
+				}
             }, function(error) {
                 if (error) {
                     throw error;

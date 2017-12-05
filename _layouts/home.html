@@ -12,8 +12,13 @@ title: Blog
                     <a class="article-link" href="{{ post.url | prepend: site.base_path | replace: '//', '/' }}">{{ post.title }}</a>
                 </h1>
                 <div class="m-article-content">
-                    {{ post.excerpt }}
+                    {% if site.excerpt_type == 'html' %}
+					  {{ post.excerpt }}
+					{% else %}
+					  {{ post.excerpt | strip_html | truncate: 150 }}
+					{% endif %}
                 </div>
+				<a href="{{ post.url | prepend: site.base_path | replace: '//', '/' }}">阅读全文...</a>
                 {% include blog/article-data.html %}
 				<div class="boder_bottonm"></div>
             </article>

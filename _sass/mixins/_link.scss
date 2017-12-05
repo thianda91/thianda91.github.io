@@ -19,3 +19,21 @@
         @content;
     }
 };
+
+@mixin link-text-colors($nc, $ec) {
+  @include link-normal {
+    color: $nc;
+  }
+  @include link-emphasize {
+    color: $ec;
+  }
+}
+
+@mixin link-background-colors($nbc, $ebc) {
+  @include link-normal {
+    background-color: $nbc;
+  }
+  @include link-emphasize {
+    background-color: $ebc;
+  }
+}
