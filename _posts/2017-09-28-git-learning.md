@@ -15,7 +15,7 @@ modify_date: 2017-10-23
 
 大家想系统学习我推荐这个：[史上最浅显易懂的Git教程！](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
 
-> https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
+或者阅读[官方教程](https://git-scm.com/book/zh)，中文的。
 
 ## Git安装配置
 
@@ -185,7 +185,7 @@ git branch -d dev  # 删除本地dev分支
 git push -u origin master
 git log
 git reflog
-ssh-keygen -t rsa -C "You@example.com"
+ssh-keygen -t rsa -C "yxd9721@qq.com"
 ```
 
 ### 3. 使用github.com
@@ -194,33 +194,20 @@ ssh-keygen -t rsa -C "You@example.com"
 
 ```shell
 // 1. 创建 ssh key，出现提示一路按回车
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-// 2. 让 ssh-agent 自后台运行 (start the ssh-agent in the background)
+ssh-keygen -t rsa -b 4096 -C "yxd9721@qq.com"
+// 2. 让 ssh-agent 在后台运行 (start the ssh-agent in the background)
 eval $(ssh-agent -s)
 // 3. 指定密钥给本地ssh-agent
 ssh-add ~/.ssh/id_rsa
 // 4. 复制公钥，然后粘贴到github->Setting->SSH and GPG keys->New SSH key
 clip < ~/.ssh/id_rsa.pub
+// 5. 验证ssh key
+ssh -T git@github.com
 ```
 
-第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：
+**使用方法**
 
-```shell
-$ ssh-keygen -t rsa -C "youremail@example.com"
-```
-
-你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可，由于这个Key也不是用于军事目的，所以也无需设置密码。
-
-如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。
-
-第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：
-
-然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：
-![廖雪峰的blog图片](https://www.liaoxuefeng.com/files/attachments/001384908342205cc1234dfe1b541ff88b90b44b30360da000/0)
-
-> 图片来自： [廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013752340242354807e192f02a44359908df8a5643103a000)
-
-点“Add Key”，你就应该看到已经添加的Key。
+> 在git-bash中使用ssh协议的链接进行clone和push，即可基于ssh key免输密码。
 
 #### 设置启动git bath后自动运行ssh-agent
 
@@ -251,6 +238,29 @@ fi
 
 unset env
 ```
+
+
+#### 详细讲解：
+
+第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：
+
+```shell
+$ ssh-keygen -t rsa -C "youremail@example.com"
+```
+
+你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可，由于这个Key也不是用于军事目的，所以也无需设置密码。
+
+如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。
+
+第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：
+
+然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：
+![廖雪峰的blog图片](https://www.liaoxuefeng.com/files/attachments/001384908342205cc1234dfe1b541ff88b90b44b30360da000/0)
+
+> 图片来自： [廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013752340242354807e192f02a44359908df8a5643103a000)
+
+点“Add Key”，你就应该看到已经添加的Key。
+
 
 ### 参考：
 

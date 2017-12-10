@@ -185,7 +185,7 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 
 
 
-## CentOS上使用jekyll（未完待续）
+## CentOS上使用jekyll（未完停更）
 
 本人安装的是`CentOS-7-x86_64-DVD-1708.iso`镜像，提前安装好 VMWare Workstation。安装时软件选择->基本环境选的`GNOME桌面`，语言`中文简体`。然后点击`开始安装`，安装时设置好root账户密码。等待安装时过程中可以设置一个非root账户，结束后需要重启。然后进入 centos，右键打开终端，开始安装 jekyll 。
 
