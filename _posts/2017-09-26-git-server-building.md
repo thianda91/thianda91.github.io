@@ -101,5 +101,7 @@ gitblit docs
 
 ### 使用Gogs
 
-未完待续...
+https://gogs.io/docs/installation
+
+基本上直接解压运行即可，个性化设置可按照官方文档修改，使用起来和github一样。非常方便
 

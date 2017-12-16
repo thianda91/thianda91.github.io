@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 
+title: 热备份路由器协议（HSRP概述）
 key: 2017-12-07
-tags: stp
+tags: HSRP
 categories: mdcn
 date: 2017-12-07 09:02:37
 modify_date: 2017-12-07 16:56:30

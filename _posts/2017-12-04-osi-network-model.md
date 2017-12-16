@@ -30,6 +30,9 @@ modify_date: 2017-12-04 16:45:26
 
 PDU：Protocol Data Unit
 
+![图解OSI模型](../statics/images/osi-network-model/osi.gif)  
+[查看原图](../statics/images/osi-network-model/osi.gif)
+
 ## TCP/IP协议栈
 
 | 层              | 对应的OSI模型层级 |
@@ -138,6 +141,6 @@ C: 192.168.0.0 -- 192.168.255.255
 
 > 三次握手
 
-###ARP
+### ARP
 
 > 已知IP，获取MAC
