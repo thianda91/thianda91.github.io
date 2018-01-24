@@ -5,23 +5,32 @@ key: 2017-04-12
 tags: safe
 categories: notes
 date: 2017-04-12 10:35
-modify_date: 2017-11-22 10:12:30
+modify_date: 2018-01-25 00:41:28
 ---
 
 ## 干货写在前面
 ### IIS web.config配置 
 ```xml
 <!-- 下面的配置修改 HTTP RESPONSE header 中的 Server 消息-->
+<system.webServer>
   <rewrite>
     <outboundRules>
       <rule name="Modify RESPONSE_Server">
         <match serverVariable="RESPONSE_Server" pattern=".+" />
-        <action type="Rewrite" value="XiandaWebServer" />
+        <action type="Rewrite" value="XiandaWebServer" />  <!-- 修改Server值 -->
       </rule>
     </outboundRules>
   </rewrite>
+</system.webServer>
+<system.web>
+  <sessionState cookieName="_Xianda" />  <!-- 修改ASP.NET_SessionId名称 -->
+  <httpRuntime enableVersionHeader="false" />  <!-- 移除不必要的响应头 -->
+</system.web>
 ```
+使用IIS管理器，在HTTP响应头模块中可设置修改`X-Powered-By`的值。
+
 ### Apache httpd.conf配置
+
 ```ini
 ServerTokens ProductOnly
 ServerSignature Off
@@ -31,6 +40,7 @@ ProxyVia Block
 
 ```ini
 expose_php=Off
+session.name=__Xianda
 ```
 
 <!--more-->
