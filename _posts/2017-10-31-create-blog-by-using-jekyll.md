@@ -53,7 +53,7 @@ modify_date: 2017-11-25 20:21:19
 
 ### 安装RubyGems、Bundler
 
-*其实使用`RubyInstaller`会自动安装了`gem`。可直接输入`gem -v`验证。*
+*其实使用`RubyInstaller`安装Ruby时会自动安装`gem`。可直接输入`gem -v`验证。*
 
 > 1. 官网下载[RubyGems](https://rubygems.org/pages/download)的zip包
 > 2. 解压zip文件并在命令行（cmd/git bash均可）cd到该目录
@@ -117,12 +117,10 @@ $ jekyll build --source <source> --destination <destination>
 # => 指定源文件夹<source>中的内容将会生成到目标文件夹<destination>中。
 
 $ jekyll build --watch
-
 # => 当前文件夹中的内容将会生成到 ./_site 文件夹中，
 # 查看改变，并且自动再生成。
 
 $ jekyll serve
-
 # => 当前文件夹中的内容将会生成到 ./_site 文件夹中。并搭建web服务。
 # 可访问 http://localhost:4000 查看，方便本地调试。
 ```
@@ -132,7 +130,7 @@ $ jekyll serve
 搭建后执行jekyll命令如果出现报错，多为配置环境的问题。第一种方法通常是根据报错信息安装对应的依赖包即可，如：
 
 ````sh
-gem install tzinfo-data
+$ gem install tzinfo-data
 ````
 
 或者第二种方法，在根目录下的`Gemfile`文件里输入：
@@ -141,7 +139,7 @@ gem install tzinfo-data
 gem 'tzinfo-data'
 ```
 
-本人使用`gem install xxx`会出错，采用的第二种方法。
+若提示缺少该依赖，且使用`gem install xxx`命令提示出错，有可能已经安装了该依赖包的低级版本。请使用第二种方法，并执行`bundle update`以及`gem cleanup`删除低版本。
 
 ###　.svg 文件转 .png 和 .ico 文件工具
 

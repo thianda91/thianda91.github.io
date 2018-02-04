@@ -20,3 +20,111 @@ __  __ _   __ _  _ __    __| |  __ _
 
 
 ```
+<style>
+pre.img {
+    font-size: 8pt;
+    letter-spacing: 4px;
+    line-height: 8pt;
+    font-weight: bold;
+}
+</style>
+<pre class="img">                                                                                                
+
+									 ..,:.                                                  
+								  ..:,:.::     .                                            
+						   ,::,: .,.      .:   . ..  .                                      
+						 :,:...::,.       : .. .  :. :.                                     
+					   .,,.     :,..  . .:: :. :  .: .::.                                   
+					   ,:       ::     .:,  : .,   :   :,                                   
+					  :   .:,,,:,    .:, : .  ;. :.:     ,.                                 
+					..:  .,,:::., . .:,..: : .,. :..   .:::                                 
+				   .::. :,:     : . :,,. . : ::: :..   .: ,:.                               
+				   ,.. ::.      , :.,,:  . . :.:.. .    :.,:.,.                             
+				  .:  . ..      ,.: ;,:    . .::..  .   .,.: .,.                            
+				 ,, ..     ..   :::.,:        :.    :   .,:, . :,                           
+				.,. ..:   ..  ...::.::   .    :.    :  ..,.:.   :                           
+				,: ..,,. .,  :,..::.::  ..    :.    :  .::.,.                               
+			   ., ..,,. .:: .::  .:::.  :.    ,.    :  .:.::..:. :                          
+			   ; ..;.   .:  ,:     .:   , ::  :    :  .:, ..   ,::..                        
+			  .,...:    :: .,.      .   :..:  .    , .::,    : .:..:                        
+			  ::..:.    .. ::       ..  .:.,  .   ., :..:    :. ,..::                       
+			 .:...:      . ::            :.:      .:....     :: ,...,                       
+			 :.: .,        ::   ::..     ...      .      ..  :: ,.  :                       
+			 :.: .:   .    ..   :::.                     .:  .:.,.. :                       
+			., .  .   .    ..    ...               .     :.  ::,:.. :                       
+			.,        .                            :     .   :.:. : :                       
+			.:         :..   ..                    ,    .    ..  :, ,                       
+			..         ...   :.      .           . ;   .:        ,: ,                       
+			..              .:   . ..,  . :    .  .i  :::        ,.:,                       
+			..     ..       ::  .:.,.;. ..:    :  ,i  :.:        : ,:                       
+			.:.     :: .     ,.  ,:,;:,: .;:  .:i.:;,.,  :  ..   : : .                       
+			::: ..  ,. :     ,. .,,;;,,: ,,.. :i;::;.;.  .   :.  . . :                       
+			, :.:: .;. ,   ..,  :,,;,,,. ;; .:;,::,,.:   .   ::. ... :                       
+			, ::,,  ; .,  .::, .,,,;,,:. i...i;...,::     . .:i   .:.,                       
+			, ,,:i..;.:,. :,:: :;,::,.  , ::: .. ,...     : .,:.:..:;.                       
+			, ;:,;,.;.:,  ,,:: :;::..  .: :..   ..        ::,:,,,.:,;                        
+			,.;::,,.;.::..;,::.:,...  ..       .          :::.,:, :,,.                       
+			::;,.,;:;.::: ;,:,..,                 .:,,::  ,,.:::;::..:                       
+			.,,,..;:,..., :;:,..:              :iGDEEKKEGt.;:...,.: ::                       
+			 .,::.:::.:.,,;ii,:.          :;DDf;       .i.:,. ...  ;.                       
+			 .::;..:. :LGDGGDGGt          :;:.           .::.  .. .,                        
+			  ..i: :.fDGfji,;iii                          .,, .   ::                        
+			   :,;.:jEj:                                  .,;     ;.                        
+			   ::,;:.                                      :;. . ;.                         
+			   .;.,,.      .                .              .,  :.,                          
+			   .,::,.                          :;iiitiii:  .,. :,.                          
+				,.:::     ..::::::          ,tffLfjtitfLGj,., .:;                           
+				,::: :jEDft,;,,,;,tG.     :D,:  fDKK#Kj, ;GKi;:i.                           
+				.,::iDG,:,iti,     i:.;t;,iE  .G##W#LLEDt ,Dji,:                            
+				 ,;:Df :tE####Ki   :GEKWWKKG ,Lf####  tf;,.LEf: .                           
+				 .;,G:.tK####KWW.  .KGj;,iDL:ft,KK#W  tf : jWL,,,;.                         
+				  .;f, .GWD#D. f,.  t     ft,: .GjDWfDG:   jD,    :,                        
+				  .;Li  fEjKWLiD    t     jt.   Gftitj;    jG.    .;                        
+				 ,;;Gt  ,DfffLfE  . ;     it    i;:.::     jE.   . ;.                       
+				.;  jj.  iji,:ti   .,     :i       .       iG   .. ;:                       
+				;.  .L,            .                 .   .  . :,, .;                        
+				,. . tL          ...               . .... . ::;;. ,,                        
+				,: : :L    .....:...            ..::::::.   ,..:  ,:                        
+				:; ,,;i  ...:::..                 ..        ,    ,;                         
+				 :,   ,                                    .,   .. .                        
+				  ,   .                                    .,.:,;                           
+				  ::.  .                                   .:.:,                            
+				   ,:  ,                                   ::                               
+				   ..:.:                                   ::                               
+					   .,              .:.                 :                                
+						,.              ..                ..                                
+						:,                               .:                                 
+						.,.                              ::                                 
+						 .,                             .:                                  
+						  ..                           .:                                   
+						   ,        .::: .::...        :,                                   
+						   :,       .:::.....         :,.                                   
+							.;:         .           ,;                                      
+							 :;:        ,,.         ,                                       
+							  :;                  .;                                        
+							   ::                .;:                                        
+								.;;             tjt.                                        
+								 ;jt        .  :tjft.                                       
+								ijit:         ,ttjfG                                        
+								titit,       :ijjjffi                                       
+						   .. ,tjLfjjfj:::,: :tjfffLLt: .                                   
+						 ..t,;ttLffjLjt.. .   tfffLffft;;                                   
+						 :tjftttLLjfLt,.    . .,GLfLLfLjj:                                  
+						 ;jfftjfGLjL,:          GLfLLfLLjj:                                 
+						 ifjjffLGLLf            fLGLLLLLLLf;,                               
+					   .;jLfLfLLGLff            fGLLLLLGLLfjf,                              
+					   ;fjfLLLLLLGLf.           fGLGLLGGLLjjjt.                             
+					   tLfjGLGGLLGLf;... ...,,;,GGGGLLGLLGLffj.                             
+					   tfffGGGGGGLLLfittttttttt;GGGLLGGLLGffLf                              
+					   tLjfLGGGDGGLLffttttttitijGGLGGDGGGLfGfj                              
+					   tfffGGLGDGGGLjfjtjtttjttLGGDGDGDGfGLffj                              
+					   iffLfGDGLDDGLftjf;ijttitGLGLDGDLLLfffGt                              
+					   ifffGGGGGGDDGLfjtjt;;;iLGGGGGGfLfLffffi                              
+					   ;fjfjjfLLfjfGLLLLjjLjfffffLLjjjtft;jtf.                              
+					   ,tjjt::iffjjfffLfLttjti;;jti:,.:,.:,ij                               
+					   :;ii:.  .;itiijjjtt;,:. ,,:         :;                               
+						..      ..:..::,,:.                                                 
+																							
+																							
+
+</pre>

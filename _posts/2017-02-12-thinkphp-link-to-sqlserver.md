@@ -55,7 +55,7 @@ extension=php_pdo_sqlsrv_56_ts.dll
 
 >（我猜这个dll是旧版本php需要配置的，我的5.6版本没有这个dll，我也没有添加这行配置，也配置成功了）
 
-（3）重新启动apache或者IIS，我是直接结束掉了进程中的pgp-cgi.exe就实现了php配置刷新。
+（3）重新启动apache或者IIS，我是直接结束掉了进程中的php-cgi.exe就实现了php配置刷新。
 备注：不要用***_nts.dll的文件，这样就会失败
 
 ```ini
