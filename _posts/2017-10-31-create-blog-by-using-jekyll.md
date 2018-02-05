@@ -5,7 +5,7 @@ key: 2017-10-30
 date: 2017-10-30 16:46:38
 categories: notes
 tags: jekyll 
-modify_date: 2017-11-25 20:21:19
+modify_date: 2018-02-05 16:38:05
 ---
 
 记录一下本人第一次搭建git pages的过程。谨以此文记录自己的操作过程。
@@ -43,7 +43,11 @@ modify_date: 2017-11-25 20:21:19
 
 [windows 使用 ruby、jekyll 搭建 github pages](http://blog.csdn.net/u013009839/article/details/43742901)
 
-> makefile的使用
+推荐几个老外写的教程：
+
+http://jekyll-windows.juthilo.com（本人遇坑时参考了这篇）
+
+http://yizeng.me/2013/05/10/install-jekyll-3-on-windows/
 
 ### 安装Ruby
 
@@ -53,7 +57,7 @@ modify_date: 2017-11-25 20:21:19
 
 ### 安装RubyGems、Bundler
 
-*其实使用`RubyInstaller`安装Ruby时会自动安装`gem`。可直接输入`gem -v`验证。*
+*其实使用`RubyInstaller`会自动安装了`gem`。可直接输入`gem -v`验证。*
 
 > 1. 官网下载[RubyGems](https://rubygems.org/pages/download)的zip包
 > 2. 解压zip文件并在命令行（cmd/git bash均可）cd到该目录
@@ -64,8 +68,8 @@ modify_date: 2017-11-25 20:21:19
 使用`gem`会自动安装帮助文档（`ri`或`rdoc`格式），因为我们可以在线查看，不需要下载，因此可以在`~\.gemrc`文件中添加两行：
 
 ```ini
-install: --no-ri --no-rdoc
-update: --no-ri --no-rdoc
+install: "--no-ri --no-rdoc"
+update: "--no-ri --no-rdoc"
 ```
 
 这样使用`gem`命令时不安装帮助文档（否则它通常安装在`D:\Ruby24-x64\lib\ruby\gems\2.4.0\doc`目录）。
@@ -84,15 +88,15 @@ gem install bundler # 安装bundler
 
 ```bash
 #查看通过gem已安装插件：
-gem list
+$ gem list
 #查看gem的源：
-gem sources list
+$ gem sources list
 #可以添加/删除源：
-gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
+$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
 #清理旧的包：
-gem cleanup
+$ gem cleanup
 #基于`Gemfile`指定的依赖包执行命令：
-bundle exec <command>
+$ bundle exec <command>
 ```
 
 ### 安装Jekyll
@@ -100,6 +104,59 @@ bundle exec <command>
 执行`gem install jekyll`即可自动安装jekyll的所以依赖包。也许或弹出防火墙提示，允许即可。依赖包数量比较多安装过程会慢，耐心等待安装完毕即可。
 
 安装完毕输入`jekyll -v`验证。
+
+
+#### 如果安装jekyll出错
+
+提示执行`ridk install`，则说明当前安装的是Ruby 2.4.x。需要在cmd运行`ridk install`安装 [MSYS2 toolkit](http://www.msys2.org/) ，执行后输入`1`即可。如果下载过慢，可手动复制下载链接进行下载安装。
+
+提示`make`不是内部或外部命令，则说明当前安装的是Ruby2.0-2.3。需要安装`DEVELOPMENT KIT`。按照下面方式操作：
+
+从[官网](https://rubyinstaller.org/downloads/)下载`DEVELOPMENT KIT`，它是个自解压文件，运行后推荐解压到`C:\RubyDevKit\`。然后用git for windows的MingW64执行
+
+```sh
+# 切换到 解压文件夹
+$ cd /C/RubyDevKit
+# 初始化安装，会自动检查Ruby的安装路径
+$ ruby dk.rb init
+```
+
+不过上一步可能会检查不出来，提示如下：
+
+```sh
+Initialization complete! Please review and modify the auto-generated
+'config.yml' file to ensure it contains the root directories to all
+of the installed Rubies you want enhanced by the DevKit.
+```
+
+需要手动修改 `config.yml`文件，确保`config.yml`中包含
+
+```yaml
+- C:/Ruby23-x64
+```
+
+安装DevKit到ruby
+
+```sh
+$ ruby dk.rb install
+```
+
+不出意外会提示：
+
+```sh
+[INFO] Updating existing gem override for 'C:/Ruby23-x64'
+[INFO] Installing 'C:/Ruby23-x64/lib/ruby/site_ruby/devkit.rb'
+```
+
+然后再尝试安装jekyll
+
+```
+$ gem install jekyll
+```
+
+笔者使用Ruby2.4，Ruby2.3均运行成功。
+
+
 
 ### Jekyll 操作教程
 
@@ -117,10 +174,12 @@ $ jekyll build --source <source> --destination <destination>
 # => 指定源文件夹<source>中的内容将会生成到目标文件夹<destination>中。
 
 $ jekyll build --watch
+
 # => 当前文件夹中的内容将会生成到 ./_site 文件夹中，
 # 查看改变，并且自动再生成。
 
 $ jekyll serve
+
 # => 当前文件夹中的内容将会生成到 ./_site 文件夹中。并搭建web服务。
 # 可访问 http://localhost:4000 查看，方便本地调试。
 ```
@@ -130,7 +189,7 @@ $ jekyll serve
 搭建后执行jekyll命令如果出现报错，多为配置环境的问题。第一种方法通常是根据报错信息安装对应的依赖包即可，如：
 
 ````sh
-$ gem install tzinfo-data
+gem install tzinfo-data
 ````
 
 或者第二种方法，在根目录下的`Gemfile`文件里输入：
@@ -139,7 +198,7 @@ $ gem install tzinfo-data
 gem 'tzinfo-data'
 ```
 
-若提示缺少该依赖，且使用`gem install xxx`命令提示出错，有可能已经安装了该依赖包的低级版本。请使用第二种方法，并执行`bundle update`以及`gem cleanup`删除低版本。
+本人使用`gem install xxx`会出错，采用的第二种方法。
 
 ###　.svg 文件转 .png 和 .ico 文件工具
 
