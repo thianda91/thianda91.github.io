@@ -1,5 +1,9 @@
 .layout--home {
   .post-list {
+    & > .xianda__border {
+      height: 10px;
+      background: linear-gradient(to right, #50cf4d 0%, #004c83 50%, #50cf4d 100%);
+    }
     & > article {
       & > h1, h2  {
         font-size: map-get($base, font-size-h3);
@@ -10,11 +14,11 @@
       & > a {
         font-size: map-get($base, font-size-sm);
       }
-      padding-bottom: map-get($spacers, 4);
-      margin-bottom: map-get($spacers, 4);
-      &:not(:last-child) {
-        @include split-line(bottom);
-      }
+      padding-bottom: map-get($spacers, 2);
+      margin-bottom: map-get($spacers, 2);
+      //&:not(:last-child) {
+      //  @include split-line(bottom);
+      //}
     }
     .article__content {
       font-size: map-get($base, font-size-sm);

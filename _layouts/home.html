@@ -32,9 +32,9 @@ show_title: false
 			{%- endif -%}
           {%- else -%}
 			{%- if page.excerpt -%}
-				{{ post.excerpt | strip_html | truncate: 150 }}
+				{{ post.excerpt | truncate: 150 }}
 			{%- else -%}
-				{{ post.content | strip_html | truncate: 150 }}
+				{{ post.content | truncate: 150 }}
 			{%- endif -%}
           {%- endif -%}
         </div>
@@ -42,6 +42,7 @@ show_title: false
         <a href="{{ _href }}">{{ _locale_readmore }}</a>
         {%- include article-info.html -%}
       </article>
+	  <div class="xianda__border"></div>
     {%- endfor -%}
   </div>
 
