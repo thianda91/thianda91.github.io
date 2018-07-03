@@ -1,201 +1,78 @@
 ---
-layout: blog-base
+layout: page
+type: post
 ---
-<div class="m-post m-page-content">
-    {% include blog/header.html %}
-    <div class="m-page-main">
-        <div class="main clearfix js-main">
-            <article itemscope itemtype="http://schema.org/BlogPosting">
-                <meta itemprop="mainEntityOfPage" itemscope itemType="https://schema.org/WebPage"/>
-                <header class="article-header">
-                    <h1 itemprop="headline" class="article-title" itemprop="name headline">{{ page.title }}</h1>
-                    {% include blog/article-data.html %}
-                </header>
-					{% if page.modify_date %}
-                    <div class="article-meta" style='font-size: 0.8em; color: #6e6;'>
-                        最后更新于
-                        <time datetime="{{ page.modify_date | date_to_xmlschema }}" itemprop="dateModified">
-                            {{ page.modify_date | date: "%Y-%m-%d %H:%M:%S" }}
-                        </time>
-                    </div>
-                    {% else %}
-                    <meta itemprop="dateModified" content="{{ page.date | date_to_xmlschema }}">
-                    {% endif %}
-                <div class="m-article-content js-article-content" itemprop="articleBody">
-                    {{ content }}
-                </div>
-                <footer>
-                    <div class="article-license">
-                        {% include blog/license.html %}
-                    </div>
-                </footer>
-                {% if page.comment == null or page.comment == true %}
-                <section>{% include utils/comment-gitment.html %}</section>
-                {% endif %}
-            </article>
-            <aside class="m-article-aside js-article-aside">
-                <div class="m-toc js-toc"></div>
-            </aside>
-        </div>
+
+{%- assign __target = layout.show_author_profile -%}
+{%- assign __source = page.show_author_profile -%}
+{%- include snippets/assign.html -%}
+{%- assign __target = site.data.variables.default.page.show_author_profile -%}
+{%- assign __source = __return -%}
+{%- include snippets/assign.html -%}
+{%- assign _show_author_profile = __return -%}
+
+<div class="layout--article">
+
+  {%- if _show_author_profile -%}
+    {%- if page.author -%}
+      {%- assign __author = site.data.authors[page.author] -%}
+    {%- else -%}
+      {%- assign __author = site.author -%}
+    {%- endif -%}
+    {%- include author-profile.html -%}
+  {%- endif -%}
+
+  <div class="article__content" itemprop="articleBody">{{ content }}</div>
+
+  <footer class="article__footer">
+    {%- if page.modify_date -%}
+      {%- assign __locale = site.data.locale.ARTICLE_DATE_FORMAT -%}
+      {%- include snippets/locale-to-string.html -%}
+      {%- assign _locale_date_format = __return -%}
+
+      {%- assign __locale = site.data.locale.LAST_UPDATED -%}
+      {%- include snippets/locale-to-string.html -%}
+      {%- assign _locale_last_update = __return -%}
+      <span>{{ _locale_last_update }}
+        <time itemprop="dateModified" datetime="{{ page.modify_date | date_to_xmlschema }}">{{ page.modify_date | date: _locale_date_format }}</time>
+      </span>
+    {%- elsif page.date -%}
+      <meta itemprop="dateModified" content="{{ page.date | date_to_xmlschema }}">
+    {%- endif -%}
+    {%- include article-footer/custom.html -%}
+    {%- if page.license -%}
+      <div class="article__license">{%- include article-footer/license.html -%}</div>
+    {%- endif -%}
+  </footer>
+
+  {%- if page.next or page.previous -%}
+    <div class="article__previous-next clearfix">
+      {%- if page.next -%}
+
+        {%- assign __path = page.next.url -%}
+        {%- include snippets/prepend-baseurl.html -%}
+        {%- assign _href = __return -%}
+
+        {%- assign __locale = site.data.locale.PREVIOUS -%}
+        {%- include snippets/locale-to-string.html -%}
+        {%- assign _locale_previous = __return -%}
+
+        <div class="previous"><span>{{ _locale_previous }}</span><a href="{{ _href }}">{{ page.next.title }}</a></div>
+      {%- endif -%}
+      {%- if page.previous -%}
+        {%- assign __path = page.previous.url -%}
+        {%- include snippets/prepend-baseurl.html -%}
+        {%- assign _href = __return -%}
+        {%- assign __locale = site.data.locale.NEXT -%}
+        {%- include snippets/locale-to-string.html -%}
+        {%- assign _locale_next = __return -%}
+        <div class="next"><span>{{ _locale_next }}</span><a href="{{ _href }}">{{ page.previous.title }}</a></div>
+      {%- endif -%}
     </div>
+  {%- endif -%}
+
 </div>
 
-<script src="//cdn.bootcss.com/toc/0.3.2/toc.min.js"></script>
-<script type="text/javascript">
-    window.throttle = function(func, wait) {
-        var args,
-            result,
-            thisArg,
-            timeoutId,
-            lastCalled = 0;
-
-        function trailingCall() {
-            lastCalled = new Date;
-            timeoutId = null;
-            result = func.apply(thisArg, args);
-        }
-        return function() {
-            var now = new Date,
-                remaining = wait - (now - lastCalled);
-
-            args = arguments;
-            thisArg = this;
-
-            if (remaining <= 0) {
-                clearTimeout(timeoutId);
-                timeoutId = null;
-                lastCalled = now;
-                result = func.apply(thisArg, args);
-            }
-            else if (!timeoutId) {
-                timeoutId = setTimeout(trailingCall, remaining);
-            }
-            return result;
-        };
-    }
-    $(function() {
-        var $window = $(window);
-        var $pageMain = $('.js-main');
-        var $pageFooter = $('.js-page-footer');
-        var $articleAside = $('.js-article-aside');
-        var $toc = $('.js-toc');
-
-        function setAsideTOC() {
-            var asideTop,
-                asideLeft,
-                scrollBottom,
-                asideBottomTop,
-                lastScrollTop;
-
-            function init() {
-                var asideOffset = $articleAside.offset();
-                var footerOffset = $pageFooter.offset();
-                var mainOffset = $pageMain.offset();
-                asideTop = mainOffset.top;
-                asideHeight = $toc.outerHeight() + parseInt($articleAside.css('padding-top'), 10) + parseInt($articleAside.css('padding-bottom'), 10);
-                asideLeft = mainOffset.left + $pageMain.outerWidth() - $articleAside.outerWidth() - parseInt($pageMain.css('padding-right'), 10);
-                scrollBottom = footerOffset.top - asideHeight;
-                asideBottomTop = scrollBottom - mainOffset.top;
-            }
-            function setAside(force) {
-                force !== true && (force = false);
-                var scrollTop = $window.scrollTop();
-                if (scrollTop >= asideTop && scrollTop <= scrollBottom) {
-                    (!force && lastScrollTop >= asideTop && lastScrollTop <= scrollBottom) ||
-                        $articleAside.css({
-                            position: 'fixed',
-                            left: asideLeft + 'px',
-                            top: 0
-                        });
-                } else if (scrollTop < asideTop) {
-                    (!force && lastScrollTop < asideTop) ||
-                        $articleAside.css({
-                            position: 'relative',
-                            left: 0,
-                            top: 0
-                        });
-                } else {
-                    (!force && lastScrollTop > scrollBottom) ||
-                        $articleAside.css({
-                            position: 'relative',
-                            left: 0,
-                            top: asideBottomTop + 'px'
-                        });
-                }
-                lastScrollTop = scrollTop;
-            }
-            function isAsideDisplay() {
-                return $articleAside.css('display') !== 'none';
-            }
-
-            isAsideDisplay() && (init(), setAside());
-            $window.on('scroll', function() {
-                isAsideDisplay() && setAside();
-            });
-            $window.on('resize', throttle(function() {
-                init();
-                setAside(true);
-            }, 100));
-            setTimeout(init, 4000);
-        }
-
-        setTimeout(setAsideTOC, 1000);
-
-        $toc.toc({
-            'selectors': 'h1,h2,h3',
-            'container': '.js-article-content',
-        });
-    });
+<script>
+  {%- include scripts/article.js -%}
 </script>
-{% if page.key != null and site.app_id and site.app_key and site.app_class and site.isdebug == false %}
-    <script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            // 初始化
-            AV.init({
-                appId: '{{ site.app_id }}',
-                appKey: '{{ site.app_key }}'
-            });
-            // 查询
-            var query = new AV.Query('{{ site.app_class }}');
-            query.equalTo('key', '{{ page.key }}');
-            query.first().then(function(result) {
-                if (result) {
-                    addOne(result)
-                } else {
-                    //新建
-                    var Blog = AV.Object.extend('{{ site.app_class }}');
-                    var blog = new Blog();
-                    blog.set('title', '{{ page.title }}');
-                    blog.set('key', '{{ page.key }}');
-                    blog.set('views', 0);
-                    blog.save().then(function(page) {
-                        addOne(page)
-                    }, function(error) {
-                        if (error) {
-                            throw error;
-                        }
-                    });
-                }
-
-                function addOne(page) {
-					if("{{site.url}}"=="https://{{site.github_repo}}"){
-						page.increment('views', 1);
-					}
-					page.fetchWhenSave(true);
-					page.save().then(function(page) {
-						$("#post-key-{{ page.key }}").text(page.attributes.views);
-					}, function(error) {
-						if (error) {
-							throw error;
-						}
-					});
-				}
-            }, function(error) {
-                if (error) {
-                    throw error;
-                }
-            });
-        });
-    </script>
-{% endif %}

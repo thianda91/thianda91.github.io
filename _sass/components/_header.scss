@@ -1,68 +1,62 @@
-/**
- * Site header
- */
-.m-page-header {
-    position: relative;
-    color: $text-color;
+.header {
+  a {
+    font-weight: map-get($base, font-weight);
+    text-decoration: none;
+    @include link-colors($text-color, $main-color-1, $main-color-1);
+  }
+  & > .main > .logo {
+    float: left;
+    @include menu(3, 0);
+    @include align-items(center);
+    height: map-get($layout, header-height);
+    & > svg {
+      margin-right: .8rem;
+      vertical-align: middle;
+      width: map-get($base, font-size-h4) * 1.6;
+      height: map-get($base, font-size-h4) * 1.6;
+      @include media-breakpoint-down(md) {
+        margin-right: .5rem;
+        width: map-get($base, font-size-h4) * 1.2;
+        height: map-get($base, font-size-h4) * 1.2;
+      }
+    }
+    & > a {
+      display: inline-block;
+      font-size: map-get($base, font-size-h4);
+      @include media-breakpoint-down(md) {
+        font-size: map-get($base, font-size-h4-small);
+      }
+    }
+    @include media-breakpoint-down(md) {
+      float: none;
+      height: map-get($layout, header-height-sm);
+    }
+  }
+  & > .main > nav {
+    display: block;
+    float: right;
+    white-space: nowrap;
+    @include overflow(auto);
     ul {
-        list-style-type: none;
-    }
-    a {
-        font-weight: $base-font-weight;
-        @include link-normal {
-            color: $text-color;
+      margin: 0;
+      @include menu(3, 2, nowrap);
+      @include align-items(center);
+      height: map-get($layout, header-height);
+      @include media-breakpoint-down(md) {
+        height: auto;
+      }
+      & > li {
+        @include split-line(bottom, 4px, transparent);
+        &.active {
+          @include split-line(bottom, 4px, $main-color-1);
+          a {
+            @include link-colors($main-color-1, $main-color-1, $main-color-1);
+          }
         }
-        @include link-emphasize {
-            color: $main-color-1;
-        }
+      }
     }
-    .site-logo {
-        display: inline-block;
-        vertical-align: top;
-        width: $h3-font-size;
-        height: $h3-font-size;
+    @include media-breakpoint-down(md) {
+      float: none;
     }
-    /**
-    * Site title
-    */
-    .site-title {
-        display: inline-block;
-        font-size: $h3-font-size;
-        line-height: 1.5;
-    }
-	/**
-    * Site sub-title
-    */
-    .site-sub-title {
-		padding-left: 20px;
-        display: inline-block;
-        font-size: $small-font-size;
-        line-height: 1.5;
-    }
-    /**
-    * Site nav (nav)
-    */
-    .site-nav {
-        display: block;
-        opacity: 1;
-        float: right;
-        font-size: $h5-font-size;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        ul {
-            padding: 0;
-            margin: 0;
-            white-space: nowrap;
-            li {
-                display: inline-block;
-                line-height: $h2-font-size * 1.5 / $h4-font-size;
-                &:not(:last-child) {
-                    margin-right: 16px;
-                }
-            }
-        }
-        @include media-query($on-palm) {
-            float: none;
-        }
-    }
+  }
 }

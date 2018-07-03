@@ -1,0 +1,46 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+@import
+    "skins/{{ site.text_skin | default: site.data.variables.default.text_skin }}",
+    // "skins/chocolate",
+    // "skins/dark",
+    // "skins/default",
+    // "skins/forest",
+    // "skins/ocean",
+    // "skins/orange",
+
+    "common/variables",
+    "common/highlighting",
+    "common/classes",
+    "common/reset",
+    "common/components/button",
+    "common/components/menu",
+    "common/components/card",
+    "common/components/toc",
+
+    "animate/fade-in",
+    "animate/fade-in-down",
+
+    "components/author-profile",
+    "components/main",
+    "components/header",
+    "components/article.info",
+    "components/article.content",
+    "components/tags",
+    "components/follow-me",
+    "components/license",
+    "components/footer",
+
+    "additional/alert",
+    "additional/photo-frame",
+
+    "layout/page",
+    "layout/home",
+    "layout/all",
+    "layout/article",
+    "layout/landing",
+    "layout/404"
+;
