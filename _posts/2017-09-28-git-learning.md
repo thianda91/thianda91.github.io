@@ -49,14 +49,24 @@ git init
 git clone <dir>
 ```
 
-#### 配置git联网的代理服务器：
+#### 配置联网的代理服务器：
 
-```shell
+bash的`ssh`命令可在`~/.ssh/config`文件中配置如下一行，即可测试`ssh -T git@github.com`
+
+```ini
+ProxyCommand connect -H xxxx:8080 %h %p
+```
+
+配置`git`命令使用代理
+
+```bash
 git config --global http.proxy http://xxxx:8080
 git config --global http.proxy user:password@http://xxxx:8080 # 需验证用户密码时这样写
 git config --global https.proxy http://xxxx:8080 # 设置git访问https协议所使用的代理
 git config --get http.proxy # 检查是否设置成功
 git config --global http.sslVerify false # 解决https证书错误的问题
+# 经测试，在内网环境使用代理后使用 git协议 (git@github.com:xxx...) 无法依然使用，需要修改为 https 协议，每次push都需要输入账户密码，比较麻烦
+git config --global credential.helper wincred # 设置使用window凭据缓存账号密码，用于https方式push
 # 当前git bash窗口有效
 export http_proxy="http://127.0.0.1:8087"
 export https_proxy="http://127.0.0.1:8087"
@@ -68,38 +78,38 @@ set http_proxy_pass=
 
 #### 取消git联网的代理服务器：
 
-```shell
+```bash
 git config --global --unset http.proxy
 ```
 
 #### 配置用户：
 
-```shell
+```bash
 git config --global user.email "You@example.com"
 ```
 
 #### 配置邮箱：
 
-```shell
+```bash
 git config --global user.name "Your Name"
 ```
 
 #### 添加远程仓库：
 
-```shell
-git remote add origin git@github.com:yuxianda/dangjian.git
+```bash
+git remote add origin git@github.com:thianda/dangjian.git
 ```
 
 #### 添加文件：
 
-``` shell
+``` bash
 git add <filename>
 git add . # 添加所有文件
 ```
 
 #### 提交：
 
-```shell
+```bash
 git commit -m '<comment>'
 git commit -am '<comment>' # 若无增删文件，可这样使用，代替`git add .`&`git commit -m '<comment>'`
 ```
@@ -108,25 +118,25 @@ git commit -am '<comment>' # 若无增删文件，可这样使用，代替`git a
 
 #### 查看状态：
 
-```shell
+```bash
 git status   # 在任何环节均可以查看状态。
 ```
 
 #### 查看所有分支
 
-```shell
+```bash
 git branch --all 
 ```
 
 #### 新建分支：
 
-```shell
+```bash
 git checkout -b <branch>
 ```
 
 等同于：
 
-```shell
+```bash
 git branch <branch>
 git checkout <branch>
 ```
@@ -135,13 +145,13 @@ git checkout <branch>
 
 ##### 1) github上已经有master分支 和dev分支
 
-```shell
+```bash
 git checkout -b dev   # 新建并切换到本地dev分支
 git pull origin dev   # 本地分支与远程分支相关联
 ```
 ##### 2) 在本地新建分支并推送到远程
 
-```shell
+```bash
 git checkout -b test
 git push origin test   # 这样远程仓库中也就创建了一个test分支
 ```
@@ -150,13 +160,13 @@ git push origin test   # 这样远程仓库中也就创建了一个test分支
 
 发布dev分支指的是同步dev分支的代码到远程服务器，与新建分支并推送类似
 
-```shell
+```bash
 git push origin dev:dev  # 这样远程仓库也有一个dev分支了
 ```
 
 #### 在dev分支开发代码
 
-```shell
+```bash
 git checkout dev  # 切换到dev分支进行开发
 # 开发代码之后，我们有两个选择
 # 第一个：如果功能开发完成了，可以合并主分支
@@ -172,27 +182,60 @@ git push  # 提交到dev远程分支
 
 #### 删除分支
 
-```shell
+```bash
 git push origin :dev  # 删除远程dev分支，危险命令哦
 # 下面两条是删除本地分支
 git checkout master  # 切换到master分支
 git branch -d dev  # 删除本地dev分支
 ```
 
+#### 标签
+
+```bash
+git tag # 查看标签
+git tag -l 'v1.4.2.*' # 搜索特定模式列
+git tag -a v1.4 -m 'my version 1.4' # 添加标签 -a 标签名字 -m 标签说明
+git show v1.4 # 查看标签版本信息
+git tag v1.4-lw # 直接给出标签名称 创建轻量标签
+git tag -v [tag-name] # 验证已经签署的标签 (git tag -s v1.4)
+git tag v1.2 9fceb02 # 对早先的某次提交加注标签
+git push origin --tags # 推送所有标签 默认 git push 不会推送标签到远端
+git tag -d v1.4-lw # 删除标签
+```
+
 #### 其他命令：
 
-```sh
+```bash
 git push -u origin master
 git log
 git reflog
 ssh-keygen -t rsa -C "yxd9721@qq.com"
 ```
 
+#### 一些alias
+
+可将下面的配置手动保存到`~/.gitconfig`文件中
+
+```ini
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lgg = log --no-merges --color --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
+	ls = log --no-merges --color --stat --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Cblue %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
+```
+
+效果等同于执行：
+
+```bash
+git config --global alias.lg log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+git config --global alias.lgg log --no-merges --color --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
+git config --global alias.ls log --no-merges --color --stat --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Cblue %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
+```
+
 ### 3. 使用github.com
 
 #### 设置ssh key
 
-```shell
+```bash
 // 1. 创建 ssh key，出现提示一路按回车
 ssh-keygen -t rsa -b 4096 -C "yxd9721@qq.com"
 // 2. 让 ssh-agent 在后台运行 (start the ssh-agent in the background)
@@ -213,7 +256,7 @@ ssh -T git@github.com
 
 将下面的代码保存到`~/.profile` 或者 `~/.bashrc`，`~`表示当前用户的用户目录。或者是前文提到的新建的`home`文件夹。
 
-```shell
+```bash
 env=~/.ssh/agent.env
 
 agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
@@ -244,7 +287,7 @@ unset env
 
 第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：
 
-```shell
+```bash
 $ ssh-keygen -t rsa -C "youremail@example.com"
 ```
 
