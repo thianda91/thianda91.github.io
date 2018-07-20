@@ -3,7 +3,7 @@
     <div class="logo">
 	{%- include snippets/get-nav-url.html -%}
 	 {%- if site.title -%}
-      <a title="{%- if site.description -%}{{ site.description }}{%- endif -%}" href="{{ __return }}">{{ site.title }}</a>
+      <a title="{%- if site.description -%}{{ site.description }}{%- endif -%}" href="{{ site.paths.root }}">{{ site.title }}</a>
     {%- endif -%}
     {%- include svg/logo.svg -%}
     {%- assign __path = site.paths.root | default: site.data.variables.default.paths.root  -%}
