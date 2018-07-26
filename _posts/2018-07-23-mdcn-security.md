@@ -422,7 +422,7 @@ PVST+特点
 # 配置 PVRST+
 SwitchX(config)# spanning-tree mode rapid-pvst
 # 验证 
-SwitchX# show spanning-tree vlan vlan# [detail]
+SwitchX# show spanning-tree vlan <vlan> [detail]
 ```
 
 ### 配置根桥和备份根桥
@@ -432,7 +432,34 @@ SwitchX# show spanning-tree vlan vlan# [detail]
 SwitchA(config)# spanning-tree vlan 1 root primary
 SwitchA(config)# spanning-tree vlan 2 root secondary
 # 或者配置优先级
-SwitchA(config)# spanning-tree vlan # priority priority
+SwitchA(config)# spanning-tree vlan # priority <priority>
+# 根桥 priority 0，备用根桥 priority 4096
+```
+
+### PostFast 和 BPDU Guard
+
+postfast 特性：
+
+- 快速转换到转发（Forwarding）状态
+- 只能配置在access接口。BPDU Guard
+
+BPDU Guard 特性：
+
+- 接口收到BPDU Guard，会立即down
+- 通常和 postfast 组合使用
+
+配置 portfast 和 BPDU Guard：
+
+```sh
+Switch(config-if)# spanning-tree portfast
+Switch(config-if)# spanning-tree bpduguard enable
+```
+
+在所有非trunk接口启用portfast，并在全局为启用portfast的接口启用bpduguard：
+
+```sh
+Switch(config)# spanning-tree portfast bpduguard default
+Switch(config)# spanning-tree portfast default
 ```
 
 ## AAA认证
@@ -457,6 +484,15 @@ TACACS+，Terminal Access Controller Access Control System
 
 ### AAA配置
 
+默认配置需要修改，`transport input none` 改成 `transport input telnet`。否则无法telnet。
+
+```
+Switch(config)# line vty 0 4
+Switch(config-line)# transport input telnet
+```
+
+
+
 ```sh
 Switch(config)# aaa new-model
 Switch(config)# username <username> secret <password>
@@ -477,5 +513,47 @@ aaa authentication login CON local line
 line console 0
   password cisco
   login authentication CON
+```
+
+### SNMPv2c配置
+
+一、
+
+```sh
+Switch(config)# access-list 1 permit 10.0.0.0 0.255.255.255
+Switch(config)# snmp-server community <团体名> <ro|rw> [acl number]
+```
+
+二、创建组
+
+```sh
+Switch(config)# access-list 1 permit 10.0.0.0 0.255.255.255
+Switch(config)# snmp-server group <组名> <v1|v2c|v3> access <acl number>
+Switch(config)# snmp-server user <用户名> <组名> <v1|v2c|v3>
+```
+
+### SSH配置
+
+> ssh v2版本 加密至少需要768位。
+
+```sh
+Switch(config)# hostname DSW1
+DSW1(config)# username cisco password cisco
+DSW1(config)# ip domain-name cisco.com
+DSW1(config)# crypto key generate rsa
+How many bits in the modulus [512]: 1024
+DSW1(config)# ip ssh version 2
+DSW1(config)# line vty 0 4
+DSW1(config-line)# login local
+DSW1(config-line)# transport input ssh
+DSW1(config-line)# exec-timeout 10
+# 和上面的二选一，有什么区别。。不知道。
+DSW1(config-line)# session-timeout 10
+```
+
+测试登录
+
+```
+R2# ssh -l cisco 10.0.0.1
 ```
 
