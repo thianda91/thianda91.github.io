@@ -5,13 +5,15 @@ key:          2018-07-23
 tags:         MDCN
 categories:   notes
 date:         2018-07-23 10:24:27
-modify_date:  2018-07-24 17:01:03
+modify_date:  2018-07-25 15:11:35
 ---
 
 主要内容： 
 
 1. 安全威胁和ACL
 2. 局域网防御
+3. 使用STP防止二层环路
+4. AAA设备管理
 
 <!-- more -->
 
@@ -344,5 +346,136 @@ SwitchX(config-if)# ip verify source port-security
 # 未配置以上3个设置，手动绑定
 SwitchX(config-if)# ip verify source
 SwitchX(config-if)# ip source binding 00E0.1E85.0431 vlan 1 10.0.0.2 int Fa0/2
+```
+
+## 生成树防止二层环路
+
+### 生成树协议标准
+
+|| 标准 | 资源需求 | | |
+|-|-|-|-|-|
+| CST 普通生成树 | 802.1d | low | slow | all vlans |
+| PVST+ | cisco | high | slow | pre vlan |
+| RSTP 快速生成树协议| 802.1w | medium | fast | all vlans |
+| PVRST  增强型每vlan快速生成树 | cisco | very high | fast | per vlan |
+| MSTP | 802.1s<br />cisco | medium or high | fast | vlan list |
+
+冗余拓扑可以消除单点故障，但是会引起广播风暴、多帧拷贝、MAC地址表不稳定的问题。
+
+### 交换环路、二层环路 
+
+使用交换机和物理线路共同组成的环状的物理通路。
+
+危害
+
+- 广播风暴
+- 数据帧多重拷贝
+- MAC地址表不稳定
+
+使用STP解决环路问题
+
+### 生成树运算
+
+- 每个广播域一个根桥
+- 每个非根桥的一个根端口
+- 每个分片一个指定口
+- 非指定口不使用
+
+### 根桥的选择
+
+BPDU（Bridge Protocol Data Unit ），Route bridge，Bridge ID
+
+选数值最小的。
+
+### 生成树协议状态
+
+| -          | -    | -              |
+| ---------- | ---- | -------------- |
+| blocking   | 阻塞 | max age 20sec  |
+| listening  | 监听 | 转发时延 15sec |
+| learning   | 学习 | 转发时延 15sec |
+| forwarding | 转发 |                |
+
+阻塞状态在确定了自己是根口或制定口后会转到监听状态。
+
+### 生成树计算与重计算
+
+### PVST+
+
+每个vlan一个生成树实例，可以实现负载均衡。
+
+### RSTP 快速生成树协议
+
+### 默认的生成树协议
+
+cisco支持PVST+、PVRST+、MSTP。cisco交换机默认使用的是`PVST+`。
+
+PVST+特点
+
+- 每个vlan一个STP实例
+- 所有vlan同一个根桥
+- No load sharing
+
+### PVRST+ 配置命令
+
+```sh
+# 配置 PVRST+
+SwitchX(config)# spanning-tree mode rapid-pvst
+# 验证 
+SwitchX# show spanning-tree vlan vlan# [detail]
+```
+
+### 配置根桥和备份根桥
+
+```sh
+# 配置主备根桥
+SwitchA(config)# spanning-tree vlan 1 root primary
+SwitchA(config)# spanning-tree vlan 2 root secondary
+# 或者配置优先级
+SwitchA(config)# spanning-tree vlan # priority priority
+```
+
+## AAA认证
+
+- authentication
+- authorization
+- accounting
+
+### AAA协议
+
+RADIUS，Remote Authentication Dial In User Service 
+
+TACACS+，Terminal Access Controller Access Control System 
+
+|              | RADIUS                              | TACACS+                             |
+| ------------ | ----------------------------------- | ----------------------------------- |
+| 开发者       | Livingston Enterprise               | Cisco                               |
+| 传输端口     | UDP 1182 and 1183                   | TCP 49                              |
+| 对aaa的支持  | 包含认证授权，分离了计费            | 使用AAA模型，分离了三服务           |
+| 挑战应答机制 | 单向的，使用单一 challenge response | 双向的，使用多重 challenge response |
+| 安全         | 加密口令                            | 加密整个数据包                      |
+
+### AAA配置
+
+```sh
+Switch(config)# aaa new-model
+Switch(config)# username <username> secret <password>
+# 配置radius服务器
+Switch(config)# radius server <config-name>
+Switch(config-radius-server)# address ipv4 <server-ip> auth-port 1182 acct-port 666
+Switch(config-radius-server)# key <string>
+# 使用服务器组来结合radius服务器
+Switch(config)#aaa group server radius <group-name>
+Switch(config-sg-radius)#server name <config-name>
+# 配置AAA认证登录使用radius并在失效时使用本地用户
+Switch(config)#aaa authentication login [default | <list-name>] group <group-name> local
+```
+
+```
+aaa authentication login CON local line
+!
+line console 0
+  password cisco
+  login authentication CON
 ```
 
