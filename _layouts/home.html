@@ -25,16 +25,16 @@ show_title: false
         <div class="article__content" itemprop="description articleBody">
           {%- assign _excerpt_type = site.excerpt_type | default: site.data.variables.default.excerpt_type  -%}
           {%- if _excerpt_type == 'html' -%}
-            {%- if page.excerpt -%}
-				{{ post.excerpt | truncate: 150 }}
+            {%- if post.excerpt -%}
+				{{ post.excerpt }}
 			{%- else -%}
 				{{ post.content | truncate: 150 }}
 			{%- endif -%}
           {%- else -%}
-			{%- if page.excerpt -%}
-				{{ post.excerpt | truncate: 150 }}
+			{%- if post.excerpt -%}
+				{{ post.excerpt | strip_html | truncate: 150 }}
 			{%- else -%}
-				{{ post.content | truncate: 150 }}
+				{{ post.content | strip_html | truncate: 150 }}
 			{%- endif -%}
           {%- endif -%}
         </div>
