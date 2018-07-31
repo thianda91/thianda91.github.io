@@ -4,7 +4,7 @@ title: Git简要教程
 key: 2017-09-28
 categories: ppt
 tags: git
-modify_date: 2017-10-23
+modify_date: 2018-08-01 00:40:10
 ---
 
 文章首发于 http://blog.csdn.net/xianda9133/article/details/78121349
@@ -211,6 +211,20 @@ git log
 git reflog
 ssh-keygen -t rsa -C "yxd9721@qq.com"
 ```
+
+#### 彻底删除某个文件的历史记录
+
+```sh
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch FILE_PATH' --prune-empty --tag-name-filter cat -- --all
+
+git push origin master --force
+rm -rf .git/refs/original/
+git reflog expire --expire=now --all
+git gc --prune=now
+git gc --aggressive --prune=now
+```
+
+把`FILE_PATH`替换成要删除的文件，执行即可。
 
 #### 一些alias
 
