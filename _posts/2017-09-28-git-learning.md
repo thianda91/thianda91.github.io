@@ -4,7 +4,7 @@ title: Git简要教程
 key: 2017-09-28
 categories: ppt
 tags: git
-modify_date: 2018-08-01 00:40:10
+modify_date: 2018-08-02
 ---
 
 文章首发于 http://blog.csdn.net/xianda9133/article/details/78121349
@@ -19,7 +19,7 @@ modify_date: 2018-08-01 00:40:10
 
 ## Git安装配置
 
-### 1. 下载安装git-for-windows
+### 下载安装git-for-windows
 
 在windows安装时选择如下选项：
 
@@ -35,21 +35,21 @@ modify_date: 2018-08-01 00:40:10
 
 否则环境变量中无`HOME`的变量，则会将配置信息以及生成的ssh密钥保存在当前登录用户的根目录，比如`C:/Users/administrator/`。
 
-### 2. 常用命令：
+## 常用命令
 
-#### 初始化git版本库：
+### 初始化git版本库
 
 ```shell
 git init
 ```
 
-#### 克隆版本库：
+### 克隆版本库
 
 ```shell
 git clone <dir>
 ```
 
-#### 配置联网的代理服务器：
+### 配置联网的代理服务器
 
 bash的`ssh`命令可在`~/.ssh/config`文件中配置如下一行，即可测试`ssh -T git@github.com`
 
@@ -57,7 +57,7 @@ bash的`ssh`命令可在`~/.ssh/config`文件中配置如下一行，即可测�
 ProxyCommand connect -H xxxx:8080 %h %p
 ```
 
-配置`git`命令使用代理
+### 配置`git`命令使用代理
 
 ```bash
 git config --global http.proxy http://xxxx:8080
@@ -76,59 +76,80 @@ set http_proxy_user=
 set http_proxy_pass=
 ```
 
-#### 取消git联网的代理服务器：
+### 取消git联网的代理服务器
 
 ```bash
 git config --global --unset http.proxy
 ```
 
-#### 配置用户：
+### ssh的说不好是什么的配置
+
+编辑`~/.ssh/config`文件，添加如下内容
+
+```
+Host github.com
+Port 443
+User git
+Hostname ssh.github.com
+PreferredAuthentications publickey
+identityfile ~/.ssh/id_rsa
+ProxyCommand connect -H PROXY_HOST_IP:PORT %h %p
+```
+
+用于在内网环境下ssh使用代理通过https协议与github。
+
+### 配置用户名和邮箱
 
 ```bash
 git config --global user.email "You@example.com"
-```
-
-#### 配置邮箱：
-
-```bash
 git config --global user.name "Your Name"
 ```
 
-#### 添加远程仓库：
+### 添加远程仓库
 
 ```bash
-git remote add origin git@github.com:thianda/dangjian.git
+git remote add origin git@github.com:youname/yourrepo.git
 ```
 
-#### 添加文件：
+### 添加文件
 
 ``` bash
 git add <filename>
 git add . # 添加所有文件
 ```
 
-#### 提交：
+### 提交
 
 ```bash
 git commit -m '<comment>'
 git commit -am '<comment>' # 若无增删文件，可这样使用，代替`git add .`&`git commit -m '<comment>'`
 ```
 
-如果忘了加`-m`参数，会进入到linux的vim编辑界面，在输入了comment后按ESC，输入`:wq`按回车即可。
+如果忘了加`-m`参数，会进入到linux的vim编辑界面，在输入了comment后按`ESC`，输入`:wq`按回车即可。
 
-#### 查看状态：
+```bash
+git commit --amend  --date="commit_time" # 修改上一次的提交时间
+# commit_time的格式可以执行date -R来查看。若修改上一次时间为当前时间，可执行：
+git commit --amend --date="$(date -R)"  或
+git commit --amend --date=`date -R`
+# 其他时间自己构造即可：
+git commit --amend --date="Sun, 25 Dec 2016 19:42:09 +0800"
+git commit --amend --date="$(date -d '2018-02-02 18:15:15' -R)"
+```
+
+### 查看状态
 
 ```bash
 git status   # 在任何环节均可以查看状态。
 ```
 
-#### 查看所有分支
+### 查看所有分支
 
 ```bash
 git branch --all 
 ```
 
-#### 新建分支：
+### 新建分支
 
 ```bash
 git checkout -b <branch>
@@ -141,22 +162,22 @@ git branch <branch>
 git checkout <branch>
 ```
 
-#### git 本地分支与远程分支关联：
+### git 本地分支与远程分支关联
 
-##### 1) github上已经有master分支 和dev分支
+#### 1) github上已经有master分支 和dev分支
 
 ```bash
 git checkout -b dev   # 新建并切换到本地dev分支
 git pull origin dev   # 本地分支与远程分支相关联
 ```
-##### 2) 在本地新建分支并推送到远程
+#### 2) 在本地新建分支并推送到远程
 
 ```bash
 git checkout -b test
 git push origin test   # 这样远程仓库中也就创建了一个test分支
 ```
 
-#### 发布dev分支
+### 发布dev分支
 
 发布dev分支指的是同步dev分支的代码到远程服务器，与新建分支并推送类似
 
@@ -164,7 +185,7 @@ git push origin test   # 这样远程仓库中也就创建了一个test分支
 git push origin dev:dev  # 这样远程仓库也有一个dev分支了
 ```
 
-#### 在dev分支开发代码
+### 在dev分支开发代码
 
 ```bash
 git checkout dev  # 切换到dev分支进行开发
@@ -180,7 +201,7 @@ git push  # 提交到dev远程分支
 # 注意：在分支切换之前最好先commit全部的改变，除非你真的知道自己在做什么
 ```
 
-#### 删除分支
+### 删除分支
 
 ```bash
 git push origin :dev  # 删除远程dev分支，危险命令哦
@@ -189,7 +210,7 @@ git checkout master  # 切换到master分支
 git branch -d dev  # 删除本地dev分支
 ```
 
-#### 标签
+### 标签
 
 ```bash
 git tag # 查看标签
@@ -203,7 +224,7 @@ git push origin --tags # 推送所有标签 默认 git push 不会推送标签�
 git tag -d v1.4-lw # 删除标签
 ```
 
-#### 其他命令：
+### 其他命令
 
 ```bash
 git push -u origin master
@@ -212,12 +233,12 @@ git reflog
 ssh-keygen -t rsa -C "yxd9721@qq.com"
 ```
 
-#### 彻底删除某个文件的历史记录
+### 彻底删除某个文件的历史记录
 
-```sh
+```bash
 git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch FILE_PATH' --prune-empty --tag-name-filter cat -- --all
 
-git push origin master --force
+git push origin master --tags --force
 rm -rf .git/refs/original/
 git reflog expire --expire=now --all
 git gc --prune=now
@@ -226,7 +247,7 @@ git gc --aggressive --prune=now
 
 把`FILE_PATH`替换成要删除的文件，执行即可。
 
-#### 一些alias
+### 一些alias
 
 可将下面的配置手动保存到`~/.gitconfig`文件中
 
@@ -245,9 +266,9 @@ git config --global alias.lgg log --no-merges --color --graph --date=format:'%Y-
 git config --global alias.ls log --no-merges --color --stat --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Cblue %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
 ```
 
-### 3. 使用github.com
+## 使用github.com
 
-#### 设置ssh key
+### 设置ssh key
 
 ```bash
 // 1. 创建 ssh key，出现提示一路按回车
@@ -266,7 +287,7 @@ ssh -T git@github.com
 
 > 在git-bash中使用ssh协议的链接进行clone和push，即可基于ssh key免输密码。
 
-#### 设置启动git bath后自动运行ssh-agent
+### 设置启动git bath后自动运行ssh-agent
 
 将下面的代码保存到`~/.profile` 或者 `~/.bashrc`，`~`表示当前用户的用户目录。或者是前文提到的新建的`home`文件夹。
 
@@ -297,7 +318,7 @@ unset env
 ```
 
 
-#### 详细讲解：
+### 详细讲解：
 
 第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：
 
@@ -319,14 +340,14 @@ $ ssh-keygen -t rsa -C "youremail@example.com"
 点“Add Key”，你就应该看到已经添加的Key。
 
 
-### 参考：
+## 参考
 
 [generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)  
 [adding-a-new-ssh-key-to-your-github-account](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/)  
 [working-with-ssh-key-passphrases](https://help.github.com/articles/working-with-ssh-key-passphrases/)  
 [CMD 和 Git 中的代理设置](http://www.cnblogs.com/terrylin/p/3296428.html)   
 
-### 拓展阅读
+## 拓展阅读
 
 [git pull介绍](http://www.yiibai.com/git/git_pull.html)
 
