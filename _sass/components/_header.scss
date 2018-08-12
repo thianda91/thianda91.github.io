@@ -1,8 +1,9 @@
 .header {
+  background: $header-background;
   a {
     font-weight: map-get($base, font-weight);
-    text-decoration: none;
-    @include link-colors($text-color, $main-color-1, $main-color-1);
+    text-decoration: none !important;
+    @include link-colors($header-text-color, $main-color-1);
   }
   & > .main > .logo {
     float: left;
@@ -27,12 +28,12 @@
         font-size: map-get($base, font-size-h4-small);
       }
     }
-    & > .site-sub-title {
+	& > .site-sub-title {
       padding-left: 20px;
       display: inline-block;
       font-size: map-get($base, font-size-h4-xs);
       line-height: 1.5;
-    }
+	}
     @include media-breakpoint-down(md) {
       float: none;
       height: map-get($layout, header-height-sm);
@@ -56,7 +57,7 @@
         &.active {
           @include split-line(bottom, 4px, $main-color-1);
           a {
-            @include link-colors($main-color-1, $main-color-1, $main-color-1);
+            @include link-colors($main-color-1, $main-color-1);
           }
         }
       }

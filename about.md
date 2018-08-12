@@ -1,25 +1,11 @@
 ---
 layout: page
-title: 关于Xianda
+title: 关于
 key: page-about
 ---
 
 我不是名合格的老师，我只是技术文章的搬运工。此blog存在的意义主要是记录自己搜资料学习的过程:+1:
 
-{% highlight javascript linenos %}
-(() => console.log('hello, world!'))();
-{% endhighlight %}
-
-```
-       _                    _        
-      (_)                  | |       
-__  __ _   __ _  _ __    __| |  __ _ 
-\ \/ /| | / _` || '_ \  / _` | / _` |
- >  < | || (_| || | | || (_| || (_| |
-/_/\_\|_| \__,_||_| |_| \__,_| \__,_|
-
-
-```
 <style>
 pre.img {
     font-size: 8pt;
@@ -123,9 +109,27 @@ pre.img {
 					   ;fjfjjfLLfjfGLLLLjjLjfffffLLjjjtft;jtf.                              
 					   ,tjjt::iffjjfffLfLttjti;;jti:,.:,.:,ij                               
 					   :;ii:.  .;itiijjjtt;,:. ,,:         :;                               
-						..      ..:..::,,:.                                                 
-
-
-​																							
+						..      ..:..::,,:.                                                 																						
 
 </pre>
+
+{% highlight javascript linenos %}
+(() => console.log('hello, world!'))();
+{% endhighlight %}
+
+```ini
+ __  __  ____        
+ \ \/ / |  _ \  __ _ 
+  \  /  | | | |/ _` |
+  /  \ _| |_| | (_| |
+ /_/\_(_)____/ \__,_|
+
+ooooooo``ooooo`````oooooooooo.`````````````
+``8888````d8'```````888'````Y8b````````````
+​```Y888..8P`````````888``````888``.oooo.```
+​`````8888'``````````888``````888``P``)88b``
+​```.8PY888.`````````888``````888``.oP"888``
+``d8'```888b```.o.``888`````d88'`d8(``888``
+o888o``o88888o`Y8P`o888bood8P'````Y888""8o`
+​```````````````````````````````````````````
+```

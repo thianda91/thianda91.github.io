@@ -5,7 +5,7 @@ key: 2017-10-30
 date: 2017-10-30 16:46:38
 categories: notes
 tags: jekyll 
-modify_date: 2018-02-05 16:38:05
+modify_date: 2018-08-12 14:51:48
 ---
 
 记录一下本人第一次搭建git pages的过程。谨以此文记录自己的操作过程。
@@ -72,19 +72,11 @@ install: "--no-ri --no-rdoc"
 update: "--no-ri --no-rdoc"
 ```
 
+可以执行`touch ~/.genrc`来创建文件名以`.`开头的文件。
+
 这样使用`gem`命令时不安装帮助文档（否则它通常安装在`D:\Ruby24-x64\lib\ruby\gems\2.4.0\doc`目录）。
 
-接下来继续安装Bundler
-
-```bash
-gem install bundler # 安装bundler
-```
-
-安装完毕可以输入`bundle -v`验证。
-
-现在我们可以根据项目根目录下`Gemfile`来使用`bundle install`或者`bundle update`命令进行安装/更新依赖了。
-
-其他操作：
+GEM 命令的其他操作：
 
 ```bash
 #查看通过gem已安装插件：
@@ -98,6 +90,24 @@ $ gem cleanup
 #基于`Gemfile`指定的依赖包执行命令：
 $ bundle exec <command>
 ```
+
+##### 如果你使用 Gemfile 和 Bundler (例如：Rails 项目)
+
+你可以用 Bundler 的 [Gem 源代码镜像命令](http://bundler.io/v1.5/bundle_config.html#gem-source-mirrors)。
+
+```bash
+$ bundle config mirror.https://rubygems.org https://gems.ruby-china.com
+```
+
+接下来继续安装Bundler
+
+```bash
+gem install bundler # 安装bundler
+```
+
+安装完毕可以输入`bundle -v`验证。
+
+现在我们可以根据项目根目录下`Gemfile`来使用`bundle install`或者`bundle update`命令进行安装/更新依赖了。
 
 ### 安装Jekyll
 

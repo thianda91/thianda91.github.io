@@ -8,10 +8,6 @@ date: 2017-12-04 10:37:12
 modify_date: 2017-12-04 16:45:26
 ---
 
-
-
-
-
 ## OSI模型
 
 | 层    | 名称           | 中文名称  | PDU     | Function/功能                             | 协议                 |
@@ -30,8 +26,8 @@ modify_date: 2017-12-04 16:45:26
 
 PDU：Protocol Data Unit
 
-![图解OSI模型](../statics/images/osi-network-model/osi.gif)  
-[查看原图](../statics/images/osi-network-model/osi.gif)
+[![图解OSI模型](../assets/images/osi-network-model/osi.gif)](../assets/images/osi-network-model/osi.gif)  
+[查看原图](../assets/images/osi-network-model/osi.gif)
 
 ## TCP/IP协议栈
 

@@ -15,7 +15,7 @@
     font-size: map-get($base, font-size-lg);
     font-weight: map-get($base, font-weight-bold);
     a {
-      @include link-colors($text-color, $text-color, $text-color);
+      @include link-colors($text-color, $main-color-1);
     }
   }
   .left-col {
@@ -33,7 +33,7 @@
       padding-left: 0;
       margin-left: 0;
     }
-    .follow-me {
+    .author-links {
       float: left;
       @include media-breakpoint-down(md) {
         float: none;

@@ -5,17 +5,15 @@
     font-size: map-get($base, font-size-sm);
     color: $text-color-l;
     .article__license {
-      position: relative;
       img {
-        height: map-get($base, font-size-sm) * 1.5;
-        vertical-align: text-bottom;
+        height: map-get($base, font-size) * 1.6;
       }
       a {
-        @include link-colors($text-color, $main-color-1, $main-color-1);
+        @include link-colors($text-color, $main-color-1);
       }
     }
   }
-  .article__previous-next {
+  .article__section-navigator {
     word-wrap: break-word;
     margin: map-get($spacers, 4) 0 map-get($spacers, 3) 0;
     padding-top: map-get($base, vertical-space-lg) / 2;
@@ -28,7 +26,7 @@
       }
       & > a {
         display: block;
-        @include link-colors($text-color, $main-color-1, $main-color-1);
+        @include link-colors($text-color, $main-color-1);
       }
     }
     & > .previous {

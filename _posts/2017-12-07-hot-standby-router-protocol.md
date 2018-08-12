@@ -8,13 +8,13 @@ date: 2017-12-07 09:02:37
 modify_date: 2017-12-07 16:56:30
 ---
 
-### HSRP
+## HSRP
 
 热备份路由器协议（Hot Standby Router Protocol）
 
 > cisco的私有协议。实现在第三层的高可用。
 
-#### 配置
+### 配置
 
 RouterA
 
@@ -32,7 +32,7 @@ switch(config-if)# ip address 10.1.10.3 255.255.255.0
 switch(config-if)# standby 10 10.1.10.1
 ```
 
-#### HSRP状态
+### HSRP状态
 
 | 状态      |      | 定义                                       |
 | ------- | ---- | ---------------------------------------- |
@@ -43,7 +43,7 @@ switch(config-if)# standby 10 10.1.10.1
 | standby | 备份   | 时刻作为下一个活跃路由器的候选人，并周期发送`hello`报文          |
 | active  | 活动   | 转发报文并发送给虚拟MAC地址，并周期发送`hello`报文           |
 
-#### 其他配置
+### 其他配置
 
 ```shell
 > HSRP优先级设置

@@ -100,7 +100,7 @@
     var $root = $('.js-all');
     var $searchBox = $('.js-search-box');
     var $searchInput = $searchBox.children('input');
-    var $searchClear = $searchBox.children('.icon-clear');
+    var $searchClear = $searchBox.children('.js-icon-clear');
     var $tags = $('.js-tags');
     var $articleTags = $('.js-article-tag');
     var $tagShowAll = $('.js-tag-show-all');
@@ -146,7 +146,7 @@
       }
       return _buttons;
     }
-    function buttonFoucs(target) {
+    function buttonFocus(target) {
       if (target) {
         addClass(target, 'focus');
         $lastFocusButton && !$lastFocusButton.is(target) && removeClass($lastFocusButton, 'focus');
@@ -174,7 +174,7 @@
     }
 
     function showAll() {
-      setNotSearch(); setIsEmpty(); buttonFoucs($tagShowAll); setUrlQuery();
+      setNotSearch(); setIsEmpty(); buttonFocus($tagShowAll); setUrlQuery();
       $result.html(render(data));
     }
     function tagSelect(tag/*decode tag*/, target) {
@@ -185,7 +185,7 @@
         $result.html(render(searchByTag(tag)));
       }
       if (target) {
-        buttonFoucs(target);
+        buttonFocus(target);
         _tag = target.attr('data-encode');
         if (_tag === '' || typeof _tag !== 'string') {
           setUrlQuery();
@@ -209,7 +209,7 @@
       if (_tag !== undefined) {
         query.tag === undefined || (_tag = query.tag);
         tagSelect(window.decodeUrl(_tag));
-        buttonFoucs(searchButtonsByTag(_tag));
+        buttonFocus(searchButtonsByTag(_tag));
       } else if (_q !== undefined) {
         _q = window.decodeUrl(_q);
         queryInput(_q); setSearchBoxVal(_q);

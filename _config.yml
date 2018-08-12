@@ -17,11 +17,11 @@
 ## => Site Settings
 ##############################
 text_skin: default # "default" (default), "dark", "forest", "ocean", "chocolate", "orange"
+highlight_theme: tomorrow-night-eighties # "default" (default), "tomorrow", "tomorrow-night", "tomorrow-night-eighties", "tomorrow-night-blue", "tomorrow-night-bright"
 url     : # the base hostname & protocol for your site e.g. https://www.someone.com
 baseurl : # does not include hostname
-title   : XDa
+title   : X.Da
 description: 自学敲代码的一路走来
-
 
 
 ## => Language and Timezone
@@ -66,7 +66,7 @@ paths:
 ## => Post
 ##############################
 ## excerpt
-excerpt_separator: <!-- more -->
+excerpt_separator: <!--more-->
 excerpt_type: html # text (default), html
 
 ## license
@@ -151,22 +151,8 @@ highlighter : rouge
 permalink   : none
 
 exclude:
-  - CHANGELOG.md
-  - CHECKLIST.md
-  - Gemfile
-  - Gemfile.lock
-  - LICENSE
-  - README-*.md
-  - README.md
-  - gulpfile.js
-  - jekyll-text-theme.gemspec
-  - package-lock.json
-  - package.json
-  - /docs
-  - /node_modules
-  - /screenshots
-  - /test
-  - /vendor
+
+
 
 defaults:
   - scope:
