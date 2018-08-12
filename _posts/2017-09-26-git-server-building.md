@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: windows系统git服务器自己搭建（gitblit or gogs）
 key: 2017-09-26
 categories: ppt

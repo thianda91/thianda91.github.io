@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: 修改常见服务器的banner
 key: 2017-04-12
 tags: safe

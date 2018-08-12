@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: 使用 Jekyll 搭建自己的 Github Pages
 key: 2017-10-30
 date: 2017-10-30 16:46:38

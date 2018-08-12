@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: MySQL数据库MyISAM与InnoDB存储引擎的比较
 key: 2017-02-11
 tags: database

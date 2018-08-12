@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       article
 title:        内容网络基础(CDN)
 key:          2018-07-18
 tags:         CDN

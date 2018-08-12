@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: C语言函数调用约定
 key: 2017-07-11
 tags: C

@@ -159,7 +159,7 @@ defaults:
       path: ""
       type: posts
     values:
-      layout: post
+      layout: article
       license: true
       aside:
         toc: true

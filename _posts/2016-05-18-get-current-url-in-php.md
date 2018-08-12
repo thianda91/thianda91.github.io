@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: PHP中获取当前页面的完整URL
 key: 2016-05-18
 tags: php

@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       article
 title:        肉鸡处理方法
 key:          2018-02-28
 tags:         notes

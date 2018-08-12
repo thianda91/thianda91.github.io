@@ -5,7 +5,7 @@
 - 基于 jekyll 的博客
 - [jekyll-TeXt-theme](https://github.com/kitian616/jekyll-TeXt-theme) 主题，并做自定义改动
 
-### 修改内容
+## 修改内容
 
 - `_includes\header.html`增加`sub-title`显示`site.description`
 

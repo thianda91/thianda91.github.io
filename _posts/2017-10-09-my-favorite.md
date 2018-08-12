@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: 收藏夹-Xianda
 key: 2017-10-09
 categories: notes

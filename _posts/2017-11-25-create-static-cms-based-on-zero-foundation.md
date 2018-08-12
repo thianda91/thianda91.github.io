@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: 零基础搭建CMS内容管理系统
 key: 2017-11-25
 categories: ppt
@@ -121,7 +121,7 @@ Jekyll 的核心其实是一个文本转换引擎。它的概念其实就是： 
 
 ```yaml
 ---
-layout: post
+layout: article
 title: this_is_the_title
 ---
 ```

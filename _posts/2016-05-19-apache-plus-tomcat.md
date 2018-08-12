@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: Apache+tomcat的整合
 key: 2016-05-19
 tags: apache

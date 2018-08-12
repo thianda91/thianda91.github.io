@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: 详解MySQL的用户密码过期功能
 key: 2017-05-24
 tags: mysql

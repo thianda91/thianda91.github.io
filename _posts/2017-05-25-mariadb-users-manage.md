@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: MariaDB用户管理
 key: 2017-05-25
 tags: mysql

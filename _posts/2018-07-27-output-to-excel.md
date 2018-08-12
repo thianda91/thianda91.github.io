@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       article
 title:        浅谈智能输出数据表到excel
 key:          2018-07-27
 tags:         excel

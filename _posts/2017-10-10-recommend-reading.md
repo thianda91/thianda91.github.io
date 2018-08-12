@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: 推荐阅读-Xianda
 key: 2017-10-10
 categories: ppt

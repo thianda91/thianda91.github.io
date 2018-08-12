@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: OSI参考模型与TCP/IP模型
 key: 2017-12-04
 tags: osi

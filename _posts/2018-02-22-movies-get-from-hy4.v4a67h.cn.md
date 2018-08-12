@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       article
 title:        记录一次js抓取在线视频源地址的实践
 key:          2018-02-22
 tags:         javascript

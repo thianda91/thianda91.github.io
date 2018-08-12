@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       article
 title:        亲手学Debian系统操作
 key:          2018-07-30
 tags:         Debian

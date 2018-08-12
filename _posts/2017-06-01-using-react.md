@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: 基于React的AmazeUI-touch使用（如何使用react）
 key: 2017-06-01
 tags: react

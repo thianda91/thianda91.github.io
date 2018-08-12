@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: 路由器的ACL与NAT地址转换
 key: 2017-12-06
 tags: acl NAT&PAT

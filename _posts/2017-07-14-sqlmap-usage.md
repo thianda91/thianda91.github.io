@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: sqlmap用户手册
 key: 2017-07-14
 categories: notes

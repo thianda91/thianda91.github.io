@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: JavaScript学习路线
 key: 2017-10-11
 categories: ppt

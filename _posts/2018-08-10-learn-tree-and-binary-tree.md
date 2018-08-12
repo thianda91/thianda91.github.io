@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       article
 title:        学习数据结构中的树，二叉树
 key:          2018-08-10
 tags:         data-structure

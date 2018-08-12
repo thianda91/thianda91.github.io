@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: 如何记录开发项目的更新日志
 key: 2017-11-13
 date: 2017-11-13 11:43:39

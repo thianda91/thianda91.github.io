@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: 思科设备跳密码登录
 key: 2017-12-05
 tags: cisco

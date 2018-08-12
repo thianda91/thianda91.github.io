@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: Xianda要学习的东西
 key: 2017-10-13
 categories: notes

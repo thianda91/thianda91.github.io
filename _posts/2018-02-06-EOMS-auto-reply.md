@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       article
 title:        EOMS 故障处理工单(设备) 自动回单脚本
 key:          2018-02-06
 tags:         javascript

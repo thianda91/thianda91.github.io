@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: 热备份路由器协议（HSRP概述）
 key: 2017-12-07
 tags: HSRP

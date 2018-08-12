@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       article
 title:        DCN安全培训
 key:          2018-07-23
 tags:         MDCN

@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       article
 title:        编程语言趋势
 key:          2018-05-14
 tags:         notes

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: 国内顶尖团队的开源地址 
 key: 2017-11-17
 tags: links

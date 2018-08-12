@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: 记录本人学习CentOS的安装使用-停更
 key: 2017-10-18
 tags: training

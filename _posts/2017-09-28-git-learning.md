@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: Git简要教程
 key: 2017-09-28
 categories: ppt

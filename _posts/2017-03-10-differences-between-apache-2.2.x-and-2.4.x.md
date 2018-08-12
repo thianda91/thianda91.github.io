@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: Apache2.4.x与Apache2.2.x的一些区别
 key: 2017-03-10
 tags: apache
