@@ -6,6 +6,7 @@ tags:         data-structure
 categories:   notes
 date:         2018-08-10 10:40:54
 modify_date:  2018-08-12 18:40:59
+mathjax:      true
 ---
 
 > 本文摘选自某本数据结构教材
@@ -86,12 +87,12 @@ modify_date:  2018-08-12 18:40:59
 ```
 ADT Tree
 {
-    数据对象 D：D 是具有相同特性的数据元素所构成的结点集合。
-    数据关系 R：结点之间的父子关系描述
-    基本操作 P：树的基本操作所构成的集合
-        构造和插入类：
-        删除类：
-        查找和修改类：
+  数据对象 D：D 是具有相同特性的数据元素所构成的结点集合。
+  数据关系 R：结点之间的父子关系描述
+  基本操作 P：树的基本操作所构成的集合
+    构造和插入类：
+    删除类：
+    查找和修改类：
 }
 ```
 
@@ -118,8 +119,8 @@ ADT Tree
 typedef int datatype;
 typedef struct node
 {
-    datatype data; /*结点的数据信息*/
-    int parent; /*双亲结点的数组下标*/
+  datatype data; /*结点的数据信息*/
+  int parent; /*双亲结点的数组下标*/
 }Pnode;
 ```
 
@@ -140,13 +141,13 @@ typedef struct node
 typedef int datatype;
 typedef struct Snode /*兄弟结点单链表的结点描述*/
 {
-    datatype data; /*结点的数据信息*/
-    struct Snode *next; /*指向兄弟结点的指针*/
+  datatype data; /*结点的数据信息*/
+  struct Snode *next; /*指向兄弟结点的指针*/
 }Siblingnode;
 typedef struct node
 {
-    datatype data; /*结点的数据信息*/
-    int parent; /*双亲结点的数组下标*/
+  datatype data; /*结点的数据信息*/
+  int parent; /*双亲结点的数组下标*/
 	Siblingnode *head ; /*指向孩子结点单链表的头结点*/
 }PCnode;
 ```
@@ -170,11 +171,11 @@ typedef struct node
 如果一棵二叉树的所有叶子结点都在同一层上，并且所有的非叶子结点的度都为 2，那么称这棵二叉树为满二叉树。
 
 ```
-        a
-     /     \
-    b       c
+    a
+   /   \
+  b     c
    /  \   /  \
-  d    e f    g
+  d  e f  g
 ```
 
 深度为 k 的满二叉树具有 `2^k-1` 个节点。
@@ -184,13 +185,13 @@ typedef struct node
 一棵具有 n 个结点的二叉树，如果它的结构与一棵满二叉树的前 n 个结点的结构相同，那么称这棵二叉树为完全二叉树。
 
 ```
-        a                          a
-     /     \                    /     \ 
-    b       c       <==>       b       c
-   /  \                       /  \    /  \
-  d    e                     d    e  f    g
+    a              a
+   /   \          /   \ 
+  b     c     <==>     b     c
+   /  \             /  \  /  \
+  d  e           d  e  f  g
   
-  完全二叉树         <==>       满二叉树
+  完全二叉树     <==>     满二叉树
 ```
 
 ### 二叉树的性质
@@ -213,3 +214,123 @@ typedef struct node
   (4) 若 $$2^i+1≤n$$ ，则它有编号为 $$2^i+1$$ 的右孩子结点，否则没有右孩子。
 
 ### 二叉树的抽象数据类型
+
+二叉树的抽象数据类型包含了三个方面，它们分别是数据对象 D、数据关系 R 和基本操作 P。
+
+``` c
+ADT Binary Tree
+{
+  数据对象 D：D 是具有相同特性的数据元素所构成的结点集合
+  数据关系 R：结点之间的父子关系描述
+  基本操作 P：树的基本操作所构成的集合
+    构造和插入类：
+    删除类：
+    查找和修改类：
+}
+```
+
+### 二叉树的存储结构
+
+#### 1 顺序存储
+
+适用与满二叉树，完全二叉树，按照从上到下，从左到右的顺序进行标号。结构既简单又节省存储空间。（本书中，结点的序号从 1 开始，而数组的下标从 0 开始）
+
+#### 2 链式存储法
+
+二叉树的链式存储结构常见的有二叉链结构和三叉链结构。
+
+二叉链结构的每个结点由数据域和指针域组成，数据域用于保存结点的数据信息，指针域包含了两个结点指针。其中，一个指针指向左孩子所在结点的存储地址，这种指针称为左指针；另一个指针指向右孩子所在结点的存储地址，这个指针称为右指针，结点的存储的结构为：`Lchild | data | Rchild`。
+
+```c
+typedef int datatype;
+typedef struct node
+{c
+  int data; /* 数据域 */
+  struct node *lchild ; /* lchild 是左子树根结点指针*/
+  struct node *rchild ; /*rchild 是右子树根结点指针 */
+}Bnode;
+```
+
+三叉链结构是二叉树的另外一种链式存储方式，三叉链的结点和二叉链的结点相比，多了一个指向双亲结点的指针：`Lchild | data | Rchild | parent`。
+
+```c
+typedef char datatype;
+typedef struct Tnode
+{
+  datatype data ; /* 数据域 */
+  struct Tnode *lchild ; /* lchild 左子树根结点指针*/
+  struct Tnode *rchild /*右子树根结点指针*/
+  struct Tnode *parent /*是双亲指针域 */
+} Bnode;
+```
+
+### 二叉树的二叉链存储结构的实现及应用
+
+在二叉链存储结构下，下面给出了二叉树的结点定义、树的初始化操作、左结点的插入操作、右结点的插入操作、左子树的删除操作、右子树的删除操作的 C 语言过程函数。
+
+（略）
+
+## 二叉树的遍历
+
+#### 1 先根遍历
+
+```c
+void PreOrder（ Bnode *root）
+{
+  if （root = =NULL） return; /*递归调用的结束条件*/
+  Visite（ root ->data） ; /*访问结点的数据域*/
+  PreOrder（root ->lchild） ; /*先序递归遍历 root 的左子树*/
+  PreOrder（root ->rchild） ; /*先序递归遍历 root 的右子树*/
+}
+
+      1
+    /     \
+  2      5
+   /      /  \
+ 3      6    7
+  \
+    4
+```
+
+#### 2 中根遍历
+
+```c
+void PreOrder（ Bnode *root）
+{
+  if （root = =NULL） return; /*递归调用的结束条件*/
+  PreOrder（root ->lchild） ; /*先序递归遍历 root 的左子树*/
+  Visite（ root ->data） ; /*访问结点的数据域*/
+  PreOrder（root ->rchild） ; /*先序递归遍历 root 的右子树*/
+}
+
+      4
+    /     \
+  3      6
+   /      /  \
+ 1      5    7
+  \
+    2
+```
+
+#### 3 后根遍历
+
+```c
+void PostOrder（ Bnode *root）
+{
+  if （root = =NULL） return; /*递归调用的结束条件*/
+  PostOrder InOrder （ root ->lchild ） ; /*先序递归遍历 root 的左子树*/
+  PostOrder InOrder （ root ->rchild ） ; /*先序递归遍历 root 的右子树*/
+  Visite（ root ->data ） ; /*访问结点的数据域*/
+}
+
+      7
+    /     \
+  3      6
+   /      /  \
+ 2      4    5
+  \
+    1
+```
+
+## 线索二叉树
+
