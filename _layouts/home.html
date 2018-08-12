@@ -32,9 +32,9 @@ show_title: false
 			{%- endif -%}
           {%- else -%}
 			{%- if post.excerpt -%}
-				{{ post.excerpt | strip_html | truncate: 150 }}
+				{{ post.excerpt }}
 			{%- else -%}
-				{{ post.content | strip_html | truncate: 150 }}
+				{{ post.content | strip_tags | truncate: 150 }}
 			{%- endif -%}
           {%- endif -%}
         </div>
