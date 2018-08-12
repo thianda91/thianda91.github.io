@@ -5,7 +5,7 @@ key:          2018-08-10
 tags:         data-structure
 categories:   notes
 date:         2018-08-10 10:40:54
-modify_date:  2018-08-12 18:40:59
+modify_date:  2018-08-13 01:40:59
 mathjax:      true
 ---
 
@@ -84,7 +84,7 @@ mathjax:      true
 
 树的抽象数据类型包含了三个方面，它们分别是数据对象 D、数据关系 R 和基本操作P。
 
-```
+``` c
 ADT Tree
 {
   数据对象 D：D 是具有相同特性的数据元素所构成的结点集合。
@@ -171,11 +171,11 @@ typedef struct node
 如果一棵二叉树的所有叶子结点都在同一层上，并且所有的非叶子结点的度都为 2，那么称这棵二叉树为满二叉树。
 
 ```
-    a
-   /   \
-  b     c
-   /  \   /  \
-  d  e f  g
+       a
+     /    \
+    b      c
+  /  \    /  \
+ d    e  f    g
 ```
 
 深度为 k 的满二叉树具有 `2^k-1` 个节点。
@@ -185,11 +185,11 @@ typedef struct node
 一棵具有 n 个结点的二叉树，如果它的结构与一棵满二叉树的前 n 个结点的结构相同，那么称这棵二叉树为完全二叉树。
 
 ```
-    a              a
-   /   \          /   \ 
-  b     c     <==>     b     c
-   /  \             /  \  /  \
-  d  e           d  e  f  g
+       a                     a
+     /    \                /   \ 
+   b       c     <==>     b      c
+  /  \                  /  \    /  \
+ d    e                d   e   f    g
   
   完全二叉树     <==>     满二叉树
 ```
@@ -283,13 +283,13 @@ void PreOrder（ Bnode *root）
   PreOrder（root ->rchild） ; /*先序递归遍历 root 的右子树*/
 }
 
-      1
-    /     \
-  2      5
-   /      /  \
- 3      6    7
-  \
-    4
+         1
+      /     \
+    2         5
+   /        /   \
+  3        6     7
+   \
+     4
 ```
 
 #### 2 中根遍历
@@ -303,11 +303,11 @@ void PreOrder（ Bnode *root）
   PreOrder（root ->rchild） ; /*先序递归遍历 root 的右子树*/
 }
 
-      4
-    /     \
-  3      6
-   /      /  \
- 1      5    7
+         4
+      /     \
+    3         6
+  /         /   \
+ 1        5       7
   \
     2
 ```
@@ -323,11 +323,11 @@ void PostOrder（ Bnode *root）
   Visite（ root ->data ） ; /*访问结点的数据域*/
 }
 
-      7
-    /     \
-  3      6
-   /      /  \
- 2      4    5
+         7
+      /     \
+    3         6
+  /         /    \
+ 2         4      5
   \
     1
 ```
