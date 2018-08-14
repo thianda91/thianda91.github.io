@@ -247,6 +247,24 @@ git gc --aggressive --prune=now
 
 把`FILE_PATH`替换成要删除的文件，执行即可。
 
+### 修改历史提交数据
+
+用`git filter-branch`命令，该命令会在当前分支的所有提交上上执行参数所描述的操作。如果你要在所有分支的所有提交上执行，可以在后边加上`--all`选项。也可参考上面彻底删除某文件历史记录的命令参数。
+
+比如，你想修改你的邮箱为新的邮箱 ：
+
+```sh
+git filter-branch --commit-filter '
+	if [ "$GIT_AUTHOR_EMAIL" = "old@example.com" ];
+	then
+			GIT_AUTHOR_NAME="NEW NAME";
+			GIT_AUTHOR_EMAIL="NEW_Email@example.com";
+			git commit-tree "$@";
+	else
+			git commit-tree "$@";
+	fi' HEAD
+```
+
 ### 一些alias
 
 可将下面的配置手动保存到`~/.gitconfig`文件中
@@ -272,7 +290,7 @@ git config --global alias.ls log --no-merges --color --stat --graph --date=forma
 
 ```bash
 // 1. 创建 ssh key，出现提示一路按回车
-ssh-keygen -t rsa -b 4096 -C "yxd9721@qq.com"
+ssh-keygen -t rsa -b 4096 -C "thianda91@outlook.com"
 // 2. 让 ssh-agent 在后台运行 (start the ssh-agent in the background)
 eval $(ssh-agent -s)
 // 3. 指定密钥给本地ssh-agent

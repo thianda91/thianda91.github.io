@@ -119,8 +119,8 @@ ADT Tree
 typedef int datatype;
 typedef struct node
 {
-  datatype data; /*结点的数据信息*/
-  int parent; /*双亲结点的数组下标*/
+  datatype data; /* 结点的数据信息 */
+  int parent; /* 双亲结点的数组下标 */
 }Pnode;
 ```
 
@@ -139,16 +139,16 @@ typedef struct node
 
 ```c
 typedef int datatype;
-typedef struct Snode /*兄弟结点单链表的结点描述*/
+typedef struct Snode /* 兄弟结点单链表的结点描述 */
 {
-  datatype data; /*结点的数据信息*/
-  struct Snode *next; /*指向兄弟结点的指针*/
+  datatype data; /* 结点的数据信息 */
+  struct Snode *next; /* 指向兄弟结点的指针 */
 }Siblingnode;
 typedef struct node
 {
-  datatype data; /*结点的数据信息*/
-  int parent; /*双亲结点的数组下标*/
-	Siblingnode *head ; /*指向孩子结点单链表的头结点*/
+  datatype data; /* 结点的数据信息 */
+  int parent; /* 双亲结点的数组下标 */
+	Siblingnode *head; /* 指向孩子结点单链表的头结点 */
 }PCnode;
 ```
 
@@ -244,10 +244,10 @@ ADT Binary Tree
 ```c
 typedef int datatype;
 typedef struct node
-{c
-  int data; /* 数据域 */
-  struct node *lchild ; /* lchild 是左子树根结点指针*/
-  struct node *rchild ; /*rchild 是右子树根结点指针 */
+{
+  int data;				/* 数据域 */
+  struct node *lchild;	/* lchild 是左子树根结点指针 */
+  struct node *rchild;	/* rchild 是右子树根结点指针 */
 }Bnode;
 ```
 
@@ -257,10 +257,10 @@ typedef struct node
 typedef char datatype;
 typedef struct Tnode
 {
-  datatype data ; /* 数据域 */
-  struct Tnode *lchild ; /* lchild 左子树根结点指针*/
-  struct Tnode *rchild /*右子树根结点指针*/
-  struct Tnode *parent /*是双亲指针域 */
+  datatype data;		/* 数据域 */
+  struct Tnode *lchild;	/* lchild 左子树根结点指针 */
+  struct Tnode *rchild;	/* 右子树根结点指针 */
+  struct Tnode *parent;	/* 是双亲指针域 */
 } Bnode;
 ```
 
@@ -272,15 +272,17 @@ typedef struct Tnode
 
 ## 二叉树的遍历
 
+遍历是二叉树中经常要用到的一种操作。因为在实际应用问题中，常常需要按一定顺序对二叉树中的每个结点逐个进行访问，查找具有某一特点的结点。通过一次完整的二叉树遍历，可使二叉树中结点信息由非线性排列变为某种意义上的线性序列。也就是说，遍历操作使非线性结构线性化。
+
 #### 1 先根遍历
 
 ```c
-void PreOrder（ Bnode *root）
+void PreOrder(Bnode *root)
 {
-  if （root = =NULL） return; /*递归调用的结束条件*/
-  Visite（ root ->data） ; /*访问结点的数据域*/
-  PreOrder（root ->lchild） ; /*先序递归遍历 root 的左子树*/
-  PreOrder（root ->rchild） ; /*先序递归遍历 root 的右子树*/
+  if (root == NULL) return;	/*递归调用的结束条件*/
+  Visite(root ->data);		/*访问结点的数据域*/
+  PreOrder(root ->lchild);	/*先序递归遍历 root 的左子树*/
+  PreOrder(root ->rchild);	/*先序递归遍历 root 的右子树*/
 }
 
          1
@@ -295,12 +297,12 @@ void PreOrder（ Bnode *root）
 #### 2 中根遍历
 
 ```c
-void PreOrder（ Bnode *root）
+void PreOrder(Bnode *root)
 {
-  if （root = =NULL） return; /*递归调用的结束条件*/
-  PreOrder（root ->lchild） ; /*先序递归遍历 root 的左子树*/
-  Visite（ root ->data） ; /*访问结点的数据域*/
-  PreOrder（root ->rchild） ; /*先序递归遍历 root 的右子树*/
+  if (root == NULL) return;	/*递归调用的结束条件*/
+  PreOrder(root ->lchild);	/*先序递归遍历 root 的左子树*/
+  Visite(root ->data);		/*访问结点的数据域*/
+  PreOrder(root ->rchild);	/*先序递归遍历 root 的右子树*/
 }
 
          4
@@ -315,12 +317,12 @@ void PreOrder（ Bnode *root）
 #### 3 后根遍历
 
 ```c
-void PostOrder（ Bnode *root）
+void PostOrder(Bnode *root)
 {
-  if （root = =NULL） return; /*递归调用的结束条件*/
-  PostOrder InOrder （ root ->lchild ） ; /*先序递归遍历 root 的左子树*/
-  PostOrder InOrder （ root ->rchild ） ; /*先序递归遍历 root 的右子树*/
-  Visite（ root ->data ） ; /*访问结点的数据域*/
+  if (root == NULL) return;				/* 递归调用的结束条件 */
+  PostOrder InOrder (root ->lchild);	/* 先序递归遍历 root 的左子树 */
+  PostOrder InOrder (root ->rchild);	/* 先序递归遍历 root 的右子树 */
+  Visite(root ->data);				/* 访问结点的数据域 */
 }
 
          7
@@ -334,3 +336,25 @@ void PostOrder（ Bnode *root）
 
 ## 线索二叉树
 
+。由于二叉树中存在大量的空闲指针，因此我们可以把二叉树的空闲指针用来保存二叉树结点的某种遍历序列关系，这就是我们下面要讨论的线索二叉树。
+
+`leftThread | lChild | data | rChild | rightThread`
+
+1） 左标志 ltag：当 ltag=0 时，lchild 指针是指向该结点的左孩子。当 ltag=1 时，lchild 指向该结点的遍历顺序的前驱结点。称 lchild 为左线索（leftThread）。
+2） 右标志 rtag：当 rtag=0 时，rchild 指针指向该结点的右孩子结点。当 rtag=1 时，rchild 指向该结点的遍历顺序的后继结点。称 rchild 为右线索（rightThread`）。
+
+## 二叉树、树和森林
+
+树、森林到二叉树的转换是一个常见问题。对于一般树，树中孩子的次序并不重要，只要保证双亲与孩子的关系正确即可。但在二叉树中，左、右孩子的次序是严格区分的。
+
+### 树和二叉树的转换
+
+（1）加线：各兄弟结点之间用虚线相连。可理解为每个结点的兄弟指针指向它的一个兄弟。
+
+（2）抹线：对每个结点仅保留它与其最左一个孩子的连线，抹去该结点与其他孩子之间的连线。可理解为每个结点仅有一个孩子指针，让它指向自己的长子。
+
+（3）旋转：把虚线改为实线，并且从水平方向向下旋转 45°，成右斜下方向。原树中实线成左斜下方向。这样树的形状呈现为一棵二叉树。
+
+
+
+完
