@@ -5,7 +5,7 @@ key:          2018-07-30
 tags:         Debian
 categories:   notes
 date:         2018-07-30 11:00:00
-modify_date:  2018-07-31 01:55:18
+modify_date:  2018-09-04 02:05:41
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -141,7 +141,7 @@ apt-get install openssh-server
 生成公钥秘钥：
 
 ```sh
-ssh-keygen -d
+ssh-keygen -t rsa
 ```
 
 默认会保存在`~/.ssh/`一个`id_rsa`和一个`id_rsa.pub`。
@@ -154,7 +154,7 @@ cat /etc/ssh/ssh_config
 
 按需将配置修改即可。
 
-```
+```ini
 Protocol 2
 Port 22
 IdentityFile ~/.ssh/id_rsa
@@ -164,6 +164,41 @@ RSAAuthentication yes
 
 默认情况下 root 用户无法远程登录，需要在上面的配置文件中设置`PermitRootLogin yes`，但是实测无效。于是不在研究，而是使用安装系统时设置的额外的用户远程登录。登录后可使用`su`命令切换到 root 。
 
+### 小内存增加 SWAP
+
+```sh
+dd if=/dev/zero of=/home/swap bs=1024 count=1024000 # 生成SWAP空间文件 
+/sbin/mkswap /home/swap # 创建SWAP分区
+/sbin/swapon /home/swap # 激活SWAP分区 
+echo '/home/swap  swap swap    defaults    0  0' >> /etc/fstab # 重启后可以自动挂载 
+```
+
+### 安装 XAMPP
+
+```sh
+wget -O xampp7.2.run https://www.apachefriends.org/xampp-files/7.2.9/xampp-linux-x64-7.2.9-0-installer.run
+chmod 777 xampp7.2.run
+./xampp7.2.run
+```
+
+安装在`/opt/lampp/`下。默认网站的入口为`/opt/lampp/htdocs/`。
+
+apache 的 config 文件为`/opt/lampp/apache2/conf/httpd.conf`。
+
+### 解决中文乱码
+
+```sh
+apt-get install locales
+dpkg-reconfigure locales
+```
+
+勾选 `en_US.UTF-8`、`zh_CN.UTF-8`。
+
+检查当前的 locale ：`locale`或`locale -a`
+
+正确配置下会显示：LANG =zh_CN.UTF-8
+
 ### 防火墙设置
 
 默认已安装了`iptables`，需要了解如何配置。
+
