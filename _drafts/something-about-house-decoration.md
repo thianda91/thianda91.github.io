@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       article
 title:        装修流程整理
 key:          2017-12-24
 tags:         

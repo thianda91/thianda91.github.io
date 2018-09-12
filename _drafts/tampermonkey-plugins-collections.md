@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       article
 title:        自用Tampermonkey脚本整理
 key:          2018-07-09
 tags:         Tampermonkey
