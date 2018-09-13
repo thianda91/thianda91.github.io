@@ -32,10 +32,13 @@
 
   `content-max-width`改为`1050px`
 
+- 文章模板`_layouts\atticle.html`将`<footer>`中的`<span> dateModified`（page.modify_date）移动到`.article__content`前。并添加 class :`.dateModified`。
+
 - `_sass\components\_main.scss`中
 
-  `.full-width`的`width`改为`95%`
-
+  - 新增`.dateModified`，其`color`为`$main-color-1`
+  - `.full-width`的`width`改为`95%`
+  
 - 主页摘要下边框：
 
   `_includes\home.html`中在`</article>`后面添加：

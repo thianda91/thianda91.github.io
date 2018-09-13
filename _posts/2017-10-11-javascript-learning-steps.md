@@ -3,7 +3,7 @@ layout: article
 title: JavaScript学习路线
 key: 2017-10-11
 categories: ppt
-tags: JavaScript ES6
+tags: JavaScript
 date: 2017-10-11
 modify_date: 2017-11-14 15:13:34
 ---

@@ -5,6 +5,9 @@
   @include media-breakpoint-down(lg) {
     padding: 0 1rem;
   }
+  .dateModified {
+    color: $main-color-1;
+  }
 }
 
 .has-aside {

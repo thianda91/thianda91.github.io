@@ -2,7 +2,7 @@
 layout: article
 title: 客户端(浏览器端)数据存储技术概览
 key: 2017-04-13
-tags: storage
+tags: notes
 categories: notes
 date: 2017-04-13 10:59
 modify_date: 2018-02-04 19:09:22

@@ -2,8 +2,8 @@
 layout: article
 title: 数据库设计相关资料
 key: 2017-10-17
-categories: ppt
-tags: training
+tags: notes
+categories: notes
 ---
 
 收集的一些资料

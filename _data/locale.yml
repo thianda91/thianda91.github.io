@@ -29,9 +29,9 @@ VIEWS:
 
 LAST_UPDATED:
   en:      "Last updated"
-  zh:      "更新于"
-  zh-Hans: "更新于"
-  zh-Hant: "更新於"
+  zh:      "本文最后更新于"
+  zh-Hans: "本文最后更新于"
+  zh-Hant: "本文最後更新於"
 
 PREVIOUS:
   en:      "PREVIOUS"
@@ -47,9 +47,9 @@ NEXT:
 
 ARTICLE_DATE_FORMAT:
   en:      "%b %d, %Y"
-  zh:      "%Y年 %m月%d日"
-  zh-Hans: "%Y年 %m月%d日"
-  zh-Hant: "%Y年 %m月%d日"
+  zh:      "%Y年%m月%d日"
+  zh-Hans: "%Y年%m月%d日"
+  zh-Hant: "%Y年%m月%d日"
 
 ARTICLE_LIST_DATE_FORMAT:
   en:      "%b %d"
