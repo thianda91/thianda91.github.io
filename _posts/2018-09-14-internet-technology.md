@@ -4,7 +4,7 @@ title:        互联网技术 个人笔记
 key:          2018-09-14
 tags:         internet
 categories:   notes
-date:         2018-09-14 10:06:13
+date:         2018-09-14 10:06:13 +08:00:00
 modify_date:  2018-09-14 11:28:16
 ---
 
@@ -36,7 +36,7 @@ ALG涉及到的两个概念：
 
 动态通道：当应用层协议报文中携带地址信息时，这些地址信息会被用于建立动态通道，后续符合该地址信息的连接将使用已经建立的动态通道来传输数据。
 
-https://blog.csdn.net/Fly_as_tadpole/article/details/80645576
+<https://blog.csdn.net/Fly_as_tadpole/article/details/80645576>
 
 ### 8021q、8021p
 
@@ -59,21 +59,26 @@ UNR（User Network Route）主要用于在用户上线过程中由于无法使�
 
 ### L2TP 协议组网
 
-https://zhidao.baidu.com/question/152442262.html
+<https://zhidao.baidu.com/question/152442262.html>
 
 在使用L2TP协议构建的VPDN典型组网中，包含LAC和LNS两部分。
 
-1、LAC LAC表示L2TP访问集中器（L2TP Access  Concentrator），是附属在交换网络上的具有PPP端系统和L2TP协议处理能力的设备。LAC一般是一个网络接入服务器NAS，主要用于通过PSTN/ISDN网络为用户提供接入服务。LAC位于LNS和远端系统（远地用户和远地分支机构）之间，用于在LNS和远端系统之间传递信息包，把从远端系统收到的信息包按照L2TP协议进行封装并送往LNS，将从LNS收到的信息包进行解封装并送往远端系统。LAC与远端系统之间可以采用本地连接或PPP链路，VPDN应用中通常为PPP链路。
+1、LAC  
+LAC表示L2TP访问集中器（L2TP Access  Concentrator），是附属在交换网络上的具有PPP端系统和L2TP协议处理能力的设备。LAC一般是一个网络接入服务器NAS，主要用于通过PSTN/ISDN网络为用户提供接入服务。LAC位于LNS和远端系统（远地用户和远地分支机构）之间，用于在LNS和远端系统之间传递信息包，把从远端系统收到的信息包按照L2TP协议进行封装并送往LNS，将从LNS收到的信息包进行解封装并送往远端系统。LAC与远端系统之间可以采用本地连接或PPP链路，VPDN应用中通常为PPP链路。
 
-2、LNS LNS表示L2TP网络服务器（L2TP Network Server），是PPP端系统上用于处理L2TP协议服务器端部分的设备。它作为L2TP隧道的另一侧端点，是LAC的对端设备，是被LAC进行隧道传输的PPP会话的逻辑终止端点。
+2、LNS  
+LNS表示L2TP网络服务器（L2TP Network Server），是PPP端系统上用于处理L2TP协议服务器端部分的设备。它作为L2TP隧道的另一侧端点，是LAC的对端设备，是被LAC进行隧道传输的PPP会话的逻辑终止端点。
 
-3、说明 用户――（ISDN/PSTN）――LAC――（L2TP协议）――LNS―――企业内部网络
+3、说明  
+用户――（ISDN/PSTN）――LAC――（L2TP协议）――LNS―――企业内部网络
 
 ### uRPF
 
 9312 接口下配有 ` ip urpf loose allow-default`。
 
-uRPF（Unicast Reverse Path Forwarding）是一种单播反向路由查找技术，用于防止基于源地址欺骗的网络攻击行为。[百科](https://baike.baidu.com/item/uRPF/6626732)
+uRPF（Unicast Reverse Path Forwarding）是一种单播反向路由查找技术，用于防止基于源地址欺骗的网络攻击行为。
+
+[百科](https://baike.baidu.com/item/uRPF/6626732)
 
 ### LACP
 
@@ -84,4 +89,7 @@ mode lacp-static
 lacp timeout slow
 ```
 
-LACP (Link Aggregation Control Protocol,链路汇聚控制协议)。[百科](https://baike.baidu.com/item/LACP/7797186)
+LACP (Link Aggregation Control Protocol,链路汇聚控制协议)。
+
+[百科](https://baike.baidu.com/item/LACP/7797186)
+
