@@ -51,6 +51,12 @@ ARTICLE_DATE_FORMAT:
   zh-Hans: "%Y年%m月%d日"
   zh-Hant: "%Y年%m月%d日"
 
+ARTICLE_MODIFY_DATE_FORMAT:
+  en:      "%Y-%m-%d %H:%M:%S"
+  zh:      "%Y-%m-%d %H:%M:%S"
+  zh-Hans: "%Y-%m-%d %H:%M:%S"
+  zh-Hant: "%Y-%m-%d %H:%M:%S"
+
 ARTICLE_LIST_DATE_FORMAT:
   en:      "%b %d"
   zh:      "%m月%d日"

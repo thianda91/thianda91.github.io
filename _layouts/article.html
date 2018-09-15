@@ -7,7 +7,7 @@ type: article
 {%- include snippets/assign.html target=__return source0=page.show_author_profile -%}
 {%- assign _show_author_profile = __return -%}
 {%- if page.modify_date -%}
-  {%- include snippets/locale-to-string.html locale=site.data.locale.ARTICLE_DATE_FORMAT -%}
+  {%- include snippets/locale-to-string.html locale=site.data.locale.ARTICLE_MODIFY_DATE_FORMAT -%}
   {%- assign _locale_date_format = __return -%}
 
   {%- include snippets/locale-to-string.html locale=site.data.locale.LAST_UPDATED -%}
