@@ -5,12 +5,21 @@ key:          2018-09-14
 tags:         internet
 categories:   notes
 date:         2018-09-14 10:06:13 +08:00:00
-modify_date:  2018-09-14 11:28:16
+modify_date:  2018-09-17 16:19:47
 ---
 
 互联网技术 知识碎片整理
 
 <!--more-->
+
+### TCP/IP 体系结构
+
+| TCP/IP | 对应 OSI | 又名 | 协议 |
+| --------------------------------- | ---- | ---- | --------------------------------- |
+| 应用层 | 应用层<br />表示层<br />会话层 |      | FTP、TELNET、DNS、SMTP、NFS、HTTP等 |
+|传输侧（TCP）| 传输层 | 主机到主机层 | TCP |
+|网络层（IP）| 网络层 | 互联层 | IP、ICMP、ARP、RARP |
+|网络接口层 | 数据链路层<br />物理层 | 链路层 | Ethernet 802.3、Token Ring 802.5、X.25、Frame relay、HDLC、PPP ATM |
 
 ## 杂项
 
