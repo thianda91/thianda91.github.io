@@ -32,3 +32,4 @@ modify_date:  2018-09-24 23:07:10
 
 其他延伸的服务模式还有：数据即服务（Data as a Service，DaaS）、桌面即服务（Desktop as a Service，DaaS）、通信即服务（Communications as a Service，CaaS）、数据库即服务等（DataBase as a Service，DBaaS）。
 
+云计算关键技术：分布式计算、分布式存储、服务器虚拟化、多租户、存储虚拟化、桌面虚拟化、云管理平台等。
