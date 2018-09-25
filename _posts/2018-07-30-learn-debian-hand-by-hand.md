@@ -5,7 +5,7 @@ key:          2018-07-30
 tags:         Debian
 categories:   notes
 date:         2018-07-30 11:00:00
-modify_date:  2018-09-04 02:05:41
+modify_date:  2018-09-26 02:05:41
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -55,6 +55,7 @@ source ~/.bashrc
 ```sh
 auto lo # 开机自动连接网络
 iface lo inet loopback
+auto ens3
 allow-hotplug ens33
 iface ens33 inet static # static表示使用固定ip，dhcp表述使用动态ip
 address 10.1.1.10 # 设置ip地址
@@ -76,7 +77,7 @@ nameserver 1.2.4.8
 service networking restart
 ```
 
-然后执行`ip add`查看ip是否生效。本人实际操作时未更新ip配置。执行`init 6`重启后成功。
+然后执行`ip address`查看ip是否生效。本人实际操作时未更新ip配置。执行`init 6`重启后成功。
 
 ### 更换源
 
@@ -84,7 +85,7 @@ service networking restart
 
 首先做个备份：
 
-```
+```sh
 mv /etc/apt/sources.list /etc/apt/sources.list.bak
 ```
 
@@ -92,20 +93,18 @@ mv /etc/apt/sources.list /etc/apt/sources.list.bak
 
 ```sh
 # 在文件最前面，添加以下条目
-deb http://mirrors.163.com/debian/ jessie main non-free contrib
-deb http://mirrors.163.com/debian/ jessie-updates main non-free contrib
-deb http://mirrors.163.com/debian/ jessie-backports main non-free contrib
-deb-src http://mirrors.163.com/debian/ jessie main non-free contrib
-deb-src http://mirrors.163.com/debian/ jessie-updates main non-free contrib
-deb-src http://mirrors.163.com/debian/ jessie-backports main non-free contrib
-deb http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib
-deb-src http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib
+deb http://ftp.debian.org/debian/ stretch main non-free contrib
+deb http://ftp.debian.org/debian/ stretch-updates main non-free contrib
+deb http://ftp.debian.org/debian/ stretch-backports main non-free contrib
+deb-src http://ftp.debian.org/debian/ stretch main non-free contrib
+deb-src http://ftp.debian.org/debian/ stretch-updates main non-free contrib
+deb-src http://ftp.debian.org/debian/ stretch-backports main contrib non-free
 ```
 
 由于最小化安装，只能使用`vi`命令进行文本编辑，但`vi`很不适合新手使用，于是可变通一下：
 
 ```sh
-echo 'deb http://mirrors.163.com/debian/ jessie main non-free contrib' >> /etc/apt/sources.list
+echo 'deb http://ftp.debian.org/debian/ jessie main non-free contrib' >> /etc/apt/sources.list
 ```
 
 使用`echo`命令以及`>>`将文本追加到文件末尾。可逐行将上述信息填入`/etc/apt/sources.list`。
@@ -122,12 +121,19 @@ apt-get install vim
 安装个工具感受一下：
 
 ```sh
-apt-get remove openssh-client
-apt-get install openssh-client
-apt-get install openssh-server
+apt-get remove openssh-client -y
+apt-get install openssh-client -y
+apt-get install openssh-server -y
 ```
 
 以上命令逐条执行，为后面操作做准备。执行时会有提示输入`Y/n`进行确认。
+
+### 修改账户密码
+
+```sh
+# 当前用户
+passwd
+```
 
 ### 设置ssh
 
@@ -167,10 +173,10 @@ RSAAuthentication yes
 ### 小内存增加 SWAP
 
 ```sh
-dd if=/dev/zero of=/home/swap bs=1024 count=1024000 # 生成SWAP空间文件 
+dd if=/dev/zero of=/home/swap bs=1024 count=1024000 # 生成SWAP空间文件1G(bs*count)
 /sbin/mkswap /home/swap # 创建SWAP分区
-/sbin/swapon /home/swap # 激活SWAP分区 
-echo '/home/swap  swap swap    defaults    0  0' >> /etc/fstab # 重启后可以自动挂载 
+/sbin/swapon /home/swap # 激活SWAP分区
+echo '/home/swap swap swap defaults 0 0' >> /etc/fstab # 重启后可以自动挂载
 ```
 
 ### 安装 XAMPP
