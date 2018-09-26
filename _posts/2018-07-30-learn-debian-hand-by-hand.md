@@ -5,7 +5,7 @@ key:          2018-07-30
 tags:         Debian
 categories:   notes
 date:         2018-07-30 11:00:00
-modify_date:  2018-09-26 02:05:41
+modify_date:  2018-09-26 16:09:41
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -21,7 +21,7 @@ modify_date:  2018-09-26 02:05:41
 3. 虚拟机开机后按照提示安装即可，语言推荐选 English，防止使用过程中因翻译内容影响理解原本含义。
 4. 大部分设置使用默认即可，但某些步骤需要你更换选项才能继续，我想这是确保一下用户真的阅读了此步骤的说明文字。
 5. 安装时会要求设置 root 账户密码，以及新建一个额外的账户，完毕后会自动重启。
-6. 初始学习直接使用root用户即可，在此建议安装完系统保存一份快照，快速恢复快照避免重装系统。
+6. 初始学习直接使用 root 用户即可，在此建议安装完系统保存一份快照，快速恢复快照避免重装系统。
 
 ## 基本设置
 
@@ -46,11 +46,11 @@ source ~/.bashrc
 
 路径中的`/`表示根目录，而默认的路径为`~`，表示用户根目录，即 `/home` 目录下对应用户名的目录。如 当前用户是 debi，`~`表示`/home/debi`。可执行`pwd`来查看当前所在的路径。
 
-### 设置静态ip
+### 设置静态 ip
 
-需要编辑2个文件
+需要编辑 2 个文件
 
-`/etc/network/interfaces`（配置IP和网关）
+`/etc/network/interfaces`（配置 IP 和网关）
 
 ```sh
 auto lo # 开机自动连接网络
@@ -81,7 +81,7 @@ service networking restart
 
 ### 更换源
 
-当设置了 Debian 可以连接互联网之后，可以先使用`apt-get update`更新一下。更新过程可能过慢，我们需要设置更新源为国内的源，具体有哪些源可自行搜索。这里以163为例进行设置。
+当设置了 Debian 可以连接互联网之后，可以先使用`apt-get update`更新一下。更新过程可能过慢，我们需要设置更新源为国内的源，具体有哪些源可自行搜索。这里以 163 为例进行设置。
 
 首先做个备份：
 
@@ -135,7 +135,7 @@ apt-get install openssh-server -y
 passwd
 ```
 
-### 设置ssh
+### 设置 ssh
 
 在虚拟机操作命令行的 Debian 很不方便。
 
@@ -152,10 +152,10 @@ ssh-keygen -t rsa
 
 默认会保存在`~/.ssh/`一个`id_rsa`和一个`id_rsa.pub`。
 
-下面看一下 ssh 的配置文件：
+下面看一下 ssh 服务器的配置文件：
 
 ``` sh
-cat /etc/ssh/ssh_config
+cat /etc/ssh/sshd_config
 ```
 
 按需将配置修改即可。
@@ -168,7 +168,7 @@ PasswordAuthentication yes
 RSAAuthentication yes
 ```
 
-默认情况下 root 用户无法远程登录，需要在上面的配置文件中设置`PermitRootLogin yes`，但是实测无效。于是不在研究，而是使用安装系统时设置的额外的用户远程登录。登录后可使用`su`命令切换到 root 。
+默认情况下 root 用户无法远程登录，需要在上面的配置文件中设置`PermitRootLogin yes`。也可以在安装系统时设置额外的用户进行远程登录。登录后可使用`su`命令切换到 root 。
 
 ### 小内存增加 SWAP
 
@@ -191,7 +191,7 @@ chmod 777 xampp7.2.run
 
 apache 的 config 文件为`/opt/lampp/apache2/conf/httpd.conf`。
 
-### 解决中文乱码
+### ~~解决中文乱码~~
 
 ```sh
 apt-get install locales
@@ -203,6 +203,8 @@ dpkg-reconfigure locales
 检查当前的 locale ：`locale`或`locale -a`
 
 正确配置下会显示：LANG =zh_CN.UTF-8
+
+> debian 9 通常不会有此问题，若显示乱码可能是 ssh 客户端没有设置 UFT-8，需要修改客户端设置。
 
 ### 防火墙设置
 
