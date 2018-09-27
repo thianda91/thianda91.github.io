@@ -5,7 +5,7 @@ key:          2018-09-14
 tags:         internet
 categories:   notes
 date:         2018-09-14 10:06:13 +08:00:00
-modify_date:  2018-09-17 16:19:47
+modify_date:  2018-09-27 20:27:47
 ---
 
 互联网技术 教程目录 & 知识碎片整理
@@ -14,24 +14,28 @@ modify_date:  2018-09-17 16:19:47
 
 ## 教材个人笔记
 
-《通信专业实务 互联网技术》
+### 《通信专业实务》互联网技术
+
+点击章节标题可跳转到整理笔记，本书已整理完结。
 
 | 章     | 名                                                           | 起始页 | 总页数 |
 | ------ | ------------------------------------------------------------ | ------ | ------ |
 | 第1章  | [计算机网络协议](../internet/internet-technology-chapter-1-3.html) | 1      | 12     |
 | 第2章  | [局域网](../internet/internet-technology-chapter-1-3.html#第2章-局域网) | 13     | 27     |
 | 第3章  | [互联网](../internet/internet-technology-chapter-1-3.html#第3章-互联网) | 40     | 23     |
-| 第4章  | [网络操作系统](../internet/internet-technology-chapter-4-7.html) | 63     | 23     |
-| 第5章  | [交换技术](../internet/internet-technology-chapter-4-7.html#第5章-交换技术) | 86     | 27     |
-| 第6章  | [网络安全](../internet/internet-technology-chapter-4-7.html#第6章-网络安全) | 113    | 31     |
-| 第7章  | [数据库基础]()                                               | 144    | 29     |
-| 第8章  | [数据存储基础]()                                             | 173    | 26     |
-| 第9章  | [软件开发基础]()                                             | 199    | 24     |
-| 第10章 | [云计算架构与应用]()                                         | 223    | 39     |
-| 第11章 | [大数据技术及应用]()                                         | 262    | 25     |
-| 第12章 | [物联网]()                                                   | 287    | 30     |
+| 第4章  | [网络操作系统](../internet/internet-technology-chapter-4-6.html) | 63     | 23     |
+| 第5章  | [交换技术](../internet/internet-technology-chapter-4-6.html#第5章-交换技术) | 86     | 27     |
+| 第6章  | [网络安全](../internet/internet-technology-chapter-4-6.html#第6章-网络安全) | 113    | 31     |
+| 第7章  | [数据库基础](../internet/internet-technology-chapter-7-9.html)                                               | 144    | 29     |
+| 第8章  | [数据存储基础](../internet/internet-technology-chapter-7-9.html#第8章-数据存储基础)                                             | 173    | 26     |
+| 第9章  | [软件开发基础](../internet/internet-technology-chapter-7-9.html#第9章-软件开发基础)                                             | 199    | 24     |
+| 第10章 | [云计算架构与应用](../internet/internet-technology-chapter-10-12.html)                                         | 223    | 39     |
+| 第11章 | [大数据技术及应用](../internet/internet-technology-chapter-10-12.html#第11章-大数据技术及应用)                                         | 262    | 25     |
+| 第12章 | [物联网](../internet/internet-technology-chapter-10-12.html#第12章-物联网)                                                   | 287    | 30     |
 
-《通信专业综合能力 中级》
+### 《通信专业综合能力》中级
+
+未整理笔记，点击章节链接无效，哈哈
 
 | 章     | 名                   | 起始页 | 总页数 |
 | ------ | -------------------- | ------ | ------ |
@@ -53,9 +57,17 @@ modify_date:  2018-09-17 16:19:47
 | TCP/IP | 对应 OSI | 又名 | 协议 |
 | --------------------------------- | ---- | ---- | --------------------------------- |
 | 应用层 | 应用层<br />表示层<br />会话层 |      | FTP、TELNET、DNS、SMTP、NFS、HTTP等 |
-|传输侧（TCP）| 传输层 | 主机到主机层 | TCP |
+|传输层（TCP）| 传输层 | 主机到主机层 | TCP |
 |网络层（IP）| 网络层 | 互联层 | IP、ICMP、ARP、RARP |
 |网络接口层 | 数据链路层<br />物理层 | 链路层 | Ethernet 802.3、Token Ring 802.5、X.25、Frame relay、HDLC、PPP ATM |
+
+### IP 数据报的分片
+
+这里看[百科](https://baike.baidu.com/item/MF/12810630)。**与分片有关的字段：Identification，Flags，Fragment offset。**
+
+Flags 占 3 位，目前只有 2 位有效。最低位 MF：more fragment，还有分片。中间位 DF：don't fragment，不许分片。
+
+当一个数据报封装成链路层的帧时。如果数据报的总长度（首部加上数据部分）大于 MTU （最大传输单元， Maximum Transmission Unit）值，则会分片，若 DF=1，说明不能分片，路由器会直接丢弃该数据报，并将一个 ICMP 错误返回给源端。DF=0，表示允许分片，除最后一个 IP 报文的 MF 为 0，其他的 IP 报文的 MF 为 1，表示还有分片，而 offset 表示片飘移，以 8 个字节为偏移单位。若 MTU=1420，去掉首部的 20 字节，1400/8=175，即第一个分片的 offset 为 0，长度为1420，第二个分片的 offset 为 175，以此类推。
 
 ### PAP 和 CHAP 的区别
 
