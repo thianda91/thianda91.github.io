@@ -154,12 +154,6 @@ modify_date:  2018-10-03 23:59:54
 
 （5）掌握 MSTP 以太网封装、级联技术及链路容量调整机制。
 
-```
-
-```
-
-
-
 （6）掌握 ASON 的功能结构、3 个平面、3 个接口以及所支持的 3 种连接类型。
 
 （7）掌握 DWDM 的系统组成、网元类型、组网及主光通道的定义。
@@ -176,19 +170,72 @@ modify_date:  2018-10-03 23:59:54
 
 （1）掌握接入网在通信网中的位置、接入网的定义、接口定界以及接入网的功能。
 
+```
+位置：用户终端与交换网之间
+定义：由业务节点接口（Service Node Interface，SNI）和相关用户网络接口（User Network Interface，UNI）之间的一些列传送实体组成。
+可经由 Q3 接口进行配置和管理。
+5 个主要功能：
+(1)用户口功能。将特定的 UNI 的要求适配到 CF 和 AN-SMF。
+(2)业务口功能。将特定的 SNI 的要求与公共承载相适配以便 CF 处理。
+(3)核心功能（Core Function，CF）。
+(4)传送功能（Transfer Function，TF）。
+(5)AN 系统管理功能（AN Syetem Management Fucntion，AN-SMF）
+```
+
 （2）了解双向 HFC 系统结构及频谱划分。
 
+```
+混合光纤同轴电缆（Hybrid Fiber-Coaxial，HFC）。通过频分复用将不同的业务调制到不同的频段传输。
+双向 HFC 由 3 部分组成：前端、干线、分配网。
+下行广播（87MHz~863MHz）。上行点对点（5MHz~65MHz）。
+```
+
 （3）掌握光纤接入的应用类型。
+
+```
+FTTC，光纤到路边，Fiber To The Curb
+FTTB，光纤到楼，Fiber To The Building
+FTTO，光纤到办公室，Fiber To The Office
+FTTH，光纤到户，Fiber To The Home
+```
 
 （4）了解 FTTx+LAN 接入。
 
 （5）掌握无源光网络的结构及参考模型。
 
+```
+无源光网络（Passive Optical Network，PON）由光线路终端（Optical Line Terminal，OLT）、光合/分路器（Spliter）和光网络单元（Optical Network Unit，OUN）组成，采用树形拓扑结构。
+
+PON 组网采用波分复用（Wavelength Division Mutiplexing，WDM） 技术，实现单芯双向传输。
+下行广播，波长 1490nm。上行 TDMA 技术，波长 1310nm。
+```
+
 （6）掌握 EPON 组网、EPON 上/下行数据的传输及应用。
+
+```
+以太网无源光网络（Ethernet Passive Optical Network，EPON）是将信息封装成以太网帧进行传输的 PON。目前上下行对称的 1.25Gbit/s，可到 10Gbit/s，分光比为 1:16，1:32。
+
+基于 EPON 技术的 FTTx 组网应用：企业用户、住宅小区。
+```
 
 （7）了解吉比特无源光网络组网及传输速率。
 
+```
+吉比特无源光网络（Gigabit PON，GPON）是将信息封装成一种新的 GEM 帧进行传输的 PON。最大距离 20km，分光比为 1:64，1:128。
+```
+
 （8）了解无线局域网的协议标准。
+
+```
+无线局域网（Wireless Local Area Network，WLAN），协议标准：
+802.11：最高 2Mbit/s，已不再使用
+802.11b：最高 11Mbit/s，2.4GHz，易受干扰
+802.11a：最高 54Mbit/s，5GHz，穿墙差
+802.11g：结合802.11b、802.11a，2.4GHz 下 11Mbit/s，5GHz 下 54Mbit/s
+802.11n：将 802.11a 及 802.11g 的速率提高到 300Mbit/s 甚至是 600Mbit/s。使用了 MIMO(多入多出)与OFDM(正交频分复用)，采用了软件无线电技术，是一个完全可编程的硬件平台。容易干扰附近的 802.11b/g 网络。
+```
+
+
 
 （9）了解无线局域网的网络结构。
 
