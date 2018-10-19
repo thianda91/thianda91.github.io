@@ -5,7 +5,7 @@ key:          2018-07-30
 tags:         Debian
 categories:   notes
 date:         2018-07-30 11:00:00
-modify_date:  2018-09-26 16:09:41
+modify_date:  2018-10-19 12:36:41
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -38,7 +38,7 @@ ip address
 如果是网络环境需要配置代理，可以这样做：
 
 ```sh
-echo 'expoer http_proxy=http://username:password@ip:port' >> ~/.bashrc
+echo 'export http_proxy=http://username:password@ip:port' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -56,7 +56,7 @@ source ~/.bashrc
 auto lo # 开机自动连接网络
 iface lo inet loopback
 auto ens3
-allow-hotplug ens33
+# allow-hotplug ens33 # 配置了 auto 就注释掉本行
 iface ens33 inet static # static表示使用固定ip，dhcp表述使用动态ip
 address 10.1.1.10 # 设置ip地址
 netmask 255.255.255.0 # 设置子网掩码
@@ -79,20 +79,25 @@ service networking restart
 
 然后执行`ip address`查看ip是否生效。本人实际操作时未更新ip配置。执行`init 6`重启后成功。
 
-### 更换源
+双网卡等情况手动配置路由
+
+```sh
+ip route add default via {ip}
+```
+
+### 修改源
 
 当设置了 Debian 可以连接互联网之后，可以先使用`apt-get update`更新一下。更新过程可能过慢，我们需要设置更新源为国内的源，具体有哪些源可自行搜索。这里以 163 为例进行设置。
 
-首先做个备份：
+先备份
 
 ```sh
 mv /etc/apt/sources.list /etc/apt/sources.list.bak
 ```
 
-然后可在`/etc/apt/sources.list`添加如下内容：
+然后编辑`/etc/apt/sources.list`，前面添加：
 
-```sh
-# 在文件最前面，添加以下条目
+```
 deb http://ftp.debian.org/debian/ stretch main non-free contrib
 deb http://ftp.debian.org/debian/ stretch-updates main non-free contrib
 deb http://ftp.debian.org/debian/ stretch-backports main non-free contrib
@@ -101,13 +106,45 @@ deb-src http://ftp.debian.org/debian/ stretch-updates main non-free contrib
 deb-src http://ftp.debian.org/debian/ stretch-backports main contrib non-free
 ```
 
-由于最小化安装，只能使用`vi`命令进行文本编辑，但`vi`很不适合新手使用，于是可变通一下：
+163：
 
-```sh
-echo 'deb http://ftp.debian.org/debian/ jessie main non-free contrib' >> /etc/apt/sources.list
+```
+deb http://mirrors.163.com/debian/  stretch main non-free contrib
+deb http://mirrors.163.com/debian/  stretch-updates main non-free contrib
+deb http://mirrors.163.com/debian/  stretch-backports main non-free contrib
+deb-src http://mirrors.163.com/debian/  stretch main non-free contrib
+deb-src http://mirrors.163.com/debian/  stretch-updates main non-free contrib
+deb-src http://mirrors.163.com/debian/  stretch-backports main non-free contrib
+deb http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib
+deb-src http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib
 ```
 
-使用`echo`命令以及`>>`将文本追加到文件末尾。可逐行将上述信息填入`/etc/apt/sources.list`。
+直接输出到配置文件。使用`echo`命令以及`>>`将文本追加到文件末尾。可逐行将上述信息填入`/etc/apt/sources.list`。或者直接用 sh：
+
+```sh
+mv /etc/apt/sources.list /etc/apt/sources.list.bak
+echo '' > /etc/apt/sources.list
+echo 'deb http://ftp.jp.debian.org/debian/ stretch main non-free contrib' >> /etc/apt/sources.list
+echo 'deb http://ftp.jp.debian.org/debian/ stretch-updates main non-free contrib' >> /etc/apt/sources.list
+echo 'deb http://ftp.jp.debian.org/debian/ stretch-backports main non-free contrib' >> /etc/apt/sources.list
+echo 'deb-src http://ftp.jp.debian.org/debian/ stretch main non-free contrib' >> /etc/apt/sources.list
+echo 'deb-src http://ftp.jp.debian.org/debian/ stretch-updates main non-free contrib' >> /etc/apt/sources.list
+echo 'deb-src http://ftp.jp.debian.org/debian/ stretch-backports main contrib non-free' >> /etc/apt/sources.list
+cat /etc/apt/sources.list
+```
+
+```sh
+mv /etc/apt/sources.list /etc/apt/sources.list.bak
+echo '' > /etc/apt/sources.list
+echo 'deb http://mirrors.163.com/debian/  stretch main non-free contrib' >> /etc/apt/sources.list
+echo 'deb http://mirrors.163.com/debian/  stretch-updates main non-free contrib' >> /etc/apt/sources.list
+echo 'deb http://mirrors.163.com/debian/  stretch-backports main non-free contrib' >> /etc/apt/sources.list
+echo 'deb-src http://mirrors.163.com/debian/  stretch main non-free contrib' >> /etc/apt/sources.list
+echo 'deb-src http://mirrors.163.com/debian/  stretch-updates main non-free contrib' >> /etc/apt/sources.list
+echo 'deb-src http://mirrors.163.com/debian/  stretch-backports main non-free contrib' >> /etc/apt/sources.list
+echo 'deb http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib' >> /etc/apt/sources.list
+echo 'deb-src http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib' >> /etc/apt/sources.list
+```
 
 或者先安装vim，安装时提示版本过高，我们需要卸载后重新安装：
 
