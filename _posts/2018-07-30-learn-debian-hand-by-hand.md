@@ -5,7 +5,7 @@ key:          2018-07-30
 tags:         Debian
 categories:   notes
 date:         2018-07-30 11:00:00
-modify_date:  2018-10-19 12:36:41
+modify_date:  2018-10-30 13:36:41
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -82,7 +82,8 @@ service networking restart
 双网卡等情况手动配置路由
 
 ```sh
-ip route add default via {ip}
+ip route add default via {ip} 
+ip route add 
 ```
 
 ### 修改源
@@ -206,6 +207,20 @@ RSAAuthentication yes
 ```
 
 默认情况下 root 用户无法远程登录，需要在上面的配置文件中设置`PermitRootLogin yes`。也可以在安装系统时设置额外的用户进行远程登录。登录后可使用`su`命令切换到 root 。
+
+### 一些工具的安装
+
+```sh
+ # ifconfig 不建议使用
+ apt-get install net-tools
+ # nslookup、dig
+ apt-get install dnsutils
+ # traceroute
+ apt-get install traceroute
+ # manual 手册
+ apt-get install man
+ 
+```
 
 ### 小内存增加 SWAP
 
