@@ -1,11 +1,11 @@
 ---
 layout:       article
-title:        自用Tampermonkey脚本整理
-key:          2018-07-09
+title:        自用 Tampermonkey 脚本整理
+key:          2018-12-16
 tags:         Tampermonkey
 categories:   notes
 date:         2018-07-09 10:56:23
-modify_date:  2018-07-09 10:56:29
+modify_date:  2018-12-16 00:17:44
 ---
 
 ## 前言
@@ -18,17 +18,22 @@ Tampermonkey插件设置里的`实用工具`中支持导出到云、压缩包、
 
 ## 自己收集并使用的脚本
 
-#### [Userscript+](https://greasyfork.org/zh-CN/scripts/24508-userscript-show-site-all-userjs)
+### [Userscript+](https://greasyfork.org/zh-CN/scripts/24508)
 
 自动发现合适脚本。如果没有安装脚本，用这个也算是便捷找脚本的方法吧。
 
-#### [AC-Baidu](https://greasyfork.org/zh-CN/scripts/14178-ac-baidu-%E4%BC%98%E5%8C%96%E7%99%BE%E5%BA%A6-%E6%90%9C%E7%8B%97-%E8%B0%B7%E6%AD%8C%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C%E4%B9%8B%E9%87%8D%E5%AE%9A%E5%90%91%E5%8E%BB%E9%99%A4-%E5%8E%BB%E5%B9%BF%E5%91%8A-favicon)
+### [AC-Baidu](https://greasyfork.org/zh-CN/scripts/14178)
 
 优化百度、搜狗、谷歌搜索结果之重定向去除+去广告+favicon
 
-#### [百度网盘直接下载助手改](https://greasyfork.org/scripts/35421)
+### [弹窗阻止程序脚本](https://greasyfork.org/scripts/37654)
 
-#### [百度网盘直接下载助手修改版 ](https://greasyfork.org/scripts/39776)
+用于阻止所有类型弹窗的最有效用户脚本。为防范最狡猾的弹窗而设计，包括成人和流媒体网站上的弹窗。
 
-功能如题
+### [网页限制解除(改)](https://greasyfork.org/zh-CN/scripts/28497)
 
+通杀大部分网站,可以解除禁止复制、剪切、选择文本、右键菜单的限制。原作者cat73,因为和搜索跳转脚本冲突,遂进行了改动,改为黑名单制。
+
+### [CSDN自动展开+去广告+净化剪贴板+免登陆](https://greasyfork.org/zh-CN/scripts/372452)
+
+CSDN自动展开阅读，可以将剪贴板的推广信息去除，去除大多数广告。
