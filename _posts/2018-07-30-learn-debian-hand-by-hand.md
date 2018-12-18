@@ -5,7 +5,7 @@ key:          2018-07-30
 tags:         Debian
 categories:   notes
 date:         2018-07-30 11:00:00
-modify_date:  2018-10-30 13:36:41
+modify_date:  2018-12-19 01:35:10
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -208,7 +208,21 @@ RSAAuthentication yes
 
 默认情况下 root 用户无法远程登录，需要在上面的配置文件中设置`PermitRootLogin yes`。也可以在安装系统时设置额外的用户进行远程登录。登录后可使用`su`命令切换到 root 。
 
-### 一些工具的安装
+## 工具安装
+
+### 关闭 ipv6
+
+使用 /proc
+
+```sh
+# 关闭所有接口的 IPv6 功能
+echo "1" > /proc/sys/net/ipv6/conf/all/disable_ipv6
+
+# 关闭指定网卡的 IPv6 功能
+echo "1" > /proc/sys/net/ipv6/conf/ethx/disable_ipv6
+```
+
+### 网络相关
 
 ```sh
  # ifconfig 不建议使用
