@@ -5,7 +5,7 @@ key:          2018-07-30
 tags:         Debian
 categories:   notes
 created_date: 2018-07-30 11:00:00
-date:         2018-12-19 01:35:10
+date:         2018-12-27 21:33:10
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -88,7 +88,11 @@ ip route add
 
 ### 修改源
 
-当设置了 Debian 可以连接互联网之后，可以先使用`apt-get update`更新一下。更新过程可能过慢，我们需要设置更新源为国内的源，具体有哪些源可自行搜索。这里以 163 为例进行设置。
+当设置了 Debian 可以连接互联网之后，可以先使用`apt-get update`更新一下。
+
+~~更新过程可能过慢，我们需要设置更新源为国内的源，具体有哪些源可自行搜索。这里以 163 为例进行设置。~~
+
+使用最小化（debian-9.x.0-amd64-netinst.iso）安装 debian 时，会提示选择软件源，直接选择中国的 163 即可。下面的操作就可以略过了。
 
 先备份
 
@@ -244,18 +248,6 @@ dd if=/dev/zero of=/home/swap bs=1024 count=1024000 # 生成SWAP空间文件1G(b
 /sbin/swapon /home/swap # 激活SWAP分区
 echo '/home/swap swap swap defaults 0 0' >> /etc/fstab # 重启后可以自动挂载
 ```
-
-### 安装 XAMPP
-
-```sh
-wget -O xampp7.2.run https://www.apachefriends.org/xampp-files/7.2.9/xampp-linux-x64-7.2.9-0-installer.run
-chmod 777 xampp7.2.run
-./xampp7.2.run
-```
-
-安装在`/opt/lampp/`下。默认网站的入口为`/opt/lampp/htdocs/`。
-
-apache 的 config 文件为`/opt/lampp/apache2/conf/httpd.conf`。
 
 ### ~~解决中文乱码~~
 
