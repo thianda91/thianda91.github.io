@@ -4,8 +4,8 @@ title:        从零开始学 docker
 key:          2018-09-27
 tags:         vps
 categories:   notes
-date:         2018-09-27 16:03:03 +08:00:00
-modify_date:  2018-09-27 16:56:48
+created_date: 2018-09-27 16:03:03 +08:00:00
+date:         2018-09-27 16:56:48
 ---
 
 搭建服务器，使用 vps，为了方便维护和快速重新搭建，使用 docker 最适合了。

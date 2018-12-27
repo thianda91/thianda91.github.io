@@ -2,10 +2,10 @@
 layout: article
 title: 如何记录开发项目的更新日志
 key: 2017-11-13
-date: 2017-11-13 11:43:39
+created_date: 2017-11-13 11:43:39
 categories: notes
 tags: git
-modify_date: 2018-08-10 16:58:49
+date: 2018-08-10 16:58:49
 ---
 
 开发项目写代码，离不开版本发布。如何记录更新历史高效简洁，将是本文所表达的。

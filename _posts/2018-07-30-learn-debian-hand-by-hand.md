@@ -4,8 +4,8 @@ title:        亲手学Debian系统操作
 key:          2018-07-30
 tags:         Debian
 categories:   notes
-date:         2018-07-30 11:00:00
-modify_date:  2018-12-19 01:35:10
+created_date: 2018-07-30 11:00:00
+date:         2018-12-19 01:35:10
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。

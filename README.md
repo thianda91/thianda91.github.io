@@ -66,3 +66,19 @@
 ```
 
 9. footer增加cnzz统计
+10. 修改文章排序按更新时间
+
+```ini
+修改每一个`_posts/`中的 .md 文件，在 yaml 头中
+  将 date 替换成 created_date
+  将 modify_date 替换成 date
+  没有 created_date/date 的，补充 created_date/date
+```
+
+​	修改模板：
+
+```ini
+在`_includes/article-info.html`、 `_includes/article.html`中
+  搜索 page.date 酌情替换为 page.created_date
+  酌情将多个 page.modify_date 替换为 page.date
+```

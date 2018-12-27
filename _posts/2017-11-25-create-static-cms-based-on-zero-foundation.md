@@ -4,8 +4,8 @@ title: 零基础搭建CMS内容管理系统
 key: 2017-11-25
 categories: ppt
 tags: cms
-date: 2017-11-25
-modify_date: 2017-11-25 16:50:00
+created_date: 2017-11-25
+date: 2017-11-25 16:50:00
 ---
 
 ##  学习此教程的意义

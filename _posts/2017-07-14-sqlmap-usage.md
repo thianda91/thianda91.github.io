@@ -4,6 +4,8 @@ title: sqlmap用户手册
 key: 2017-07-14
 categories: notes
 tags: sqlmap
+date: 2017-07-14
+created_date: 2017-07-14
 ---
 
 > 说明：本文为转载，对原文中一些明显的拼写错误进行修正，并标注对自己有用的信息。

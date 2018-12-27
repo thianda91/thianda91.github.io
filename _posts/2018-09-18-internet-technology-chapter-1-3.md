@@ -4,8 +4,8 @@ title:        互联网技术 第一、二、三章
 key:          2018-09-18
 tags:         internet
 categories:   internet
-date:         2018-09-18 22:50:13 +08:00:00
-modify_date:  2018-09-19 03:07:10
+created_date: 2018-09-18 22:50:13 +08:00:00
+date:         2018-09-19 03:07:10
 ---
 
 《互联网技术》教材 内容节选

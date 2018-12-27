@@ -151,8 +151,12 @@ highlighter : rouge
 permalink   : none
 
 exclude:
-
-
+ - CNAME
+ - Gemfile
+ - gulpfile.js
+ - LICENSE
+ - package.json
+ - README.md
 
 defaults:
   - scope:

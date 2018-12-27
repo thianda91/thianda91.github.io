@@ -4,8 +4,8 @@ title: PHP中获取当前页面的完整URL
 key: 2016-05-18
 tags: php
 categories: notes
+created_date: 2016-05-18 23:54
 date: 2016-05-18 23:54
-modify_date: 2016-05-18 23:54
 ---
 
 假设我们当前的测试网址是: http://localhost/blog/testurl.php?id=5

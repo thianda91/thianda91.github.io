@@ -4,8 +4,8 @@ title:        互联网技术 第四、五、六章
 key:          2018-09-19
 tags:         internet
 categories:   internet
-date:         2018-09-19 22:55:35 +08:00:00
-modify_date:  2018-09-21 11:21:16
+created_date: 2018-09-19 22:55:35 +08:00:00
+date:         2018-09-21 11:21:16
 ---
 
 《互联网技术》教材 内容节选

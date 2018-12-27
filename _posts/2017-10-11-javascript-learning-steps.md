@@ -4,8 +4,8 @@ title: JavaScript学习路线
 key: 2017-10-11
 categories: ppt
 tags: JavaScript
-date: 2017-10-11
-modify_date: 2017-11-14 15:13:34
+created_date: 2017-10-11
+date: 2017-11-14 15:13:34
 ---
 
 [如何评价《深入理解ES6》这本书？](https://www.zhihu.com/question/61333866 )  

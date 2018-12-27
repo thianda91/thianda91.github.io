@@ -4,8 +4,8 @@ title:        肉鸡处理方法
 key:          2018-02-28
 tags:         notes
 categories:   notes
-date:         2018-02-28 16:59:41
-modify_date:  2018-02-28 17:09:44
+created_date: 2018-02-28 16:59:41
+date:         2018-02-28 17:09:44
 ---
 
 被通报为肉鸡处理方法

@@ -4,8 +4,8 @@ title:        记录一次js抓取在线视频源地址的实践
 key:          2018-02-22
 tags:         javascript
 categories:   tricks
-date:         2018-02-22 00:56:08
-modify_date:  2018-02-22 01:16:08
+created_date: 2018-02-22 00:56:08
+date:         2018-02-22 01:16:08
 ---
 
 记录一次js抓取在线视频原地址的实践

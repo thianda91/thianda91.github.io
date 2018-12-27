@@ -4,8 +4,8 @@ title: C语言函数调用约定
 key: 2017-07-11
 tags: C
 categories: notes
+created_date: 2017-05-24 11:45:57
 date: 2017-05-24 11:45:57
-modify_date: 2017-05-24 11:45:57
 ---
 
 在C语言中，假设我们有这样的一个函数：

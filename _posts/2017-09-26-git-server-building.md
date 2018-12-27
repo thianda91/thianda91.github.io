@@ -4,7 +4,7 @@ title: windows系统git服务器自己搭建（gitblit or gogs）
 key: 2017-09-26
 categories: ppt
 tags: git
-modify_date: 
+date: 2017-09-26
 ---
 
 

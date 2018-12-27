@@ -4,8 +4,8 @@ title: 基于React的AmazeUI-touch使用（如何使用react）
 key: 2017-06-01
 tags: react
 categories: notes
-date: 2017-06-01 01:32:02
-modify_date: 2017-06-01
+created_date: 2017-06-01 01:32:02
+date: 2017-06-01
 ---
 
 想做个手机端web应用，想使用AmazeUI-touch，官方文档不是很入门级。

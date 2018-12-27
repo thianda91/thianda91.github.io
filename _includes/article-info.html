@@ -45,20 +45,20 @@
   {%- endif -%}
 
 
-  {%- if (_pageview or post) or _cur_page.date -%}
+  {%- if (_pageview or post) or _cur_page.created_date -%}
     <ul class="right-col menu">
       {%- if !_cur_page.author -%}
         <li><i class="fas fa-user"></i>  <span>{{ _author.name }}</span></li>
       {%- endif -%}
 
-      {%- if _cur_page.date -%}
+      {%- if _cur_page.created_date -%}
         <li>
           {%- include snippets/locale-to-string.html locale=site.data.locale.ARTICLE_DATE_FORMAT -%}
           {%- if post -%}
             <i class="far fa-calendar-alt"></i> <span itemprop="datePublished">{{ _cur_page.date | date: __return }}</span>
           {%- elsif page -%}
-            <i class="far fa-calendar-alt"></i> <time datetime="{{ page.date | date_to_xmlschema }}"
-              itemprop="datePublished">{{ _cur_page.date | date: __return }}
+            <i class="far fa-calendar-alt"></i> <time datetime="{{ page.created_date | date_to_xmlschema }}"
+              itemprop="datePublished">{{ _cur_page.created_date | date: __return }}
             </time>
           {%- endif -%}
         </li>

@@ -4,8 +4,8 @@ title: 思科设备跳密码登录
 key: 2017-12-05
 tags: cisco
 categories: mdcn
-date: 2017-12-05 10:07:37
-modify_date: 2017-12-05 16:47:56
+created_date: 2017-12-05 10:07:37
+date: 2017-12-05 16:47:56
 ---
 
 cisco设备忘记登录密码，使用Console线连接设备，执行以下步骤

@@ -6,17 +6,17 @@ type: article
 {%- include snippets/assign.html target=site.data.variables.default.page.show_author_profile source0=layout.show_author_profile -%}
 {%- include snippets/assign.html target=__return source0=page.show_author_profile -%}
 {%- assign _show_author_profile = __return -%}
-{%- if page.modify_date -%}
+{%- if page.date -%}
   {%- include snippets/locale-to-string.html locale=site.data.locale.ARTICLE_MODIFY_DATE_FORMAT -%}
   {%- assign _locale_date_format = __return -%}
 
   {%- include snippets/locale-to-string.html locale=site.data.locale.LAST_UPDATED -%}
   {%- assign _locale_last_update = __return -%}
   <span class="dateModified">{{ _locale_last_update }}
-    <time itemprop="dateModified" datetime="{{ page.modify_date | date_to_xmlschema }}">{{ page.modify_date | date: _locale_date_format }}</time>
+    <time itemprop="dateModified" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: _locale_date_format }}</time>
   </span>
-{%- elsif page.date -%}
-  <meta itemprop="dateModified" content="{{ page.date | date_to_xmlschema }}">
+{%- elsif page.created_date -%}
+  <meta itemprop="dateModified" content="{{ page.created_date | date_to_xmlschema }}">
 {%- endif -%}
 
 <div class="layout--article">

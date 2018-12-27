@@ -4,8 +4,8 @@ title: MariaDB用户管理
 key: 2017-05-25
 tags: mysql
 categories: notes
+created_date: 2017-05-25 22:03:15
 date: 2017-05-25 22:03:15
-modify_date: 2017-05-25 22:03:15
 ---
 
 ### 创建用户

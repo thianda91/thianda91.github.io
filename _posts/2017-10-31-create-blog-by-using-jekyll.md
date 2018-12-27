@@ -2,10 +2,10 @@
 layout: article
 title: 使用 Jekyll 搭建自己的 Github Pages
 key: 2017-10-30
-date: 2017-10-30 16:46:38
+created_date: 2017-10-30 16:46:38
 categories: notes
 tags: jekyll 
-modify_date: 2018-08-12 14:51:48
+date: 2018-08-12 14:51:48
 ---
 
 记录一下本人第一次搭建git pages的过程。谨以此文记录自己的操作过程。

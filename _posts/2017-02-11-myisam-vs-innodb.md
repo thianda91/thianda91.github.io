@@ -4,8 +4,8 @@ title: MySQL数据库MyISAM与InnoDB存储引擎的比较
 key: 2017-02-11
 tags: database
 categories: notes
+created_date: 2017-02-11 15:55
 date: 2017-02-11 15:55
-modify_date: 2017-02-11 15:55
 ---
 
 MyISAM是MySQL的默认存储引擎，基于传统的ISAM类型，支持全文搜索，但不是事务安全的，而且不支持外键。每张MyISAM表存放在三个文件中：frm 文件存放表格定义；数据文件是MYD (MYData)；索引文件是MYI (MYIndex)。

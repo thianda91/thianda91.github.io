@@ -4,8 +4,8 @@ title: 配置php连接SQLServer2008r2
 key: 2017-02-12
 tags: php SQLServer
 categories: notes
-date: 2017-02-12 19:42
-modify_date: 2018-07-11 16:48
+created_date: 2017-02-12 19:42
+date: 2018-07-11 16:48
 ---
 
 ## php连接SQLServer2008

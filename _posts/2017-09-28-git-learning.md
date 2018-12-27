@@ -4,7 +4,8 @@ title: Git简要教程
 key: 2017-09-28
 categories: ppt
 tags: git
-modify_date: 2018-08-02
+date: 2018-08-02
+created_date: 2018-08-02
 ---
 
 文章首发于 http://blog.csdn.net/xianda9133/article/details/78121349

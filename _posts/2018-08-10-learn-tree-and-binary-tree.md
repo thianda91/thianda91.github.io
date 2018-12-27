@@ -4,8 +4,8 @@ title:        学习数据结构中的树，二叉树
 key:          2018-08-10
 tags:         data-structure
 categories:   notes
-date:         2018-08-10 10:40:54
-modify_date:  2018-08-13 01:40:59
+created_date: 2018-08-10 10:40:54
+date:         2018-08-13 01:40:59
 mathjax:      true
 ---
 

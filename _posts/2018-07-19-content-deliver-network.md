@@ -4,8 +4,8 @@ title:        内容网络基础(CDN)
 key:          2018-07-18
 tags:         CDN
 categories:   notes
-date:         2018-07-18 08:44:58
-modify_date:  2018-07-20 09:47:53 
+created_date: 2018-07-18 08:44:58
+date:         2018-07-20 09:47:53 
 ---
 
  内容分发网络技术基础

@@ -4,8 +4,8 @@ title:        自搭建内网穿透与文件同步
 key:          2018-11-08
 tags:         nat fileSync
 categories:   notes
-date:         2018-11-08 00:27:02
-modify_date:  2018-11-08 02:27:11
+created_date: 2018-11-08 00:27:02
+date:         2018-11-08 02:27:11
 ---
 
 本文收集一些 可在私有云自搭建的 内网穿透工具和文件同步的工具。

@@ -4,8 +4,8 @@ title:        浅谈智能输出数据表到excel
 key:          2018-07-27
 tags:         excel
 categories:   tricks
-date:         2018-07-27 22:37:04
-modify_date:  2018-07-27 22:37:10
+created_date: 2018-07-27 22:37:04
+date:         2018-07-27 22:37:10
 ---
 
 本文总结3种通过编程处理excel数据的方法。
