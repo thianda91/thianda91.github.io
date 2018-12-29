@@ -1,14 +1,14 @@
 ---
 layout:       article
-title:        自搭建内网穿透与文件同步
+title:        自搭建内网穿透与文件共享
 key:          2018-11-08
 tags:         nat fileSync
 categories:   notes
 created_date: 2018-11-08 00:27:02
-date:         2018-11-08 02:27:11
+date:         2018-12-30 00:21:35
 ---
 
-本文收集一些 可在私有云自搭建的 内网穿透工具和文件同步的工具。
+本文收集一些 可在私有云自搭建的 内网穿透工具和文件共享的工具。
 
 <!--more-->
 
@@ -16,7 +16,7 @@ date:         2018-11-08 02:27:11
 
 内网穿透自搭建 frp。
 
-文件同步还没决定用哪个。。
+文件共享还没决定用哪个。。
 
 ## 内网穿透相关
 
@@ -52,7 +52,29 @@ date:         2018-11-08 02:27:11
 
 
 
-## 文件同步相关
+## 文件同步/共享相关
+
+### Caddy.filemanager
+
+caddy 的一个插件。使用 caddy 搭建 web 服务的同时，可以直接管理文件。支持文本在线编辑、链接分享等。
+
+```sh
+wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/caddy_install.sh && chmod +x caddy_install.sh && bash caddy_install.sh install http.filemanager,tls.dns.cloudflare
+```
+
+
+
+### ownCloud 
+
+服务端仅支持 linux。客户端支持全平台。
+
+### NextCloud
+
+<https://nextcloud.com>，B/S 架构，国外，有 docker image。基于php，项目地址：<https://github.com/nextcloud>
+
+### Oneindex
+
+<https://github.com/donwa/oneindex>，Onedrive 的目录浏览。基于 php，不占用服务器空间，不走服务器流量，直接列出 OneDrive 目录，文件直链下载。
 
 ### FreeFileSync
 
@@ -70,13 +92,7 @@ date:         2018-11-08 02:27:11
 
 window 系统下， 服务端安装需要 python2.7。
 
-### ownCloud 
 
-服务端仅支持 linux。客户端支持全平台。
-
-### NextCloud
-
-<https://nextcloud.com>，B/S 架构，国外，有 docker image。基于php，项目地址：<https://github.com/nextcloud>
 
 ### Syncthing
 

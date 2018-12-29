@@ -5,7 +5,7 @@ key:          2018-12-27
 tags:         vps php
 categories:   notes
 created_date: 2018-12-27 13:22:28
-date:         2018-12-28 01:21:04
+date:         2018-12-29 23:29:04
 ---
 
 ## nextcloud 简介
@@ -165,7 +165,7 @@ nano /usr/local/caddy/Caddyfile
 
 除域名外，我还将 php 的 tcp 套接字改成了 unix 套接字，并添加 tls 自动申请：
 
-> `-` 表示原配置，`+`表示修改后或新增的配置
+> `-` 表示删除的原配置，`+`表示修改后或新增的配置
 
 ```ini
 - fastcgi / 127.0.0.1:9000 php {
@@ -174,6 +174,9 @@ nano /usr/local/caddy/Caddyfile
 +    tls {
 +        dns cloudflare         
 +    }
+     header / {
++        Referrer-Policy "no-referrer"
+     }
 ```
 
 创建文件夹，下载 web 安装文件：
@@ -191,6 +194,8 @@ caddy 默认监听 80/443 端口。若使用其他端口，且希望在访问 ht
 修改 caddy 启动脚本`/etc/init.d/caddy`：（假设 http 端口为 1444，https 端口为 3444）
 
 ```ini
++ export CLOUDFLARE_API_KEY=xxx
++ export CLOUDFLARE_EMAIL=xxx
 - nohup "$BIN" --conf="$CONF" -agree >> /tmp/caddy.log 2>&1 &
 + nohup "$BIN" -http-port=1444 -https-port=3444 --conf="$CONF" -agree >> /tmp/caddy.log 2>&1 &
 ```
@@ -249,12 +254,21 @@ mysql --no-defaults -u[username] -p[password] [database]
 
 ### 访问 web 安装
 
+在 nextcloud 官网下载 web 安装文件：
+
+```sh
+wget -O "/var/www/nextcloud/setup-nextcloud.php" "https://download.nextcloud.com/server/installer/setup-nextcloud.php"
+chmod +x /var/www/nextcloud/setup-nextcloud.php
+```
+
+
+
 启动 caddy：
 
 ```sh
 service caddy restart
 # 或
-/usr/init.d/caddy restart
+/etc/init.d/caddy restart
 ```
 
 启动成功后
@@ -296,7 +310,9 @@ apt-get install -y php7.3-curl
 apt-get install -y php7.3-gd
 apt-get install -y php7.3-mbstring
 apt-get install -y php7.3-mysql
-service php7.3-fpm restart
+# 启动后查看日志有错误，安装下面的包解决
+apt-get install -y php7.3-intl
+/etc/init.d/php7.3-fpm restart
 ```
 
 赋予“写”权限
@@ -306,24 +322,64 @@ service php7.3-fpm restart
 # 且`su www-data`无法切换到该用户（用户不可用）
 # 于是乎，授权：
 chmod -R 747 /var/www/nextcloud/
+# 官网教程执行如下：
+chown -R www-data:www-data /var/www/nextcloud/
 ```
 
 在 web 页面填写好管理员账号和数据库信息，可以使用了。
 
 提示 "代码完整性检查出现异常，点击查看详细信息"。根据提示操作，将给出的代码粘贴到`php.ini`。
 
+并添加同上面一样的内容：
+
+```ini
+date.timezone = Asia/Shanghai
+expose_php = Off
+max_execution_time = 300
+upload_max_filesize = 200M
+```
+
+需要注意添加 opcache 要在 fpm 的 php.ini：
+
 ```sh
-nano /etc/php/7.3/cli/php.ini
+nano /etc/php/7.3/fpm/php.ini 
 
 ...
+# 重启 php-fpm
 /etc/init.d/php7.3-fpm restart
 ```
 
+**step2**
+
+填写数据库账号密码数据库名等信息。
+
 接下来就开始愉快的玩耍吧~
+
+### 应用推荐
+
+登录 nextcloud 后，点击右上角头像，选择 app / 应用，可以下载安装插件，推荐几款：
+
+> 若下载失败可手动下载到`/var/www/nextcloud/apps`，然后`tar -xzvf FILENAME`解压，刷新网页就可以看到了。手动下载后需要在 app / 应用 中 找到并点击“启动”，并输入密码验证。
+
+| App name                 | 简介                 |      |
+| ------------------------ | -------------------- | ---- |
+| External storage support | 可关联外部存储。     |      |
+| Files Right Click        | 右键菜单             |      |
+| Collabora Online         | 在线编辑 office 文件 |      |
+| Tasks                    | 创建任务             |      |
+|                          |                      |      |
+
+手动安装可能会出现权限问题或警告，授权解决：
+
+```sh
+chown -R www-data:www-data /var/www/nextcloud/apps/richdocuments
+```
+
+
 
 ## debug 相关
 
-```
+```sh
 apt install net-tools
 netstat -apn
 ps aux
@@ -336,6 +392,9 @@ ps aux
 /etc/init.d/caddy restart
 /etc/init.d/php7.3-fpm restart
 /etc/init.d/mysql restart
+
+# nextcloud 更新
+sudo -u www-data ./occ upgrade
 ```
 
 
