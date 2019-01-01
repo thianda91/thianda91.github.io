@@ -5,7 +5,7 @@ key:          2018-12-27
 tags:         vps php
 categories:   notes
 created_date: 2018-12-27 13:22:28
-date:         2018-12-29 23:29:04
+date:         2019-01-01 17:01:57
 ---
 
 ## nextcloud 简介
@@ -23,6 +23,12 @@ nextcloud 是一种自托管的网盘。官网：<https://nextcloud.com/>
 服务端在官网下载存档文件（archive）,也可以下载一个 php，自己搭建好 http 服务，访问该 php 页面安装。
 
 本文记录从搭建 虚拟机 debian 开始，一步一步搭建环境并安装 nextcloud 的过程。
+
+**Download as Univention App**
+
+ 在 [这里](https://www.univention.com/products/univention-app-center/collabora-online-development-edition-with-nextcloud/) 下载 已经部署好的完整镜像。比如 VMware image 可下载：
+
+<https://appcenter.software-univention.de/univention-apps/current/collabora/Univention-App-collabora-nextcloud-vmware.zip>
 
 ## 安装 debian
 
@@ -367,7 +373,8 @@ nano /etc/php/7.3/fpm/php.ini
 | Files Right Click        | 右键菜单             |      |
 | Collabora Online         | 在线编辑 office 文件 |      |
 | Tasks                    | 创建任务             |      |
-|                          |                      |      |
+
+
 
 手动安装可能会出现权限问题或警告，授权解决：
 

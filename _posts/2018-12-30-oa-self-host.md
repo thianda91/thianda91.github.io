@@ -5,7 +5,7 @@ key:          2018-12-30
 tags:         vps
 categories:   notes
 created_date: 2018-12-30 01:01:11
-date:         2018-12-30 02:58:32
+date:         2019-01-01 17:15:59
 ---
 
 小型团队需要协同办公。不想使用第三方服务，希望成本最低，希望把数据掌握在自己手中（自托管）。
@@ -55,8 +55,41 @@ date:         2018-12-30 02:58:32
 
 
 
+### ONLYOFFICE document server
+
+
+
 ### Collabora online
 
 
 
-### ONLYOFFICE document server
+
+
+## 安装 Collabora online
+
+安装 doeker，可参考[这里](../notes/vps-init.html#安装-docker)。
+
+docker 安装完毕，再进行下一步：
+
+拉去 collabora 镜像
+
+```sh
+docker pull collabora/code
+# 此过程较慢
+```
+
+请将 cloud\.orgleaf\.com 替换为自己的域名（即用于访问 Nextcloud 的域名），注意主机名后面有一个"/"。
+
+```sh
+docker run -t -d -p 127.0.0.1:9980:9980 -e 'domain=cloud\\.orgleaf\\.com' --restart always --cap-add MKNOD collabora/code
+```
+
+如果要让这个 Collabora Office 同时服务于多个域名的话，需要在两个不同域名之间加上\|，例如：
+
+```sh
+'domain=cloud\\.nextcloud\\.com\|second\\.nexcloud\\.com'
+```
+
+
+
+### 

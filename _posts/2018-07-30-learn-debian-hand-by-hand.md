@@ -5,7 +5,7 @@ key:          2018-07-30
 tags:         Debian
 categories:   notes
 created_date: 2018-07-30 11:00:00
-date:         2018-12-27 21:33:10
+date:         2018-12-31 23:59:10
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -39,6 +39,7 @@ ip address
 
 ```sh
 echo 'export http_proxy=http://username:password@ip:port' >> ~/.bashrc
+echo 'export https_proxy=http://username:password@ip:port' >> ~/.bashrc
 source ~/.bashrc
 ```
 
