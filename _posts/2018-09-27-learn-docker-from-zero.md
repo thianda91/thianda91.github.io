@@ -5,7 +5,7 @@ key:          2018-09-27
 tags:         vps
 categories:   notes
 created_date: 2018-09-27 16:03:03 +08:00:00
-date:         2019-01-01 17:16:12
+date:         2019-01-07 00:52:46
 ---
 
 搭建服务器，使用 vps，为了方便维护和快速重新搭建，使用 docker 最适合了。
@@ -34,13 +34,14 @@ $ docker version
 $ docker -v
 # hello world
 $ docker run hello-world
-# 查看本地镜像
-$ docker images
 # 搜索
 $ docker search php
+# 查看本地镜像
+$ docker images
 # 查看当前运行的容器
 $ docker ps
-
+# 查看镜像的详细信息
+$ docker inspect {IMAGE_ID}
 # 删除镜像
 $ docker rm container_id
 $ docker rmi image_id
