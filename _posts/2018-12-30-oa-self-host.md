@@ -209,6 +209,21 @@ iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 14444 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 34444 -j ACCEPT
 ```
 
+上面是临时添加，重启后失效。若要永久保存，则需要找到 iptables 的配置文件：
+
+```sh
+/etc/security/packetfilter.d/10_univention-firewall_start.sh
+```
+
+编辑上述文件，仿造写下命令并保存：
+
+```sh
+iptables --wait -A INPUT -p "tcp"  --dport 14444 -j ACCEPT
+iptables --wait -A INPUT -p "tcp"  --dport 34444 -j ACCEPT
+```
+
+然后重新运行上面的代码。
+
 **其他可能用到的命令**
 
 ```sh
