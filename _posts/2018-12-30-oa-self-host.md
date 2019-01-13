@@ -237,3 +237,9 @@ ps -ux
 ```
 
 修改端口时发现 ssl 端口监听配置在`/etc/apache2/mods-available/ssl.conf`的 line 11，在这里修改后重启 apache2 才生效。
+
+### 终极解决方案
+
+以上操作尝试后发现，docker 内的 app 已经固化了某些链接，他们是不带端口号的。所以 apache2 的监听端口无法修改。需用其他方法。Emm...
+
+尝试自己在 linux 安装 docker 再拉取 `collabora/code` 的镜像。
