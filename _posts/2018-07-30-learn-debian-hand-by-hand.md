@@ -5,7 +5,7 @@ key:          2018-07-30
 tags:         Debian
 categories:   notes
 created_date: 2018-07-30 11:00:00
-date:         2018-12-31 23:59:10
+date:         2019-01-24 13:25:17
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -212,6 +212,21 @@ RSAAuthentication yes
 ```
 
 默认情况下 root 用户无法远程登录，需要在上面的配置文件中设置`PermitRootLogin yes`。也可以在安装系统时设置额外的用户进行远程登录。登录后可使用`su`命令切换到 root 。
+
+### 设置时区
+
+```sh
+echo "export TZ='Asia/Shanghai'"  >> /etc/profile
+source /etc/profile
+date -R
+date
+# 或者
+tzselect
+# 或者
+dpkg-reconfigure tzdata
+```
+
+
 
 ## 工具安装
 

@@ -5,7 +5,7 @@ key:          2018-12-27
 tags:         vps php
 categories:   notes
 created_date: 2018-12-27 13:22:28
-date:         2019-01-01 17:01:57
+date:         2019-01-24 15:55:52
 ---
 
 ## nextcloud 简介
@@ -56,7 +56,10 @@ apt-get upgrade
 ### 安装 caddy
 
 ```sh
-wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/caddy_install.sh && chmod +x caddy_install.sh && bash caddy_install.sh install http.filemanager,tls.dns.cloudflare
+wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/caddy_install.sh && chmod +x caddy_install.sh && bash caddy_install.sh install http.filebrowser,http.webdav,tls.dns.cloudflare
+
+# 官方安装，安装到 /usr/local/bin
+curl https://getcaddy.com | bash -s personal http.filebrowser,http.webdav,tls.dns.cloudflare
 ```
 
 此步骤会附带安装插件：`http.filemanager`和`tls.dns.cloudflare`，以后会用到。
@@ -318,6 +321,10 @@ apt-get install -y php7.3-mbstring
 apt-get install -y php7.3-mysql
 # 启动后查看日志有错误，安装下面的包解决
 apt-get install -y php7.3-intl
+
+# 一行命令全部安装
+apt-get install -y php7.3-zip php7.3-xml php7.3-curl php7.3-gd php7.3-mbstring php7.3-mysql php7.3-intl
+
 /etc/init.d/php7.3-fpm restart
 ```
 
@@ -380,6 +387,21 @@ nano /etc/php/7.3/fpm/php.ini
 
 ```sh
 chown -R www-data:www-data /var/www/nextcloud/apps/richdocuments
+```
+
+运行 docker 版的 collabora，需配置 owncloud 的域名，以及 collabora 后台的账户和密码
+
+> 下面 将域名设置为 yourdomain.com，用户名和密码设置为 collabora。
+
+```sh
+docker run -t -d -p 0.0.0.0:9980:9980 -e 'domain=yourdomain\\.com' -e "username=collabora" -e "password=collabora" --restart always --cap-add MKNOD collabora/code
+
+```
+
+然后访问 collabora 后台，地址：
+
+```
+https://yourdomain.com:9980/loleaflet/dist/admin/admin.html
 ```
 
 

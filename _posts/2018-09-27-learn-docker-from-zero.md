@@ -47,3 +47,13 @@ $ docker rm container_id
 $ docker rmi image_id
 ```
 
+### docker hub 镜像
+
+```sh
+nano /etc/docker/daemon.json
+# 粘贴以下内容
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+```
+
