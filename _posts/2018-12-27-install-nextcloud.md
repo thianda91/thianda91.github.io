@@ -381,13 +381,13 @@ nano /etc/php/7.3/fpm/php.ini
 | Collabora Online         | 在线编辑 office 文件 |      |
 | Tasks                    | 创建任务             |      |
 
-
-
 手动安装可能会出现权限问题或警告，授权解决：
 
 ```sh
 chown -R www-data:www-data /var/www/nextcloud/apps/richdocuments
 ```
+
+### 安装并配置 collabora
 
 运行 docker 版的 collabora，需配置 owncloud 的域名，以及 collabora 后台的账户和密码
 
@@ -395,7 +395,6 @@ chown -R www-data:www-data /var/www/nextcloud/apps/richdocuments
 
 ```sh
 docker run -t -d -p 0.0.0.0:9980:9980 -e 'domain=yourdomain\\.com' -e "username=collabora" -e "password=collabora" --restart always --cap-add MKNOD collabora/code
-
 ```
 
 然后访问 collabora 后台，地址：
@@ -404,15 +403,29 @@ docker run -t -d -p 0.0.0.0:9980:9980 -e 'domain=yourdomain\\.com' -e "username=
 https://yourdomain.com:9980/loleaflet/dist/admin/admin.html
 ```
 
+修改 collabora
 
+```sh
+docker ps
+# 进入到 docker 的内部
+docker exec -it 8a43ecd80cc8 /bin/bash # 8a43ecd80cc8 是 CONTAINER ID
+# 从 docker 中退出来
+exit
+# 在 docker 中修改配置，没有安装 nano/vim
+apt update
+apt install nano
+nano /etc/loolwsd/loolwsd.xml
+# 关闭 https
+# 在 /etc/loolwsd/loolwsd.xml 搜索 ssl,设置为 false
+# 授权可访问的域名配置在 /etc/loolwsd/loolwsd.xml 最后面
+```
 
 ## debug 相关
 
 ```sh
 apt install net-tools
-netstat -apn
+netstat -ltp
 ps aux
-
 
 /etc/init.d/caddy status
 /etc/init.d/php7.3-fpm status
