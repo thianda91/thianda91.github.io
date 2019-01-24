@@ -85,7 +85,7 @@ setup(
 
 执行打包命令
 
-**若打包`source distribution**`
+**若打包`source distribution`**
 
 ```sh
 python setup.py sdist
