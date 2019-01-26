@@ -5,7 +5,7 @@ key:          2018-12-30
 tags:         vps
 categories:   notes
 created_date: 2018-12-30 01:01:11
-date:         2019-01-07 02:12:02
+date:         2019-01-26 15:12:02
 ---
 
 小型团队需要协同办公。不想使用第三方服务，希望成本最低，希望把数据掌握在自己手中（自托管）。
@@ -242,4 +242,4 @@ ps -ux
 
 以上操作尝试后发现，docker 内的 app 已经固化了某些链接，他们是不带端口号的。所以 apache2 的监听端口无法修改。需用其他方法。Emm...
 
-尝试自己在 linux 安装 docker 再拉取 `collabora/code` 的镜像。
+在 linux 安装 docker 再拉取 `collabora/code` 的镜像。详见[这里](/notes/install-nextcloud.html#安装-collabora)。

@@ -5,7 +5,7 @@ key:          2018-12-27
 tags:         vps php
 categories:   notes
 created_date: 2018-12-27 13:22:28
-date:         2019-01-24 15:55:52
+date:         2019-01-26 17:30:16
 ---
 
 ## nextcloud 简介
@@ -125,6 +125,7 @@ composer -V
 
 ```sh
 nano /etc/php/7.3/cli/php.ini
+# 若在 web 中调用 fpm，则需配置 /etc/php/7.3/fpm/php.ini
 ```
 
 在最后添加：
@@ -146,7 +147,7 @@ upload_max_filesize = 200M
 
 这里介绍注册免费二级域名，使用期 1 年：<https://www.freenom.com>，教程可参考[这篇](https://coderschool.cn/2197.html)或自行百度。
 
-目前该网站应该是屏蔽了中国大陆的 ip 地址，以及语言为中文的浏览器。所以想要体验免费二级域名，需要 FQ 并使用语言为非中文的浏览器（如英文版 firefox）。
+**目前该网站应该是屏蔽了中国大陆的 ip 地址，以及语言为中文的浏览器。所以想要体验免费二级域名，需要 FQ 并使用语言为非中文的浏览器（如英文版 firefox ）。**
 
 ### DNS 解析/CDN 设置
 
@@ -270,8 +271,6 @@ wget -O "/var/www/nextcloud/setup-nextcloud.php" "https://download.nextcloud.com
 chmod +x /var/www/nextcloud/setup-nextcloud.php
 ```
 
-
-
 启动 caddy：
 
 ```sh
@@ -368,6 +367,21 @@ nano /etc/php/7.3/fpm/php.ini
 
 接下来就开始愉快的玩耍吧~
 
+### 一些优化配置
+
+配置后台任务执行方式为：Cron。[参考文档](https://docs.nextcloud.com/server/15/admin_manual/configuration_server/background_jobs_configuration.html)。
+
+```sh
+crontab -u www-data -e
+# 选择编辑器，添加：
+*/15  *  *  *  * php -f /usr/nextcloud/cron.php
+# 验证查看：
+crontab -u www-data -l
+service cron reload
+```
+
+
+
 ### 应用推荐
 
 登录 nextcloud 后，点击右上角头像，选择 app / 应用，可以下载安装插件，推荐几款：
@@ -379,31 +393,74 @@ nano /etc/php/7.3/fpm/php.ini
 | External storage support | 可关联外部存储。     |      |
 | Files Right Click        | 右键菜单             |      |
 | Collabora Online         | 在线编辑 office 文件 |      |
-| Tasks                    | 创建任务             |      |
+| Registration             | 创建任务             |      |
 
 手动安装可能会出现权限问题或警告，授权解决：
 
 ```sh
-chown -R www-data:www-data /var/www/nextcloud/apps/richdocuments
+chown -R www-data:www-data /usr/nextcloud/apps/richdocuments
 ```
 
-### 安装并配置 collabora
+### 安装 collabora
+
+以下内容在[这里](/notes/oa-self-host.html#安装-collabora-online)也可以看到。
 
 运行 docker 版的 collabora，需配置 owncloud 的域名，以及 collabora 后台的账户和密码
 
 > 下面 将域名设置为 yourdomain.com，用户名和密码设置为 collabora。
 
 ```sh
-docker run -t -d -p 0.0.0.0:9980:9980 -e 'domain=yourdomain\\.com' -e "username=collabora" -e "password=collabora" --restart always --cap-add MKNOD collabora/code
+docker run -t -d -p 127.0.0.1:9980:9980\
+        -e 'domain=yourdomain\\.com'\
+        -e "username=collabora"\
+        -e "password=collabora"\
+        -e "extra_params=--o:ssl.termination=true"\
+        --restart always\
+        --cap-add MKNOD\
+collabora/code
 ```
 
-然后访问 collabora 后台，地址：
+参考：[Collabora Online Development Edition ](https://www.collaboraoffice.com/code/)、[Setting up and configuring collabora/code Docker image](https://www.collaboraoffice.com/code/docker/)(官方)
 
-```
-https://yourdomain.com:9980/loleaflet/dist/admin/admin.html
+已知 caddy 的 proxy 功能有问题，无法代理 collabora，原因未知。反复测试均无效。
+
+### 使用 nginx 做代理
+
+```sh
+apt install nginx
 ```
 
-修改 collabora
+在`/etc/nginx/nginx.conf`中可以看到：
+
+```ini
+include /etc/nginx/conf.d/*.conf;
+include /etc/nginx/sites-enabled/*;
+```
+
+于是可以在`/etc/nginx/sites-enabled/`新增配置文件：
+
+```sh
+nano /etc/nginx/sites-enabled/collabora
+```
+
+nginx 的配置可直接用[官方的](https://www.collaboraoffice.com/code/nginx-reverse-proxy/)，复制粘贴即可。
+
+重启 nginx
+
+```sh
+service nginx restart
+```
+
+然后访问 collabora 后台测试，地址：
+
+```ini
+# 访问 docker 的端口映射
+https://127.0.0.1:9980/loleaflet/dist/admin/admin.html
+# 访问 nginx 的代理
+https://yourdomain.com/loleaflet/dist/admin/admin.html
+```
+
+### 修改 collabora
 
 ```sh
 docker ps
@@ -418,7 +475,205 @@ nano /etc/loolwsd/loolwsd.xml
 # 关闭 https
 # 在 /etc/loolwsd/loolwsd.xml 搜索 ssl,设置为 false
 # 授权可访问的域名配置在 /etc/loolwsd/loolwsd.xml 最后面
+#
+# 也可以将 loolwsd.xml 从 docker 中复制出来
+docker cp 8a43ecd80cc8:/etc/loolwsd/loolwsd.xml loolwsd.xml
+nano loolwsd.xml
+# 修改完再复制到 docker
+docker cp loolwsd.xml 8a43ecd80cc8:/etc/loolwsd/loolwsd.xml
+docker restart 8a43ecd80cc8
 ```
+
+## 安装离线下载 aria2  
+
+### 安装 ocDownloader 
+
+访问<https://apps.nextcloud.com/apps/ocdownloader>，或直接访问 [github release](https://github.com/e-alfred/ocdownloader/releases)，下载到`nextcloud/apps`目录。
+
+```sh
+tar xzf ocdownloader.tar.gz
+chown www-data:www-data ocdownloader -Rf
+```
+
+进入Nextcloud，在应用页面启用插件 ocDownloader。
+
+### 安装 aria2
+
+```sh
+apt install aria2
+# 安装到: /usr/bin/aria2c
+```
+
+配置
+
+```sh
+mkdir /etc/Downloads
+chown www-data:www-data -R /etc/Downloads
+mkdir /etc/aria2
+touch /etc/aria2/aria2.session
+touch /etc/aria2/aria2.log
+nano /etc/aria2/aria2.conf
+```
+
+以配置文件方式启动 aria2
+
+```sh
+sudo -u www-data aria2c --conf-path=/etc/aria2/aria2.conf -D
+```
+
+可以将此命令添加到开机自启动。
+
+[参考配置](https://www.cnblogs.com/zhuxiaoxi/p/7714457.html) `aria2.conf`：
+
+```ini
+
+## 进度保存相关 ##
+
+# 从会话文件中读取下载任务
+input-file=aria2.session
+# 在Aria2退出时保存`错误/未完成`的下载任务到会话文件
+save-session=aria2.session
+# 定时保存会话, 0为退出时才保存, 需1.16.1以上版本, 默认:0
+#save-session-interval=60
+
+## 文件保存相关 ##
+
+# 文件的保存路径, 默认: 当前启动位置
+dir=/usr/Downloads
+# 启用磁盘缓存, 0为禁用缓存, 需1.16以上版本, 默认:16M
+#disk-cache=32M
+# 文件预分配方式, 能有效降低磁盘碎片, 默认:prealloc
+# 预分配所需时间: none < falloc ? trunc < prealloc
+# falloc和trunc则需要文件系统和内核支持
+# NTFS建议使用 falloc, EXT3/4建议 trunc, MAC 下需要注释此项
+#file-allocation=trunc
+# 断点续传
+continue=true
+
+## 下载连接相关 ##
+
+# 最大同时下载任务数, 运行时可修改, 默认:5
+#max-concurrent-downloads=5
+# 同一服务器连接数, 添加时可指定, 默认:1
+max-connection-per-server=5
+# 最小文件分片大小, 添加时可指定, 取值范围1M -1024M, 默认:20M
+# 假定size=10M, 文件为20MiB 则使用两个来源下载; 文件为15MiB 则使用一个来源下载
+min-split-size=10M
+# 单个任务最大线程数, 添加时可指定, 默认:5
+#split=5
+# 整体下载速度限制, 运行时可修改, 默认:0
+#max-overall-download-limit=0
+# 单个任务下载速度限制, 默认:0
+#max-download-limit=0
+# 整体上传速度限制, 运行时可修改, 默认:0
+#max-overall-upload-limit=0
+# 单个任务上传速度限制, 默认:0
+#max-upload-limit=0
+# 禁用IPv6, 默认:false
+#disable-ipv6=true
+# 连接超时时间, 默认:60
+#timeout=60
+# 最大重试次数, 设置为0表示不限制重试次数, 默认:5
+#max-tries=5
+# 设置重试等待的秒数, 默认:0
+#retry-wait=0
+
+## RPC相关设置 ##
+
+# 启用RPC, 默认:false
+enable-rpc=true
+# 允许所有来源, 默认:false
+rpc-allow-origin-all=true
+# 允许非外部访问, 默认:false
+rpc-listen-all=true
+# 事件轮询方式, 取值:[epoll, kqueue, port, poll, select], 不同系统默认值不同
+#event-poll=select
+# RPC监听端口, 端口被占用时可以修改, 默认:6800
+#rpc-listen-port=6800
+# 设置的RPC授权令牌, v1.18.4新增功能, 取代 --rpc-user 和 --rpc-passwd 选项
+#rpc-secret=<TOKEN>
+# 设置的RPC访问用户名, 此选项新版已废弃, 建议改用 --rpc-secret 选项
+#rpc-user=<USER>
+# 设置的RPC访问密码, 此选项新版已废弃, 建议改用 --rpc-secret 选项
+#rpc-passwd=<PASSWD>
+# 是否启用 RPC 服务的 SSL/TLS 加密,
+# 启用加密后 RPC 服务需要使用 https 或者 wss 协议连接
+#rpc-secure=true
+# 在 RPC 服务中启用 SSL/TLS 加密时的证书文件,
+# 使用 PEM 格式时，您必须通过 --rpc-private-key 指定私钥
+#rpc-certificate=/path/to/certificate.pem
+# 在 RPC 服务中启用 SSL/TLS 加密时的私钥文件
+#rpc-private-key=/path/to/certificate.key
+
+## BT/PT下载相关 ##
+
+# 当下载的是一个种子(以.torrent结尾)时, 自动开始BT任务, 默认:true
+#follow-torrent=true
+# BT监听端口, 当端口被屏蔽时使用, 默认:6881-6999
+listen-port=51413
+# 单个种子最大连接数, 默认:55
+#bt-max-peers=55
+# 打开DHT功能, PT需要禁用, 默认:true
+enable-dht=false
+# 打开IPv6 DHT功能, PT需要禁用
+#enable-dht6=false
+# DHT网络监听端口, 默认:6881-6999
+#dht-listen-port=6881-6999
+# 本地节点查找, PT需要禁用, 默认:false
+#bt-enable-lpd=false
+# 种子交换, PT需要禁用, 默认:true
+enable-peer-exchange=false
+# 每个种子限速, 对少种的PT很有用, 默认:50K
+#bt-request-peer-speed-limit=50K
+# 客户端伪装, PT需要
+peer-id-prefix=-TR2770-
+user-agent=Transmission/2.77
+# 当种子的分享率达到这个数时, 自动停止做种, 0为一直做种, 默认:1.0
+seed-ratio=1.0
+# 强制保存会话, 即使任务已经完成, 默认:false
+# 较新的版本开启后会在任务完成后依然保留.aria2文件
+#force-save=false
+# BT校验相关, 默认:true
+#bt-hash-check-seed=true
+# 继续之前的BT任务时, 无需再次校验, 默认:false
+bt-seed-unverified=true
+# 保存磁力链接元数据为种子文件(.torrent文件), 默认:false
+bt-save-metadata=true
+```
+
+
+
+### 安装 youtube-dl
+
+安装 python3 和 pip3
+
+```
+apt install python3
+apt install python3-pip
+```
+
+设置 pip 的阿里源：
+
+```sh
+mkdir ~/.pip
+
+cat > ~/.pip/pip.conf << EOF
+
+[global]
+trusted-host=mirrors.aliyun.com
+index-url=https://mirrors.aliyun.com/pypi/simple/
+
+EOF
+```
+
+安装 youtube-dl
+
+```sh
+pip3 install youtube-dl
+# 安装到： /usr/local/bin/youtube-dl
+```
+
+
 
 ## debug 相关
 
@@ -437,6 +692,8 @@ ps aux
 
 # nextcloud 更新
 sudo -u www-data ./occ upgrade
+# nextcloud logs
+/usr/nextcloud/data/nextcloud.log
 ```
 
 
