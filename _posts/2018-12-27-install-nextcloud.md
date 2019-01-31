@@ -5,7 +5,7 @@ key:          2018-12-27
 tags:         vps php
 categories:   notes
 created_date: 2018-12-27 13:22:28
-date:         2019-01-26 17:30:16
+date:         2019-02-01 01:30:16
 ---
 
 ## nextcloud 简介
@@ -157,7 +157,28 @@ upload_max_filesize = 200M
 
 环境搭建好之后，可按照 nextcloud 官网安装。可查看[官网说明的系统需求](https://docs.nextcloud.com/server/15/admin_manual/installation/system_requirements.html#server)。
 
-### 配置工作目录
+### nginx 或 caddy 的配置
+
+**1. nginx**
+
+```sh
+apt install nginx
+```
+
+在`/etc/nginx/nginx.conf`中可以看到：
+
+```ini
+include /etc/nginx/conf.d/*.conf;
+include /etc/nginx/sites-enabled/*;
+```
+
+根据[官方文档](https://docs.nextcloud.com/server/15/admin_manual/installation/nginx.html)，直接在`/etc/nginx/conf.d/`新建文件`nextcloud.conf`
+
+```
+nano /etc/nginx/conf.d/nextcloud.conf
+```
+
+**2. caddy**
 
 caddy 的安装路径为 `/usr/local/caddy/，`在此新建 Caddyfile 的配置文件。
 
@@ -237,6 +258,7 @@ MariaDB [nextcloud]> USE nextcloud
 MariaDB [nextcloud]> GRANT ALL PRIVILEGES ON nextcloud.* TO 'username'@'%';
 MariaDB [nextcloud]> FLUSH PRIVILEGES;
 MariaDB [nextcloud]> select User,Host from mysql.user;
+MariaDB [nextcloud]> show grants for 'nextcloud'@'%';
 ```
 
 **配置远程访问**
@@ -380,7 +402,19 @@ crontab -u www-data -l
 service cron reload
 ```
 
+修改默认语言，编辑 nextcloud 的配置文件：
 
+```sh
+nano /var/www/nextcloud/config/config.php
+```
+
+在最后添加：
+
+```ini
+ 'default_language' => 'zh_CN',
+ 'default_locale' => 'zh_Hans',
+#  'force_locale' => 'zh_Hans',
+```
 
 ### 应用推荐
 
@@ -393,7 +427,7 @@ service cron reload
 | External storage support | 可关联外部存储。     |      |
 | Files Right Click        | 右键菜单             |      |
 | Collabora Online         | 在线编辑 office 文件 |      |
-| Registration             | 创建任务             |      |
+| Registration             | 用户注册模块         |      |
 
 手动安装可能会出现权限问题或警告，授权解决：
 
@@ -426,24 +460,7 @@ collabora/code
 
 ### 使用 nginx 做代理
 
-```sh
-apt install nginx
-```
-
-在`/etc/nginx/nginx.conf`中可以看到：
-
-```ini
-include /etc/nginx/conf.d/*.conf;
-include /etc/nginx/sites-enabled/*;
-```
-
-于是可以在`/etc/nginx/sites-enabled/`新增配置文件：
-
-```sh
-nano /etc/nginx/sites-enabled/collabora
-```
-
-nginx 的配置可直接用[官方的](https://www.collaboraoffice.com/code/nginx-reverse-proxy/)，复制粘贴即可。
+复制粘贴[官方的](https://www.collaboraoffice.com/code/nginx-reverse-proxy/)，添加在`nano /etc/nginx/conf.d/nextcloud.conf`中即可。
 
 重启 nginx
 
@@ -481,6 +498,9 @@ docker cp 8a43ecd80cc8:/etc/loolwsd/loolwsd.xml loolwsd.xml
 nano loolwsd.xml
 # 修改完再复制到 docker
 docker cp loolwsd.xml 8a43ecd80cc8:/etc/loolwsd/loolwsd.xml
+docker exec -it 8a43ecd80cc8 /bin/bash 
+chmod 644 /etc/loolwsd/loolwsd.xml
+exit
 docker restart 8a43ecd80cc8
 ```
 
