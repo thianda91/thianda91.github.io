@@ -8,9 +8,32 @@ created_date: 2019-02-16 23:26:35
 date:         2019-03-08 00:31:43
 ---
 
-使用`ffmpeg`，将 mp4 切片成 ts 格式文件，并生成 m3u8 列表。
+使用`ffmpeg`，将下载的视频文件进行格式转换。
 
 <!--more-->
+
+## 提取字幕
+
+<https://blog.csdn.net/achang21/article/details/49128785>
+
+```sh 
+# 可提取多种格式
+ffmpeg -i xx.mkv -map 0:s:0 xxx.srt
+ffmpeg -i xx.mkv -map 0:s:0 xxx.ass
+# 下面的方法需确保已知内置的字幕的格式，后缀名不匹配则报错，故推荐上面的方式
+ffmpeg -i xx.mkv -an -vn -scodec copy xxx.ass
+```
+
+## 将字幕烧进视频文件
+
+<https://trac.ffmpeg.org/wiki/HowToBurnSubtitlesIntoVideo>
+
+```
+ffmpeg -i xx.mkv -vf subtitles=xx.mkv output.mp4
+ffmpeg -i xx.mkv -vf subtitles=xxx.ass output.mp4
+```
+
+此过程耗时较长
 
 ## m3u8 转 MP4 
 
@@ -34,6 +57,7 @@ ffmpeg -i test.mp4 -c copy -f segment -segment_list playlist.m3u8 -segment_time 
 
 ```sh
 ffmpeg -i test.mp4 -codec copy -bsf h264_mp4toannexb test.ts
+
 ffmpeg -i test.mp4 -codec copy test.ts
 ```
 
