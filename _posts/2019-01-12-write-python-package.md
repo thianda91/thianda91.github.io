@@ -5,7 +5,7 @@ key:          2019-01-12
 tags:         python
 categories:   notes
 created_date: 2019-01-12 16:38:47
-date:         2019-01-13 14:24:52
+date:         2019-03-10 21:53:52
 ---
 
 Python 有非常丰富的第三方库可以使用，很多开发者会向 [pypi](https://pypi.org/) 上提交自己的 Python 包。要想向 pypi 包仓库提交自己开发的包，首先要将自己的代码打包，才能上传分发。
@@ -120,7 +120,9 @@ python setup.py bdist_wheel
 
 ## 发布到  pypi
 
-当运行了上面的命令后，会生成 `dist/`的文件夹。在[官方指引](https://packaging.python.org/guides/distributing-packages-using-setuptools/#id77) 中，明确给出了警告：在其他参考文献中会推荐这两个命令：`python setup.py register`和`python setup.py upload`，使用它们会造成账号密码通过 http 明文传输，或使用未验证的 https 传输，进而可能造成账号泄露。
+当运行了上面的命令后，会生成 `dist/`的文件夹。在[官方指引](https://packaging.python.org/guides/distributing-packages-using-setuptools/#id77) 中，明确给出了警告：
+
+>在其他参考文献中会推荐这两个命令：`python setup.py register`和`python setup.py upload`，使用它们会造成账号密码通过 http 明文传输，或使用未验证的 https 传输，进而可能造成账号泄露。
 
 首先去官网[注册账号](https://pypi.org/account/register/)，将账号信息写入到 `~/.pypirc`
 

@@ -5,7 +5,7 @@ key:          2019-03-09
 tags:         python
 categories:   notes
 created_date: 2019-03-09 22:46:42
-date:         2019-03-10 00:46:51
+date:         2019-03-10 21:37:51
 ---
 
  收集 python 中的一些常识。
@@ -54,4 +54,26 @@ date:         2019-03-10 00:46:51
 3. 满足下面这个正则表达式的字符串都有效：`\%^.*\n.∗\?#.*coding[:=]\s*[0-9A-Za-z-_.]\+.*$  `
 
 第 1 种方式支持更多的编辑器，移植性好。
+
+## 2to3.py
+
+Python 2 程序都需要一些修改才能正常地运行在 Python 3 的环境下。
+
+python 3 自带了一个 `2to3.py` 文件。通常在 python 安装目录下的 `\Tools\scripts` 文件夹。如：
+
+```
+D:\Program Files\Python37\Tools\scripts\2to3.py
+```
+
+使用 `2to3.py` 即可进行转换，转换到 python 3 的形式后，源文件内容会备份到 `*.bak` 文件，
+
+```sh
+# 查看使用帮助
+python 2to3.py --help
+# 转换目录或转换文件
+python 2to3.py -w "D:\home\python-ipy\"
+python 2to3.py -w "D:\Program Files\Python37\Lib\site-packages\IPy.py"
+```
+
+
 
