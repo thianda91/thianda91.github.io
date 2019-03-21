@@ -102,7 +102,7 @@ ffmpeg -i input.mp4 -c:v libx265 output.mp4
 
 ## 修改分辨率
 
-这里收集了常用的命令：https://www.cnblogs.com/frost-yen/p/5848781.html>
+这里收集了常用的命令：<https://www.cnblogs.com/frost-yen/p/5848781.html>
 
 `-vf` 表示使用过滤器，很多操作都属于过滤器的功能。
 
