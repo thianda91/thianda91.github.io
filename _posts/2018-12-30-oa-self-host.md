@@ -5,7 +5,7 @@ key:          2018-12-30
 tags:         vps
 categories:   notes
 created_date: 2018-12-30 01:01:11
-date:         2019-01-26 15:12:02
+date:         2019-04-01 15:19:02
 ---
 
 小型团队需要协同办公。不想使用第三方服务，希望成本最低，希望把数据掌握在自己手中（自托管）。
@@ -69,19 +69,34 @@ date:         2019-01-26 15:12:02
 
 安装 docker，可参考[这里](../notes/vps-init.html#安装-docker)。
 
-docker 安装完毕，再进行下一步：
+> Docker 镜像 <http://mirrors.ustc.edu.cn/help/dockerhub.html>
+>
+> Docker 镜像 <https://www.docker-cn.com/registry-mirror>
 
-拉去 collabora 镜像
+docker 安装完毕，安装 collabora，官方下载：<https://www.collaboraoffice.com/code/>
+
+### 方式 1 拉取 docker
+
+1. 拉取 collabora 镜像：<https://hub.docker.com/r/collabora/code/>。
 
 ```sh
 docker pull collabora/code
 # 此过程较慢
 ```
 
-请将 cloud\.orgleaf\.com 替换为自己的域名（即用于访问 Nextcloud 的域名），注意主机名后面有一个"/"。
+2. 运行 docker 版的 collabora，需配置 owncloud 的域名，以及 collabora 后台的账户和密码
+
+> 下面命令 将域名设置为 yourdomain.com，用户名和密码设置为 collabora。
 
 ```sh
-docker run -t -d -p 127.0.0.1:9980:9980 -e 'domain=cloud\\.orgleaf\\.com' --restart always --cap-add MKNOD collabora/code
+docker run -t -d -p 127.0.0.1:9980:9980\
+        -e 'domain=yourdomain\\.com'\
+        -e "username=collabora"\
+        -e "password=collabora"\
+        -e "extra_params=--o:ssl.termination=true"\
+        --restart always\
+        --cap-add MKNOD\
+collabora/code
 ```
 
 如果要让这个 Collabora Office 同时服务于多个域名的话，需要在两个不同域名之间加上\|，例如：
@@ -90,19 +105,11 @@ docker run -t -d -p 127.0.0.1:9980:9980 -e 'domain=cloud\\.orgleaf\\.com' --rest
 'domain=cloud\\.nextcloud\\.com\|second\\.nexcloud\\.com'
 ```
 
+参考：[Collabora Online Development Edition ](https://www.collaboraoffice.com/code/)、[Setting up and configuring collabora/code Docker image](https://www.collaboraoffice.com/code/docker/)(官方)
 
+### 方式 2 Univention App
 
-### Univention App 下载配置
-
-几种方式的官方下载：<https://www.collaboraoffice.com/code/>
-
-1. <https://hub.docker.com/r/collabora/code/>
-
-```sh
-docker pull collabora/code
-```
-
-2. 下载[Collabora Online Development Edition](https://www.univention.com/products/univention-app-center/app-catalog/collabora/)。
+访问：[Collabora Online Development Edition](https://www.univention.com/products/univention-app-center/app-catalog/collabora/)。
 
 <https://www.univention.com/products/univention-app-center/collabora-online-development-edition-with-nextcloud/>
 
@@ -111,6 +118,8 @@ docker pull collabora/code
 安装过程较慢，需要很多根据提示手动配置的部分，因为是虚拟机，设置完毕开始安装，约 1 个多小时。
 
 ### 配置文件分析
+
+> 此部分用于后面的内容修改，但是实践时发现内容修改并不能满足我们的需求。实际操作请查看后面的**终极解决方案**。
 
 这个 Univention App 为一个虚拟机，里面已经使用  docker 搭建好了  Collabora Online 和 nextcloud。
 
@@ -240,6 +249,36 @@ ps -ux
 
 ### 终极解决方案
 
-以上操作尝试后发现，docker 内的 app 已经固化了某些链接，他们是不带端口号的。所以 apache2 的监听端口无法修改。需用其他方法。Emm...
+以上操作尝试后发现，docker 内的 app 已经固化了某些链接，他们是不带端口号的。所以 docker 内的 apache2 的监听端口修改会造成更多的问题。最后改成使用本机的 nginx 代理 docker 中的 apache2，再配合 caddy 实现自动 https 证书。
 
-在 linux 安装 docker 再拉取 `collabora/code` 的镜像。详见[这里](/notes/install-nextcloud.html#安装-collabora)。
+[官方的 nginx 配置](https://www.collaboraoffice.com/code/nginx-reverse-proxy/)。
+
+**修改 collabora**
+
+```sh
+docker ps
+# 进入到 docker 的内部
+docker exec -it 8a43ecd80cc8 /bin/bash # 8a43ecd80cc8 是 CONTAINER ID
+# 从 docker 中退出来
+exit
+# 在 docker 中修改配置，没有安装 nano/vim
+apt update
+apt install nano
+nano /etc/loolwsd/loolwsd.xml
+# 关闭 https
+# 在 /etc/loolwsd/loolwsd.xml 搜索 ssl,设置为 false
+# 授权可访问的域名配置在 /etc/loolwsd/loolwsd.xml 最后面
+
+########################################
+# 也可以将 loolwsd.xml 从 docker 中复制出来
+docker cp 8a43ecd80cc8:/etc/loolwsd/loolwsd.xml loolwsd.xml
+nano loolwsd.xml
+# 修改完再复制到 docker
+docker cp loolwsd.xml 8a43ecd80cc8:/etc/loolwsd/loolwsd.xml
+# 进入到 docker 授权
+docker exec -it 8a43ecd80cc8 /bin/bash 
+chmod 644 /etc/loolwsd/loolwsd.xml
+exit
+docker restart 8a43ecd80cc8
+```
+

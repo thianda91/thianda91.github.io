@@ -5,7 +5,7 @@ key:          2018-09-27
 tags:         vps
 categories:   notes
 created_date: 2018-09-27 16:03:03 +08:00:00
-date:         2019-01-26 17:22:09
+date:         2019-04-01 14:45:09
 ---
 
 搭建服务器，使用 vps，为了方便维护和快速重新搭建，使用 docker 最适合了。
@@ -55,11 +55,17 @@ $ docker exec -it {CONTAINER_ID} /bin/bash
 
 ### docker hub 镜像
 
+参考： <https://www.cnblogs.com/wushuaishuai/p/9984228.html>
+
+Docker 镜像 <http://mirrors.ustc.edu.cn/help/dockerhub.html>
+
+Docker 镜像 <https://www.docker-cn.com/registry-mirror>
+
 ```sh
 nano /etc/docker/daemon.json
 # 粘贴以下内容
 {
-  "registry-mirrors": ["https://registry.docker-cn.com"]
+  "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn/"]
 }
 ```
 

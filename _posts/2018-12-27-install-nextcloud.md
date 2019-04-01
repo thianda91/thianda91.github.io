@@ -4,8 +4,8 @@ title:        debian 安装 nextcloud（自建网盘）
 key:          2018-12-27
 tags:         vps php
 categories:   notes
-created_date: 2018-12-27 13:22:28
-date:         2019-02-01 01:30:16
+created_date: 2018-12-27 13:22:28 +08:00:00
+date:         2019-04-01 15:19:16
 ---
 
 ## nextcloud 简介
@@ -157,9 +157,7 @@ upload_max_filesize = 200M
 
 环境搭建好之后，可按照 nextcloud 官网安装。可查看[官网说明的系统需求](https://docs.nextcloud.com/server/15/admin_manual/installation/system_requirements.html#server)。
 
-### nginx 或 caddy 的配置
-
-**1. nginx**
+### nginx 配置
 
 ```sh
 apt install nginx
@@ -178,7 +176,7 @@ include /etc/nginx/sites-enabled/*;
 nano /etc/nginx/conf.d/nextcloud.conf
 ```
 
-**2. caddy**
+### caddy 配置
 
 caddy 的安装路径为 `/usr/local/caddy/，`在此新建 Caddyfile 的配置文件。
 
@@ -216,7 +214,7 @@ nano /usr/local/caddy/Caddyfile
 mkdir -p /var/www/nextcloud
 ```
 
-### 非 80/443 端口的特殊配置
+**caddy 非 80/443 端口的特殊配置**
 
 caddy 默认监听 80/443 端口。若使用其他端口，且希望在访问 http 时自动跳转到 https，则需要一些额外的配置。
 
@@ -437,26 +435,7 @@ chown -R www-data:www-data /usr/nextcloud/apps/richdocuments
 
 ### 安装 collabora
 
-以下内容在[这里](/notes/oa-self-host.html#安装-collabora-online)也可以看到。
-
-运行 docker 版的 collabora，需配置 owncloud 的域名，以及 collabora 后台的账户和密码
-
-> 下面 将域名设置为 yourdomain.com，用户名和密码设置为 collabora。
-
-```sh
-docker run -t -d -p 127.0.0.1:9980:9980\
-        -e 'domain=yourdomain\\.com'\
-        -e "username=collabora"\
-        -e "password=collabora"\
-        -e "extra_params=--o:ssl.termination=true"\
-        --restart always\
-        --cap-add MKNOD\
-collabora/code
-```
-
-参考：[Collabora Online Development Edition ](https://www.collaboraoffice.com/code/)、[Setting up and configuring collabora/code Docker image](https://www.collaboraoffice.com/code/docker/)(官方)
-
-已知 caddy 的 proxy 功能有问题，无法代理 collabora，原因未知。反复测试均无效。
+本部分内容现已移到了[这里](/notes/oa-self-host.html#安装-collabora-online)。安装后需做一定的修改配置。
 
 ### 使用 nginx 做代理
 
@@ -475,33 +454,6 @@ service nginx restart
 https://127.0.0.1:9980/loleaflet/dist/admin/admin.html
 # 访问 nginx 的代理
 https://yourdomain.com/loleaflet/dist/admin/admin.html
-```
-
-### 修改 collabora
-
-```sh
-docker ps
-# 进入到 docker 的内部
-docker exec -it 8a43ecd80cc8 /bin/bash # 8a43ecd80cc8 是 CONTAINER ID
-# 从 docker 中退出来
-exit
-# 在 docker 中修改配置，没有安装 nano/vim
-apt update
-apt install nano
-nano /etc/loolwsd/loolwsd.xml
-# 关闭 https
-# 在 /etc/loolwsd/loolwsd.xml 搜索 ssl,设置为 false
-# 授权可访问的域名配置在 /etc/loolwsd/loolwsd.xml 最后面
-#
-# 也可以将 loolwsd.xml 从 docker 中复制出来
-docker cp 8a43ecd80cc8:/etc/loolwsd/loolwsd.xml loolwsd.xml
-nano loolwsd.xml
-# 修改完再复制到 docker
-docker cp loolwsd.xml 8a43ecd80cc8:/etc/loolwsd/loolwsd.xml
-docker exec -it 8a43ecd80cc8 /bin/bash 
-chmod 644 /etc/loolwsd/loolwsd.xml
-exit
-docker restart 8a43ecd80cc8
 ```
 
 ## 安装离线下载 aria2  
@@ -609,9 +561,9 @@ rpc-listen-all=true
 # 事件轮询方式, 取值:[epoll, kqueue, port, poll, select], 不同系统默认值不同
 #event-poll=select
 # RPC监听端口, 端口被占用时可以修改, 默认:6800
-#rpc-listen-port=6800
+rpc-listen-port=6868
 # 设置的RPC授权令牌, v1.18.4新增功能, 取代 --rpc-user 和 --rpc-passwd 选项
-#rpc-secret=<TOKEN>
+rpc-secret=mysecret
 # 设置的RPC访问用户名, 此选项新版已废弃, 建议改用 --rpc-secret 选项
 #rpc-user=<USER>
 # 设置的RPC访问密码, 此选项新版已废弃, 建议改用 --rpc-secret 选项
