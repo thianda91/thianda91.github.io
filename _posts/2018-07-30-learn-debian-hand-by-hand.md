@@ -5,7 +5,7 @@ key:          2018-07-30
 tags:         Debian
 categories:   notes
 created_date: 2018-07-30 11:00:00
-date:         2019-01-24 13:25:17
+date:         2019-05-22 16:23:17
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -24,6 +24,38 @@ date:         2019-01-24 13:25:17
 6. 初始学习直接使用 root 用户即可，在此建议安装完系统保存一份快照，快速恢复快照避免重装系统。
 
 ## 基本设置
+
+### 查看系统基本信息
+
+```sh
+# 查看系统版本
+cat /proc/version
+uname -a
+# 查看磁盘信息
+fdisk -l
+lsblk
+df -h
+mount | column -t
+# 查看 CPU
+lscpu
+# 查看内存
+free -h
+# 查看指定目录使用情况
+du -sh {目录}
+# 启动时间
+uptime -p
+date -d "$(awk -F. '{print $1}' /proc/uptime) second ago" +"%Y-%m-%d %H:%M:%S"
+cat /proc/uptime| awk -F. '{run_days=$1 / 86400;run_hour=($1 % 86400)/3600;run_minute=($1 % 3600)/60;run_second=$1 % 60;printf("系统已运行：%d天%d时%d分%d秒",run_days,run_hour,run_minute,run_second)}'
+```
+
+### 常用基本设置
+
+```sh
+# 添加配置
+echo "alias ls='ls --color'" >>  ~/.bashrc
+echo "alias ll='ls -l'" >>  ~/.bashrc
+source ~/.bashrc
+```
 
 ### 网络代理设置
 
@@ -83,8 +115,12 @@ service networking restart
 双网卡等情况手动配置路由
 
 ```sh
+# 查看路由
+ip route
+# 默认路由
 ip route add default via {ip} 
-ip route add 
+# 添加静态路由
+ip route add 10.0.0.0/8 via {gateway} dev ens{XX}
 ```
 
 ### 修改源
@@ -125,33 +161,6 @@ deb http://mirrors.163.com/debian-security/  stretch/updates main non-free contr
 deb-src http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib
 ```
 
-直接输出到配置文件。使用`echo`命令以及`>>`将文本追加到文件末尾。可逐行将上述信息填入`/etc/apt/sources.list`。或者直接用 sh：
-
-```sh
-mv /etc/apt/sources.list /etc/apt/sources.list.bak
-echo '' > /etc/apt/sources.list
-echo 'deb http://ftp.jp.debian.org/debian/ stretch main non-free contrib' >> /etc/apt/sources.list
-echo 'deb http://ftp.jp.debian.org/debian/ stretch-updates main non-free contrib' >> /etc/apt/sources.list
-echo 'deb http://ftp.jp.debian.org/debian/ stretch-backports main non-free contrib' >> /etc/apt/sources.list
-echo 'deb-src http://ftp.jp.debian.org/debian/ stretch main non-free contrib' >> /etc/apt/sources.list
-echo 'deb-src http://ftp.jp.debian.org/debian/ stretch-updates main non-free contrib' >> /etc/apt/sources.list
-echo 'deb-src http://ftp.jp.debian.org/debian/ stretch-backports main contrib non-free' >> /etc/apt/sources.list
-cat /etc/apt/sources.list
-```
-
-```sh
-mv /etc/apt/sources.list /etc/apt/sources.list.bak
-echo '' > /etc/apt/sources.list
-echo 'deb http://mirrors.163.com/debian/  stretch main non-free contrib' >> /etc/apt/sources.list
-echo 'deb http://mirrors.163.com/debian/  stretch-updates main non-free contrib' >> /etc/apt/sources.list
-echo 'deb http://mirrors.163.com/debian/  stretch-backports main non-free contrib' >> /etc/apt/sources.list
-echo 'deb-src http://mirrors.163.com/debian/  stretch main non-free contrib' >> /etc/apt/sources.list
-echo 'deb-src http://mirrors.163.com/debian/  stretch-updates main non-free contrib' >> /etc/apt/sources.list
-echo 'deb-src http://mirrors.163.com/debian/  stretch-backports main non-free contrib' >> /etc/apt/sources.list
-echo 'deb http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib' >> /etc/apt/sources.list
-echo 'deb-src http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib' >> /etc/apt/sources.list
-```
-
 或者先安装vim，安装时提示版本过高，我们需要卸载后重新安装：
 
 ```sh
@@ -176,6 +185,50 @@ apt-get install openssh-server -y
 ```sh
 # 当前用户
 passwd
+```
+
+### 安装最新版 openssh-server
+
+升级 openssh-server 前，为防止远程连接不上，可先安装 telnet 服务端。
+
+```sh
+apt install telnetd
+# 顺带会安装这些包： libevent-2.0-5 libfile-copy-recursive-perl openbsd-inetd update-inetd
+```
+
+安装最新版 openssh-server 需要手动下载并编译。
+
+首先到[官网](http://www.openssh.com/)下载源码：http://www.openssh.com/portable.html#http
+
+进入其中一个镜像站，比如：<https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/>，下载最新版的压缩文件。
+
+```sh
+wget https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.0p1.tar.gz
+tar zxf openssh-8.0p1.tar.gz
+# 备份 /etc/ssh
+mv /etc/ssh /opt/ssh.bak
+cd openssh-8.0p1
+# 编译 (缺依赖就安装)
+./configure --sysconfdir=/etc/ssh
+# 没有报错继续执行
+make && make install
+```
+
+安装**编译的依赖包**：
+
+> 出现这种问题的话，该如何下手找到原因呢？比如说：你是按什么思路来发现需要安装zlib1g-dev
+>
+> 头文件和静态库一般包含在dev包里面
+>
+> 一般这种包就叫zlib-dev，zlib[version]-dev，libzlib-dev，libzlib[version]-dev
+
+```sh
+apt search zlib
+apt install gcc
+apt install zlib1g-dev
+apt install libssl-dev
+# RHEL： yum install openssl-devel
+apt install --reinstall make
 ```
 
 ### 设置 ssh
@@ -204,6 +257,9 @@ cat /etc/ssh/sshd_config
 按需将配置修改即可。
 
 ```ini
+PermitRootLogin yes
+PrintLastLog yes
+##################
 Protocol 2
 Port 22
 IdentityFile ~/.ssh/id_rsa
@@ -212,6 +268,16 @@ RSAAuthentication yes
 ```
 
 默认情况下 root 用户无法远程登录，需要在上面的配置文件中设置`PermitRootLogin yes`。也可以在安装系统时设置额外的用户进行远程登录。登录后可使用`su`命令切换到 root 。
+
+卸载 telnetd：
+
+```sh
+service inetd stop
+apt remove telnetd -y
+apt autoremove
+```
+
+
 
 ### 设置时区
 
@@ -226,7 +292,30 @@ tzselect
 dpkg-reconfigure tzdata
 ```
 
+### 挂载硬盘
 
+```sh
+# 查看
+fdisk -l
+# 创建新硬盘
+fdisk /dev/sdb
+# p 命令显示硬盘的分区表信息
+# n 添加新分区
+
+# (1) n 添加新分区
+# (2) e extended 添加扩展分区 number 1
+# (3) First cylinder (1-13054, default 1)(第一个柱面,默认就行,直接会回车)
+# (4) Last cylinder, +cylinders or +size{K,M,G} (1-13054, default 13054)(最后一个柱面,默认就行,直接会回车)
+# (5) p 查看分区
+# (6) w 把分区信息写入新硬盘的分区表
+
+# 格式化
+mkfs -t ext4 /dev/sdb1
+# 挂载
+mount /dev/sdb1 /usr
+# 开机自动挂载
+echo '/dev/sdb1 /usr ext4 defaults 0 0' >> /etc/fstab
+```
 
 ## 工具安装
 
@@ -245,7 +334,7 @@ echo "1" > /proc/sys/net/ipv6/conf/ethx/disable_ipv6
 ### 网络相关
 
 ```sh
- # ifconfig 不建议使用
+ # ifconfig、netstat
  apt-get install net-tools
  # nslookup、dig
  apt-get install dnsutils
@@ -253,7 +342,6 @@ echo "1" > /proc/sys/net/ipv6/conf/ethx/disable_ipv6
  apt-get install traceroute
  # manual 手册
  apt-get install man
- 
 ```
 
 ### 小内存增加 SWAP
