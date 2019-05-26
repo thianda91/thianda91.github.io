@@ -5,7 +5,7 @@ key:          2018-07-30
 tags:         Debian
 categories:   notes
 created_date: 2018-07-30 11:00:00
-date:         2019-05-22 16:23:17
+date:         2019-05-27 01:37:33
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -23,6 +23,42 @@ date:         2019-05-22 16:23:17
 5. 安装时会要求设置 root 账户密码，以及新建一个额外的账户，完毕后会自动重启。
 6. 初始学习直接使用 root 用户即可，在此建议安装完系统保存一份快照，快速恢复快照避免重装系统。
 
+### 分区设置
+
+简单使用，选择默认设置。若做大文件存储，或想要在以后做空间扩容，则可以在创建系统分区时选择 lvm 格式。
+
+```sh
+# 查看磁盘分区及挂载情况
+fdisk -l
+lsblk
+df -h
+mount | column -t
+```
+
+若使用新硬盘，分区设置如下：
+
+```sh
+apt install lvm2 -y
+fdisk -l
+fdisk /dev/sdb
+# 进入交互界面
+# 创建 gpt 分区格式硬盘，创建分区，修改为 lvm
+g
+n
+# 默认按回车，使用全部硬盘空间创建分区
+# 修改分区格式为 lvm
+t
+31
+w
+# 退出交互界面
+# 格式化
+# mkfs -t ext4 /dev/sdb1
+# 创建 pv、vg、lv
+pvcreate /dev/sdb1
+vgcreate vgusr /dev/sdb1
+lvcreate vgusr -L 30G -n lvusr
+```
+
 ## 基本设置
 
 ### 查看系统基本信息
@@ -31,11 +67,6 @@ date:         2019-05-22 16:23:17
 # 查看系统版本
 cat /proc/version
 uname -a
-# 查看磁盘信息
-fdisk -l
-lsblk
-df -h
-mount | column -t
 # 查看 CPU
 lscpu
 # 查看内存
