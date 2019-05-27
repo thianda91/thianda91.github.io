@@ -5,7 +5,7 @@ key:          2018-12-27
 tags:         vps php
 categories:   notes
 created_date: 2018-12-27 13:22:28 +08:00:00
-date:         2019-04-01 15:19:16
+date:         2019-05-27 17:19:16
 ---
 
 ## nextcloud 简介
@@ -56,13 +56,15 @@ apt-get upgrade
 ### 安装 caddy
 
 ```sh
-wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/caddy_install.sh && chmod +x caddy_install.sh && bash caddy_install.sh install http.filebrowser,http.webdav,tls.dns.cloudflare
+# 1
+wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/caddy_install.sh && chmod +x caddy_install.sh && bash caddy_install.sh install http.webdav,tls.dns.cloudflare
 
+# 2 
 # 官方安装，安装到 /usr/local/bin
-curl https://getcaddy.com | bash -s personal http.filebrowser,http.webdav,tls.dns.cloudflare
+curl https://getcaddy.com | bash -s personal http.webdav,tls.dns.cloudflare
 ```
 
-此步骤会附带安装插件：`http.filemanager`和`tls.dns.cloudflare`，以后会用到。
+此步骤会附带安装插件：`tls.dns.cloudflare`，以后会用到。
 
 使用 caddy 作为 web 服务器，优点：
 
@@ -174,6 +176,32 @@ include /etc/nginx/sites-enabled/*;
 
 ```
 nano /etc/nginx/conf.d/nextcloud.conf
+```
+
+**生成 https 的证书**：执行后会填写证书的基本信息。最后生成`server.key`和`server.csr`。
+
+```sh
+mkdir -p /etc/ssl/nginx
+cd /etc/ssl/nginx
+openssl req -new -nodes -newkey rsa:2048 -keyout server.key -out server.csr
+```
+
+**csr 转 crt**：生成有效期 10 年的的证书。
+
+```sh
+openssl x509 -req -days 3600 -in /etc/ssl/nginx/cert_req.csr -signkey /etc/ssl/nginx/private.key -out /etc/ssl/nginx/server_cert.crt
+```
+
+最后在 ngnix 的配置文件中修改：
+
+```ini
+ server {
+         listen               443;
+         server_name          www.myssl.cn;
+         ssl                  on;
+         ssl_certificate      server.cer;
+         ssl_certificate_key  server.key;
+         }
 ```
 
 ### caddy 配置

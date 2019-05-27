@@ -5,7 +5,7 @@ key:          2018-07-30
 tags:         Debian
 categories:   notes
 created_date: 2018-07-30 11:00:00
-date:         2019-05-27 01:37:33
+date:         2019-05-27 17:19:33
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -86,6 +86,39 @@ cat /proc/uptime| awk -F. '{run_days=$1 / 86400;run_hour=($1 % 86400)/3600;run_m
 echo "alias ls='ls --color'" >>  ~/.bashrc
 echo "alias ll='ls -l'" >>  ~/.bashrc
 source ~/.bashrc
+```
+
+**开机自运行脚本**
+
+新建脚本`/etc/init.d/xda`
+
+1.在文件开头添加：
+
+```sh
+#!/bin/bash
+
+### BEGIN INIT INFO
+# Provides:          xxx
+# Required-Start:    $network $local_fs $remote_fs
+# Required-Stop:     $network $local_fs $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: xxxx
+# Description:       xxxx
+### END INIT INFO
+```
+
+然后即可使用`update-rc.d`将其添加为服务：
+
+```
+chmod +x /etc/init.d/xda
+update-rc.d xda defaults
+```
+
+2.将启动的脚本添加到：`/etc/rc.local`，如
+
+```sh
+echo 'nohup /etc/init.d/xda' >> /etc/rc.local
 ```
 
 ### 网络代理设置
