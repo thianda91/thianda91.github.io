@@ -5,7 +5,7 @@ key:          2018-12-27
 tags:         vps php
 categories:   notes
 created_date: 2018-12-27 13:22:28 +08:00:00
-date:         2019-05-27 17:19:16
+date:         2019-05-28 17:09:16
 ---
 
 ## nextcloud 简介
@@ -71,6 +71,20 @@ curl https://getcaddy.com | bash -s personal http.webdav,tls.dns.cloudflare
 - 跨平台、自动申请 https 证书
 - 原生 http/2，插件丰富
 - 配置简单、无明显漏洞，安全
+
+**原 filebrowser 插件**现已独立，官网：<https://filebrowser.xyz>。
+
+基本配置：
+
+```sh
+curl -fsSL https://filebrowser.xyz/get.sh | bash
+filebrowser -d /usr/local/caddy/filebrowser.db config init
+filebrowser -d /usr/local/caddy/filebrowser.db config set -p 1111
+filebrowser -d /usr/local/caddy/filebrowser.db config set --locale zh-cn
+filebrowser -d /usr/local/caddy/filebrowser.db config set --log /usr/local/caddy/filebrowser.log
+filebrowser -d /usr/local/caddy/filebrowser.db config set --baseurl /admin
+filebrowser -d /usr/local/caddy/filebrowser.db users add root password --perm.admin
+```
 
 ### 安装 php7
 
