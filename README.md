@@ -81,4 +81,7 @@
 在`_includes/article-info.html`、 `_includes/article.html`中
   搜索 page.date 酌情替换为 page.created_date
   酌情将多个 page.modify_date 替换为 page.date
+#在`_includes/scripts/article-list.html`中
+#  搜索 _post.date 替换为 _post.created_date
 ```
+
