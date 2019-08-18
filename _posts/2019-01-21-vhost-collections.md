@@ -24,3 +24,15 @@ date:         2019-01-24 21:21:07
 |                                                   |           |                                    |
 |                                                   |           |                                    |
 
+[VirMach](https://billing.virmach.com/cart.php?gid=1)，圣何塞机房。
+
+[CloudCone](https://cloudcone.com/cloud-servers/)，洛杉矶 MCOM 机房。
+
+[vultr](https://www.vultr.com/products/cloud-compute/)
+
+[linode](https://www.linode.com/pricing)
+
+[hostwinds](https://www.hostwinds.com/vps/unmanaged-linux)
+
+[WikiHost ](https://idc.wiki)
+

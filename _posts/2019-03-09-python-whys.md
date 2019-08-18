@@ -3,9 +3,9 @@ layout:       article
 title:        学习 python 遇到的十万个为什么
 key:          2019-03-09
 tags:         python
-categories:   notes
-created_date: 2019-03-09 22:46:42
-date:         2019-03-10 21:37:51
+categories:   python
+created_date: 2019-03-09 22:46:42 +08:00:00
+date:         2019-08-18 23:36:46 +08:00:00
 ---
 
  收集 python 中的一些常识。
@@ -75,7 +75,13 @@ python 2to3.py -w "D:\home\python-ipy\"
 python 2to3.py -w "D:\Program Files\Python37\Lib\site-packages\IPy.py"
 ```
 
+## python 命令行工具
 
+- [plumbum](https://plumbum.readthedocs.io)
+- [argparse](https://docs.python.org/3/library/argparse.html)
+- [Fire](https://github.com/google/python-fire)
+- [click](https://click.palletsprojects.com)
+- [docopt](http://docopt.org/)
 
 
 
