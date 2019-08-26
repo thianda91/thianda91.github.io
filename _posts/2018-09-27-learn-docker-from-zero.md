@@ -5,7 +5,7 @@ key:          2018-09-27
 tags:         vps
 categories:   notes
 created_date: 2018-09-27 16:03:03 +08:00:00
-date:         2019-04-01 14:45:09
+date:         2019-08-27 01:13:28
 ---
 
 搭建服务器，使用 vps，为了方便维护和快速重新搭建，使用 docker 最适合了。
@@ -69,3 +69,6 @@ nano /etc/docker/daemon.json
 }
 ```
 
+## 推荐阅读
+
+[Docker教程：Docker入门实践（精讲版）](http://c.biancheng.net/docker/)
