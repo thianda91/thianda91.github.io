@@ -4,8 +4,8 @@ title:        亲手学Debian系统操作
 key:          2018-07-30
 tags:         Debian
 categories:   notes
-created_date: 2018-07-30 11:00:00
-date:         2019-05-28 17:02:33
+created_date: 2018-07-30 11:00:00 +08:00:00
+date:         2019-05-28 17:02:33 +08:00:00
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -204,25 +204,25 @@ mv /etc/apt/sources.list /etc/apt/sources.list.bak
 然后编辑`/etc/apt/sources.list`，前面添加：
 
 ```
-deb http://ftp.debian.org/debian/ stretch main non-free contrib
-deb http://ftp.debian.org/debian/ stretch-updates main non-free contrib
-deb http://ftp.debian.org/debian/ stretch-backports main non-free contrib
-deb-src http://ftp.debian.org/debian/ stretch main non-free contrib
-deb-src http://ftp.debian.org/debian/ stretch-updates main non-free contrib
-deb-src http://ftp.debian.org/debian/ stretch-backports main contrib non-free
+deb http://ftp.debian.org/debian/ buster main non-free contrib
+deb http://ftp.debian.org/debian/ buster-updates main non-free contrib
+deb http://ftp.debian.org/debian/ buster-backports main non-free contrib
+deb-src http://ftp.debian.org/debian/ buster main non-free contrib
+deb-src http://ftp.debian.org/debian/ buster-updates main non-free contrib
+deb-src http://ftp.debian.org/debian/ buster-backports main contrib non-free
 ```
 
 163：
 
 ```
-deb http://mirrors.163.com/debian/  stretch main non-free contrib
-deb http://mirrors.163.com/debian/  stretch-updates main non-free contrib
-deb http://mirrors.163.com/debian/  stretch-backports main non-free contrib
-deb-src http://mirrors.163.com/debian/  stretch main non-free contrib
-deb-src http://mirrors.163.com/debian/  stretch-updates main non-free contrib
-deb-src http://mirrors.163.com/debian/  stretch-backports main non-free contrib
-deb http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib
-deb-src http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib
+deb http://mirrors.163.com/debian/  buster main non-free contrib
+deb http://mirrors.163.com/debian/  buster-updates main non-free contrib
+deb http://mirrors.163.com/debian/  buster-backports main non-free contrib
+deb-src http://mirrors.163.com/debian/  buster main non-free contrib
+deb-src http://mirrors.163.com/debian/  buster-updates main non-free contrib
+deb-src http://mirrors.163.com/debian/  buster-backports main non-free contrib
+deb http://mirrors.163.com/debian-security/  buster/updates main non-free contrib
+deb-src http://mirrors.163.com/debian-security/  buster/updates main non-free contrib
 ```
 
 或者先安装vim，安装时提示版本过高，我们需要卸载后重新安装：
@@ -431,6 +431,15 @@ dpkg-reconfigure locales
 正确配置下会显示：LANG =zh_CN.UTF-8
 
 > debian 9 通常不会有此问题，若显示乱码可能是 ssh 客户端没有设置 UFT-8，需要修改客户端设置。
+
+若`cat`中文正常， 而在 `nano`或`vim`中中文乱码，则需在`~/.bashrc`中配置：
+
+```sh
+export LANG="en_US.UTF-8"
+export LC_CTYPE="zh_CN.UTF-8"
+```
+
+
 
 ### 防火墙设置
 

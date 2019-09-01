@@ -5,7 +5,7 @@ key:          2018-12-27
 tags:         vps php
 categories:   notes
 created_date: 2018-12-27 13:22:28 +08:00:00
-date:         2019-05-28 17:09:16
+date:         2019-08-31 21:19:16 +08:00:00
 ---
 
 ## nextcloud 简介
@@ -527,6 +527,7 @@ mkdir /etc/aria2
 touch /etc/aria2/aria2.session
 touch /etc/aria2/aria2.log
 nano /etc/aria2/aria2.conf
+chown www-data:www-data -R /etc/aria2
 ```
 
 以配置文件方式启动 aria2
@@ -544,9 +545,9 @@ sudo -u www-data aria2c --conf-path=/etc/aria2/aria2.conf -D
 ## 进度保存相关 ##
 
 # 从会话文件中读取下载任务
-input-file=aria2.session
+input-file=/etc/aria2/aria2.session
 # 在Aria2退出时保存`错误/未完成`的下载任务到会话文件
-save-session=aria2.session
+save-session=/etc/aria2/aria2.session
 # 定时保存会话, 0为退出时才保存, 需1.16.1以上版本, 默认:0
 #save-session-interval=60
 
@@ -627,8 +628,10 @@ rpc-secret=mysecret
 listen-port=51413
 # 单个种子最大连接数, 默认:55
 #bt-max-peers=55
+#强制加密, 防迅雷必备
+bt-require-crypto=true
 # 打开DHT功能, PT需要禁用, 默认:true
-enable-dht=false
+#enable-dht=false
 # 打开IPv6 DHT功能, PT需要禁用
 #enable-dht6=false
 # DHT网络监听端口, 默认:6881-6999
@@ -655,7 +658,32 @@ bt-seed-unverified=true
 bt-save-metadata=true
 ```
 
+设置 `bt-tracker`：<https://github.com/ngosang/trackerslist>。只要 [trackers_best.txt](https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt) （貌似被墙了）就好了.
 
+> notepad++中然后用编辑中行操作去空行,再选中两个链接之间的部分查找替换成英文逗号
+
+```ini
+bt-tracker=
+```
+
+**浏览器插件**
+
+|                           |                                                              |
+| ------------------------- | ------------------------------------------------------------ |
+| Safari2Aria               | <https://github.com/miniers/safari2aria>                     |
+| 115: 使用Aria2下载115资源 | <https://github.com/acgotaku/115/>                           |
+| Chrome 插件               | <https://github.com/jae-jae/camtd>                           |
+|                           | <https://github.com/acgotaku/BaiduExporter> 无法使用 [传送门](http://www.senra.me/reinstall-baiduexporter-for-chrome/) |
+| YAAW for Chrome           | <https://chrome.google.com/webstore/detail/yaaw-for-chrome/dennnbdlpgjgbcjfgaohdahloollfgoc> |
+
+**各种 WebGUI**
+
+| UI 项目                                        | 项目地址                                  |
+| ---------------------------------------------- | ----------------------------------------- |
+| YAAW                                           | <https://github.com/binux/yaaw>           |
+| webgui-[aria2](http://www.senra.me/tag/aria2/) | <https://github.com/ziahamza/webui-aria2> |
+| AriaNG                                         | <https://github.com/mayswind/AriaNg>      |
+| Glutton                                        | <https://github.com/NemoAlex/glutton>     |
 
 ### 安装 youtube-dl
 
