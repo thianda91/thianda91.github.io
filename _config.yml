@@ -35,13 +35,13 @@ timezone: Asia/Shanghai # see https://en.wikipedia.org/wiki/List_of_tz_database_
 author:
   type      : # "person" (default), "organization"
   name      : X.Da
-  url       : https://github.com/thianda
+  url       : https://github.com/thianda91
   avatar    : # path or url of avatar image
   bio       : I'm a nonprofessional programmer.
   email     : 1748104738@139.com
   facebook  : # "user_name" the last part of your profile url, e.g. https://www.facebook.com/user_name
   twitter   : # "user_name" the last part of your profile url, e.g. https://twitter.com/user_name
-  github    : thianda # "user_name" the last part of your profile url, e.g. https://github.com/user_name
+  github    : thianda91 # "user_name" the last part of your profile url, e.g. https://github.com/user_name
   linkedin  : # "user_name" the last part of your profile url, e.g. https://www.linkedin.com/in/user_name/
   googleplus: # "user_id"   the last part of your profile url, e.g. https://plus.google.com/u/0/user_id
   weibo     : # "user_id"   the last part of your profile url, e.g. https://www.weibo.com/user_id/profile?...
@@ -50,7 +50,7 @@ author:
 
 ## => GitHub Repository (if the site is hosted by GitHub)
 ##############################
-repository: thianda/thianda.github.io
+repository: thianda91/thianda91.github.io
 repository_tree: master
 
 
@@ -92,7 +92,7 @@ chart: # false (default), true
 
 ## => Paginate
 ##############################
-paginate: 15
+paginate: 6
 paginate_path: /page:num # don't change this unless for special need
 
 

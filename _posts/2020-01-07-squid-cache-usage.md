@@ -14,6 +14,8 @@ date:         2020-01-07 15:45:53 +08:00:00
 
 <!--more-->
 
+参考链接：<https://www.cnblogs.com/bluestorm/p/9032086.html>
+
 ### 默认配置
 
 squid 功能很强大，默认配置`/etc/squid/squid.conf`很长。去除注释掉的行，仅剩：
