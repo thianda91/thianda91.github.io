@@ -55,11 +55,11 @@ date:         2018-05-15 00:35:39
 
 Google的，跨平台功能很强大。因直接编译成二进制，所以无关平台。
 
-#### Kotil
+#### Kotlin
 
-可看这篇：[为什么我要改用Kotlin](https://blog.csdn.net/androidyue/article/details/72457157)。Kotil主要是替换java来开发Android。很多原理和java一致。已实现将java代码转成Kotil，Kotil则可直接在JVM编译。
+可看这篇：[为什么我要改用Kotlin](https://blog.csdn.net/androidyue/article/details/72457157)。Kotlin主要是替换java来开发Android。很多原理和java一致。已实现将java代码转成Kotlin，Kotlin则可直接在JVM编译。
 
-> 我已经放弃java的坑了，使用Kotil的概率比较小。
+> 我已经放弃java的坑了，使用Kotlin的概率比较小。
 
 ### 但愿以后我会静下心来学门新的语言
 
