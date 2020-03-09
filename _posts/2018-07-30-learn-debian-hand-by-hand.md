@@ -5,7 +5,7 @@ key:          2018-07-30
 tags:         Debian
 categories:   notes
 created_date: 2018-07-30 11:00:00
-date:         2020-03-01 17:13:30
+date:         2020-03-07 10:53:30
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -57,6 +57,60 @@ w
 pvcreate /dev/sdb1
 vgcreate vgusr /dev/sdb1
 lvcreate vgusr -L 30G -n lvusr
+```
+
+### LVM 介绍
+
+硬盘可能只有一个分区也可能有多个。通过将这些物理存在的分区（或称为卷） PV（physical volume）进行整合，组成一个分区（卷）组 VG（volume group），进而再次进行分配形成逻辑分区（卷） LV（logical volume）。
+
+创建成功的逻辑分区对于操作系统来说会想普通分区无异，其好处是可以动态调整分区大小。管理PV，VG，LV 的工具称为逻辑卷管理器 LVM（logical volume manager）。
+
+|          | pv        | vg        | lv        |
+| -------- | --------- | --------- | --------- |
+| 查看显示 | pvdisplay | vgdisplay | lvdisplay |
+| 创建     | pvcreate  | vgcreate  | lvcreate  |
+| 删除     | pvremove  | vgremove  | lvremove  |
+| 扩容     |           | vgextend  | lvextend  |
+| 激活     | pvchange  | vgchange  | lvchange  |
+| 扫描查找 | pvscan    | vgscan    | lvscan    |
+
+> 需要指出的是，在某个物理卷在加入卷组时，会将物理卷的最小存储单元设定为一个固定的值，这个值称为 **PE**（physical  extent）。这个值的创建，是为了保证用统一的最小分配单元来创建逻辑卷，不至于因为分配单元大小不同而造成空间浪费。举个例子：用于远洋运输的集装箱的设计是是有着统一标准的，最重要一点是集装箱大小完全相同，这样做的好处是集装箱相互堆叠在一起不会留下多余的空隙，完全利用了空间，且便于管理。设定 PE 的原因也与此相同。LVM 以最小分配单元来创建逻辑卷，该最小分配单元的值称为 **LE**（logical extent）。一般来说 PE=LE，且大小为 2n。
+
+```sh
+# 创建物理卷
+pvcreate /dev/sda5
+# 查看物理卷
+pvdisplay
+# 创建卷组
+vgcreate vgusr /dev/sda5
+# 创建 PE=LE=1MB，卷组名为 vgusr，包含物理卷 /dev/sda5
+vgcreate 1MB vgusr /dev/sda5
+# 查看卷组状态
+vgdisplay
+# 创建逻辑卷
+# 在卷组 vgusr 上创建名为 lvusr 的逻辑卷，
+# -L 指定大小， -l 指定该逻辑卷包含的 LE 的数量。
+lvcreate -L 30G -n lvusr vgusr
+lvcreate -l 7680 -n lvusr vgusr
+# 查看逻辑卷状态
+lvdisplay
+# 在逻辑卷上创建文件系统
+mkfs.ext4 /dev/vgusr/lvusr
+# 挂载
+mkdir /uusr
+mount /dev/vgusr/lvusr /uusr/
+```
+
+为了自动启动挂载，编辑 `/etc/fstab`，底部添加：
+
+```
+/dev/vgusr/lvusr /uusr ext4 defaults 0 0
+```
+
+删除：
+
+```sh
+lvremove /dev/vgusr/lvusr
 ```
 
 ## 基本设置
@@ -331,7 +385,8 @@ PrintLastLog yes
 ##################
 Protocol 2
 Port 22
-IdentityFile ~/.ssh/id_rsa
+#IdentityFile ~/.ssh/authorized_keys 旧版
+AuthorizedKeysFile ~/.ssh/authorized_keys
 PasswordAuthentication yes
 RSAAuthentication yes
 ```
@@ -345,8 +400,6 @@ service inetd stop
 apt remove telnetd -y
 apt autoremove
 ```
-
-
 
 ### 设置时区
 
