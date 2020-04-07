@@ -4,8 +4,8 @@ title:        亲手学Debian系统操作
 key:          2018-07-30
 tags:         Debian
 categories:   notes
-created_date: 2018-07-30 11:00:00
-date:         2020-03-07 10:53:30
+created_date: 2018-07-30 11:00:00 +08:00:00
+date:         2020-04-07 20:32:30 +08:00:00
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -140,8 +140,9 @@ cat /proc/uptime| awk -F. '{run_days=$1 / 86400;run_hour=($1 % 86400)/3600;run_m
 echo "alias ls='ls --color'" >>  ~/.bashrc
 echo "alias ll='ls -l'" >>  ~/.bashrc
 
-echo "export LANG='en_US.UTF-8'" >>  ~/.bashrc
-echo "export LC_CTYPE='zh_CN.UTF-8'" >>  ~/.bashrc
+echo "export LANG='en_US.UTF-8'" >>  /etc/profile
+echo "export LC_CTYPE='zh_CN.UTF-8'" >>  /etc/profile
+echo "export TZ='Asia/Shanghai'"  >> /etc/profile
 echo "export TIME_STYLE='+%Y/%m/%d %H:%M:%S'" >>  ~/.bashrc
 
 source ~/.bashrc
@@ -263,25 +264,25 @@ mv /etc/apt/sources.list /etc/apt/sources.list.bak
 然后编辑`/etc/apt/sources.list`，前面添加：
 
 ```
-deb http://ftp.debian.org/debian/ stretch main non-free contrib
-deb http://ftp.debian.org/debian/ stretch-updates main non-free contrib
-deb http://ftp.debian.org/debian/ stretch-backports main non-free contrib
-deb-src http://ftp.debian.org/debian/ stretch main non-free contrib
-deb-src http://ftp.debian.org/debian/ stretch-updates main non-free contrib
-deb-src http://ftp.debian.org/debian/ stretch-backports main contrib non-free
+deb http://ftp.debian.org/debian/ buster main non-free contrib
+deb http://ftp.debian.org/debian/ buster-updates main non-free contrib
+deb http://ftp.debian.org/debian/ buster-backports main non-free contrib
+deb-src http://ftp.debian.org/debian/ buster main non-free contrib
+deb-src http://ftp.debian.org/debian/ buster-updates main non-free contrib
+deb-src http://ftp.debian.org/debian/ buster-backports main contrib non-free
 ```
 
 163：
 
 ```
-deb http://mirrors.163.com/debian/  stretch main non-free contrib
-deb http://mirrors.163.com/debian/  stretch-updates main non-free contrib
-deb http://mirrors.163.com/debian/  stretch-backports main non-free contrib
-deb-src http://mirrors.163.com/debian/  stretch main non-free contrib
-deb-src http://mirrors.163.com/debian/  stretch-updates main non-free contrib
-deb-src http://mirrors.163.com/debian/  stretch-backports main non-free contrib
-deb http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib
-deb-src http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib
+deb http://mirrors.163.com/debian/  buster main non-free contrib
+deb http://mirrors.163.com/debian/  buster-updates main non-free contrib
+deb http://mirrors.163.com/debian/  buster-backports main non-free contrib
+deb-src http://mirrors.163.com/debian/  buster main non-free contrib
+deb-src http://mirrors.163.com/debian/  buster-updates main non-free contrib
+deb-src http://mirrors.163.com/debian/  buster-backports main non-free contrib
+deb http://mirrors.163.com/debian-security/  buster/updates main non-free contrib
+deb-src http://mirrors.163.com/debian-security/  buster/updates main non-free contrib
 ```
 
 或者先安装vim，安装时提示版本过高，我们需要卸载后重新安装：
@@ -310,7 +311,7 @@ apt-get install openssh-server -y
 passwd
 ```
 
-### 安装最新版 openssh-server
+### ~~安装最新版 openssh-server~~
 
 升级 openssh-server 前，为防止远程连接不上，可先安装 telnet 服务端。
 
@@ -401,10 +402,11 @@ apt remove telnetd -y
 apt autoremove
 ```
 
-### 设置时区
+### 设置时区和语言
 
 ```sh
 echo "export TZ='Asia/Shanghai'"  >> /etc/profile
+echo "export LANG='zh_CN.UTF-8'"  >> /etc/profile
 source /etc/profile
 date -R
 date
@@ -476,6 +478,14 @@ echo '/home/swap swap swap defaults 0 0' >> /etc/fstab # 重启后可以自动�
 ```
 
 ### ~~解决中文乱码~~
+
+1.
+
+```sh
+echo "export LANG='zh_CN.UTF-8'"  >> /etc/profile
+```
+
+2.
 
 ```sh
 apt-get install locales
