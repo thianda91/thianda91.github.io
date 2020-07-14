@@ -5,7 +5,7 @@ key:          2018-11-08
 tags:         nat fileSync
 categories:   notes
 created_date: 2018-11-08 00:27:02
-date:         2018-12-30 00:21:35
+date:         2020-07-14 17:14:47
 ---
 
 本文收集一些 可在私有云自搭建的 内网穿透工具和文件共享的工具。
@@ -20,19 +20,35 @@ date:         2018-12-30 00:21:35
 
 ## 内网穿透相关
 
+### frp
+
+完全开源，项目地址：<https://github.com/fatedier/frp>。基于 go，国人开发，资料多。使用配置文件。
+
+### nps
+
+完全开源，项目地址：<https://github.com/ehang-io/nps>。基于 go，国人开发，可命令行参数，可配置文件。
+
 ### ngrok
 
 <https://ngrok.com/>，国外，服务被墙。服务端闭源，可以自搭建。
 
-国内基于ngrok的服务：[Sunny-Ngrok](https://www.ngrok.cc/)、[ittun--ngrok](https://www.ittun.com/)。
+国内基于ngrok的服务：Sunny-Ngrok：<https://www.ngrok.cc/>、ittun--ngrok：<https://www.ittun.com/>。
+
+### smarGate
+
+宣称无需公网 IP，可将 Android 做为服务器。项目地址：https://github.com/lazy-luo/smarGate。无源代码，下载 release 需要在历史 commit 中寻找。
+
+### fcn
+
+闭源，项目地址：https://github.com/boywhp/fcn。会安装虚拟网卡。GUI 界面操作。
+
+### n2n
+
+Peer-to-peer VPN。项目地址：<https://github.com/ntop/n2n>。基于 C，可命令行参数，可配置文件。需手动编译成可执行二进制文件。
 
 ### ZeroTier
 
 <https://www.zerotier.com>，内网穿透工具，无公网 ip 搭建虚拟网络。Android 仅可在 google play 下载。
-
-### frp
-
-完全开源，项目地址：<https://github.com/fatedier/frp>。基于 go，国人开发，资料多。
 
 ### PageKite
 
@@ -54,15 +70,21 @@ date:         2018-12-30 00:21:35
 
 ## 文件同步/共享相关
 
-### Caddy.filemanager
+### filebrowser
 
-caddy 的一个插件。使用 caddy 搭建 web 服务的同时，可以直接管理文件。支持文本在线编辑、链接分享等。
+原是 caddy 的一个插件。现已独立：<https://github.com/filebrowser/filebrowser>。
+
+初始化配置：（默认保存到 `filebrowser.db`）
 
 ```sh
-wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/caddy_install.sh && chmod +x caddy_install.sh && bash caddy_install.sh install http.filemanager,tls.dns.cloudflare
+filebrowser config init
+filebrowser config set -a xxx.xxx.xxx.xxx
+filebrowser config set -p 80
+filebrowser config set --locale zh-cn
+filebrowser config set --root "d:/MyPath"
+filebrowser users add admin admin
+filebrowser users update 1 --perm.admin
 ```
-
-
 
 ### ownCloud 
 
