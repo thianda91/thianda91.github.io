@@ -5,7 +5,7 @@ key:          2018-12-16
 tags:         Tampermonkey
 categories:   notes
 created_date: 2018-07-09 10:56:23
-date:         2018-12-16 00:17:44
+date:         2020-07-16 10:33:26
 ---
 
 ## 前言
@@ -26,6 +26,14 @@ Tampermonkey插件设置里的`实用工具`中支持导出到云、压缩包、
 
 优化百度、搜狗、谷歌搜索结果之重定向去除+去广告+favicon
 
+### [计时器掌控者|视频广告跳过|视频广告加速器](https://greasyfork.org/zh-CN/scripts/372673)
+
+控制网页计时器速度|加速跳过页面计时广告|视频快进（慢放）|跳过广告|支持几乎所有网页
+
+### [自动展开全文](https://greasyfork.org/zh-CN/scripts/397476)
+
+自动展开网站内容而无需点击。当前支持知乎，CSDN，B 站等共计 52 个网站。
+
 ### [弹窗阻止程序脚本](https://greasyfork.org/scripts/37654)
 
 用于阻止所有类型弹窗的最有效用户脚本。为防范最狡猾的弹窗而设计，包括成人和流媒体网站上的弹窗。
@@ -33,6 +41,10 @@ Tampermonkey插件设置里的`实用工具`中支持导出到云、压缩包、
 ### [网页限制解除(改)](https://greasyfork.org/zh-CN/scripts/28497)
 
 通杀大部分网站,可以解除禁止复制、剪切、选择文本、右键菜单的限制。原作者cat73,因为和搜索跳转脚本冲突,遂进行了改动,改为黑名单制。
+
+### [🔥持续更新🔥 CSDN广告完全过滤、人性化脚本优化](https://greasyfork.org/zh-CN/scripts/378351)
+
+⚡️拥有数项独家功能的最强CSDN脚本，不服比一比⚡️|🕶无需登录CSDN，获得比会员更佳的体验
 
 ### [CSDN自动展开+去广告+净化剪贴板+免登陆](https://greasyfork.org/zh-CN/scripts/372452)
 

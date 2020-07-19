@@ -36,11 +36,11 @@ date:         2020-07-14 17:14:47
 
 ### smarGate
 
-宣称无需公网 IP，可将 Android 做为服务器。项目地址：https://github.com/lazy-luo/smarGate。无源代码，下载 release 需要在历史 commit 中寻找。
+无需公网 IP，将 Android 手机 App 做为服务器。项目地址：<https://github.com/lazy-luo/smarGate>。闭源。App 端需注册账户，随意注册即可，30天不用自动注销。首选`p2p`连接，也可自建代理。通过服务端可中转任意`ip:port`
 
 ### fcn
 
-闭源，项目地址：https://github.com/boywhp/fcn。会安装虚拟网卡。GUI 界面操作。
+闭源，项目地址：<https://github.com/boywhp/fcn>。会安装虚拟网卡。GUI 界面操作。
 
 ### n2n
 
@@ -49,6 +49,10 @@ Peer-to-peer VPN。项目地址：<https://github.com/ntop/n2n>。基于 C，可
 ### ZeroTier
 
 <https://www.zerotier.com>，内网穿透工具，无公网 ip 搭建虚拟网络。Android 仅可在 google play 下载。
+
+### Remotely
+
+官网：<https://remotely.one/>。有 demo，通过网页访问被控制端。需公网 IP。
 
 ### PageKite
 
