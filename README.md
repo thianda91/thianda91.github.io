@@ -85,3 +85,13 @@
 #  搜索 _post.date 替换为 _post.created_date
 ```
 
+1.  修改三方 css （三方访问过慢）
+
+```ini
+在 `_data/variables.yml` 中
+原：
+https://use.fontawesome.com/releases/v5.0.13/css/all.css
+修改到：
+`https://cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/css/all.css`
+```
+

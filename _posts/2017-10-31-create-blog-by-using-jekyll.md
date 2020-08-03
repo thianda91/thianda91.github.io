@@ -51,7 +51,7 @@ http://yizeng.me/2013/05/10/install-jekyll-3-on-windows/
 
 ### 安装Ruby
 
-在[官网](https://rubyinstaller.org)下载ruby，windows系统推荐使用[RubyInstaller](https://rubyinstaller.org/downloads/)。本人下载了`.exe`安装，会自动添加路径到path变量中。
+在[官网](https://rubyinstaller.org)下载ruby，windows系统推荐使用[RubyInstaller](https://rubyinstaller.org/downloads/)（with Devkit）。本人下载了`.exe`安装，会自动添加路径到path变量中。安装结束后会要求执行`ridk install`，安装 **MSYS2**。
 
 安装完毕可以输入`ruby -v`验证。
 
@@ -107,7 +107,15 @@ gem install bundler # 安装bundler
 
 安装完毕可以输入`bundle -v`验证。
 
-现在我们可以根据项目根目录下`Gemfile`来使用`bundle install`或者`bundle update`命令进行安装/更新依赖了。
+现在我们可以根据项目根目录下`Gemfile`来安装/更新依赖：
+
+```sh
+bundle install
+# 或者
+bundle update
+```
+
+
 
 ### 安装Jekyll
 
