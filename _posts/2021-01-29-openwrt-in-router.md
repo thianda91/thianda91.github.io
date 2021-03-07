@@ -5,12 +5,12 @@ key:          2021-01-29
 tags:         openwrt
 categories:   notes
 created_date: 2021-01-29 22:58:13 +08:00:00
-date:         2021-01-31 01:42:24 +08:00:00
+date:         2021-03-08 02:37:50 +08:00:00
 ---
 
 记录一下小米路由器 R3G 刷固件的遇到的问题以及使用新固件时的一些设置。
 
-<!--more- -> 
+<!--more--> 
 
 ## 使用需求
 
@@ -198,9 +198,220 @@ mtd -r write /extdisks/sda1/breed-mt7621-xiaomi-r3g.bin Bootloader
 
 之后会自动再次进入 breed。访问 192.168.1.1，在环境变量编辑里添加 `xiaomi.r3g.bootfw` 字段，值为 2，保存后重启即可完美进入 Openwrt。
 
+## 自己编译 openwrt
+
+源码仓库地址：https://github.com/coolsnowwolf/lede。需要准备一个 Ubuntu 20.04 LTS。准备过程略。
+
+### 编译步骤
+
+1. 按照源码中的 README 操作，先做前期准备
+
+ ssh 登录 Ubuntu ，而不推荐在 Ubuntu 中直接使用 terminal。
+
+2. 查看内存使用
+
+```sh
+free -m
+```
+
+内存 1G 不够，扩大内存或增加虚拟内存
+
+```sh
+dd if=/dev/zero of=/home/swap bs=1024 count=1024000
+/sbin/mkswap /home/swap
+/sbin/swapon /home/swap
+```
+
+再次执行 `free -m` 确认增加成功
+
+3. 编译时要使用非 `root` 用户，新建
+
+```sh
+useradd xxx
+passwd xxx
+```
+
+4. 赋予新用户 sudo 权限
+
+编辑 `/etc/sudoers`：
+
+```sh
+nano /etc/sudoers
+```
+
+在这一行内容后面，
+
+```sh
+root ALL=(ALL:ALL) ALL
+```
+
+增加：
+
+```sh
+xxx ALL=(ALL:ALL) ALL
+```
+
+按 `Ctrl + x`输入`Y`，按回车，再按回车保存。
+
+5. 执行系统更新
+
+```sh
+sudo apt update -y
+```
+
+6. 安装编译所需要的软件包
+
+```sh
+sudo apt install -y build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync
+```
+
+7. 切换到新用户，依次执行
+
+```sh
+su xxx
+cd ~
+git clone https://github.com/coolsnowwolf/lede
+cd lede
+# 更新列表
+./scripts/feeds update -a
+./scripts/feeds install -a
+```
+
+8. 固件配置
+
+```sh
+make menuconfig
+```
+
+根据需要选择，上下键切换选项，左右键切换按钮功能，空格键自动在 Y、M、N 直接切换。回车确认选择。
+
+点击 Y 勾选需要编译进固件的应用，M 勾选只编译为 ipk 安装包，N 剔除不需要的应用。
+
+选择 `HELP` 按钮可查看依赖，按 `/`可进行搜索。
+
+我的选择记录在文章后面的**自定义配置**。
+
+9. 预下载编译所需的软件包
+
+```sh
+make -j8 download V=s
+```
+
+10. 检查文件完整性
+
+```sh
+find dl -size -1024c -exec ls -l {}
+```
+
+此命令可以列出下载不完整的文件（根据我多次编译的经验得出小于 1k 的文件属于下载不完整），如果存在这样的文件可以使用 `find dl -size  -1024c -exec rm -f {}` 命令将它们删除，然后重新执行`make download`下载并反复检查，确认所有文件完整可大大提高编译成功率，避免浪费时间。
+
+11. 开始编译
+
+```sh
+make -j1 V=s
+```
+
+编译的配置保存到 `.config` 文件。
+
+编译生成的最终文件在 `bin/targets` 目录下。
+
+二次编译：
+
+```sh
+cd lede
+git pull
+./scripts/feeds update -a && ./scripts/feeds install -a
+make defconfig
+make -j8 download
+make -j$(($(nproc) + 1)) V=s
+```
+
+如果需要重新配置：
+
+```sh
+rm -rf ./tmp && rm -rf .config
+make menuconfig
+make -j$(($(nproc) + 1)) V=s
+```
+
+### 注意事项
+
+实测：使用最新的 Ubuntu 20.04 LTS，全程使用梯子，可顺利编译成功。
+
+遇到的问题：
+
+- 使用 debian 10，在第一步前期准备时就提示无法找到包。
+- 使用 Ubuntu ，使用国内源镜像执行 `apt`，会提示无法找到包。使用默认的美国源一切正常。感觉速度慢就使用梯子，可加快速度。
+- 编译时最后一步 `make -j1 V=s` 操作会执行很久，首次编译会下载大量源码，并生成中间产物，如果没用梯子，编译进度可能会因网络不通，在不断地尝试网络连接中而无法继续执行。
+- 修改配置可能导致编译时报错奇奇怪怪，即使编译成功， 刷机后无法使用，获取不到 IP 或有线连接周期性（40秒）显示网线已拔出。猜测是再次修改勾选的内容变少导致。这种情况下删除所有源码，重新 `clone`，重新编译吧。
+
+- 上一个问题也可以通过执行 `make clean` ，删除产生的object文件（后缀为“.o”的文件）及可执行文件。
+- 建议第一次编译使用单线程 `make -j1 V=s`，再次编译可使用多线程 `make -j$(nproc) V=s`。
+
+### 自定义配置
+
+勾选所有包不太现实。受路由器本身的 Flash 存储空间和性能的限制。由于包之间有依赖关系，选择某个包会自动勾选它的依赖。有些包功能重复，如果勾选重复了，在编译时会报错。
+
+根据报错信息重新固件配置 `make menuconfig`。
+
+默认选项中不包含以下的 package，我需要手动勾选：(排名不分先后)
+
+```ini
+aria2
+fdisk
+syncdial
+curl
+nano
+nginx
+file
+tar
+whereis
+useradd/userdel/usermod
+nohup
+vsftpd
+acme.sh
+frpc
+frps
+```
+
+找的好辛苦，做个记录：
+
+| 包路径                        | 名称                           | 是否保留 |
+| ----------------------------- | ------------------------------ | -------- |
+| Target System                 | MediaTek Ralink MIPS           |          |
+| Subtarget                     | MT7621 based boards            |          |
+| Target Profile                | Xiaomi Mi Router 3G            |          |
+| Extra packages                | automount.                     | y        |
+| Extra packages                | autosamba                      | y        |
+| Languages > Python            | python3-pip                    | y        |
+| LuCI > 3. Applications        | luci-app-aria2                 | y        |
+| LuCI > 3. Applications        | luci-app-diskman               | y        |
+| LuCI > 3. Applications        | luci-app-frpc                  | y        |
+| LuCI > 3. Applications        | luci-app-frps                  | y        |
+| LuCI > 3. Applications        | luci-app-syncdial              | y        |
+| LuCI > 3. Applications        | luci-app-unblockmusic          | y        |
+| LuCI > 3. Applications        | luci-app-vsftpd                | y        |
+| LuCI > 3. Applications        | luci-app-vlmcsd(KMS授权服务器) | N        |
+| Network                       | acme-dnsapi                    | y        |
+| Network > File Transfer       | curl                           | y        |
+| Network > NeteaseMusic        | UnblockNeteaseMusicGo          | y        |
+| Network > NeteaseMusic        | UnblockNeteaseMusicNodeJS      | y        |
+| Network > Web Servers/Proxies | --nginx-ssl                    | y        |
+| Network > Web Servers/Proxies | Enable WebDAV module           | y        |
+| Network > Web Servers/Proxies | Enable HTTP real ip module     | y        |
+| Network > Web Servers/Proxies | Enable TS module               | y        |
+| Utilities > Disc              | fdisk                          | y        |
+| Utilities > Editors           | nano                           | y        |
+| Utilities                     | file                           | y        |
+| Utilities                     | tar                            | y        |
+| Utilities                     | whereis                        | y        |
+| Utilities > coreutils         | coreutils-nohup                | y        |
+| Utilities > coreutils         | coreutils-who                  | y        |
+| Utilities                     | shadow-utils                   | y        |
+
 ## openwrt 使用技巧
 
-openwrt 功能强大， 以下记录一些注意事项。固件版本：OpenWrt  R20.7.20。内核版本：5.4.51
+openwrt 功能强大， 以下记录一些注意事项。固件版本：OpenWrt  R21.2.1。内核版本：5.4.101
 
 ### 设置多播
 
@@ -218,19 +429,27 @@ openwrt 功能强大， 以下记录一些注意事项。固件版本：OpenWrt 
 
 网络 -> DHCP/DNS，高级设置，取消勾选“禁止解析 IPv6 DNS 记录”。
 
-### 无线功能异常
+### ~~无线功能异常~~
 
-加密（模式）选择 WPA2PSK，修改 SSID、密码。其他不要动。
+自己编译最新的 openwrt ，再无此问题发生。
 
-经测试，openwrt 的无线功能默认关闭，或是在修改了网络相关的配置后，下次重启后无线功能关闭。必须使用网线连接路由器，手动开启无线功能。
+~~加密（模式）选择 WPA2PSK，修改 SSID、密码。其他不要动。~~
 
-因此，为了防止无线功能关闭连接不上路由器。在修改了网络配置后，手动重启几次，直到重启后无线功能是开启状态。
+~~经测试，openwrt 的无线功能默认关闭，或是在修改了网络相关的配置后，下次重启后无线功能关闭。必须使用网线连接路由器，手动开启无线功能。~~
 
-如果出现其他异常，如终端连接 wifi 无法获取 ip，连上 wifi 无法上网，则进入高级设置，选择恢复出厂设置，重新配置一遍 SSID、密码等。
+~~因此，为了防止无线功能关闭连接不上路由器。在修改了网络配置后，手动重启几次，直到重启后无线功能是开启状态。~~
+
+~~如果出现其他异常，如终端连接 wifi 无法获取 ip，连上 wifi 无法上网，则进入高级设置，选择恢复出厂设置，重新配置一遍 SSID、密码等。~~
 
 ### 配置 ssh 的安全
 
 系统 -> 管理权，修改 Dropbear 实例 的接口为 lan。可组织来自外部的访问。
+
+### 对外打开防火墙
+
+设置了 nginx 等服务，发现外面无法访问。
+
+网络 -> 防火墙，在区域设置中，将 WAN 区域的入站数据规则修改为接受。
 
 ### 挂载 ntfs 格式的移动硬盘
 
@@ -241,7 +460,7 @@ mount -t ntfs-3g /extdisks/sda1 /uusr
 
 ### 设置文件共享
 
-网络存储 -> 网络共享，添加共享目录。
+网络存储 -> 网络共享，添加共享目录。编译时如果勾选了 automount，autosamba，会自动挂载自动分享为 SMB。
 
 ### 设置 DDNS
 
@@ -261,10 +480,41 @@ https://github.com/anrip/dnspod-shell/
 
 最后设置为脚本定时执行。
 
-### 手动更新 passwall 组件
+### 手动更新某些组件
 
 小米路由器 R3G，下载可执行的二进制文件，选择 mipsle 架构。
 
+### nano 没有语法高亮
+
+找到一台有语法高亮的系统，拷贝 `/usr/share/nano/*` 到 openwrt，
+
+然后设置 `~/.nanorc`
+
+```ini
+include /usr/share/nano/*
+```
+
+  如果保存时提示 `segmentation fault`，执行 `unset LANG` 。
+
+**另一种思路**
+
+```sh
+find /usr/share/nano/ -iname "*.nanorc" -exec echo include {} \; >> ~/.nanorc
+# 如果您的.nanorc文件中有一个拒绝接受通配符的nano版本，则此方法有效:
+find /usr/share/nano -name '*.nanorc' -printf "include %p\n" > ~/.nanorc
+```
+
+> `find`命令搜索指定目录内的文件或目录。
+>
+> - `-iname`标志告诉它只查找名称以`.nanorc`结尾的文件。
+> - `-exec`标志定义了在每个找到的文件上执行的命令。
+> - `{}`被替换为文件名。
+> - `\;`用于表示要执行到`find`命令的命令的结尾。
+> - 最后，`>> ~/.nanorc`会将输出附加到您的`~/.nanorc`文件。
+
 ## 实际效果
 
-将小米路由器 R1D 的内置硬盘拆下来，买个 sata 转 USB 3.0 的工具。连接到一起后插到小米路由器 R3G 的 USB 接口。配置好硬盘挂载和文件共享。在局域网下的电视就可以在网络共享中访问
+将小米路由器 R1D 的内置硬盘拆下来，买个 sata 转 USB 3.0 的工具。连接到一起后插到小米路由器 R3G 的 USB 接口。配置好硬盘挂载和文件共享。在局域网下的电视就可以在网络共享中访问。
+
+为了提升读写性能，最好将硬盘格式化成 ext4 格式。
+
