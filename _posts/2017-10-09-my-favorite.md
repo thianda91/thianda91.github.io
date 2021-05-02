@@ -2,8 +2,8 @@
 layout: article
 title: 收藏夹-Xianda
 key: 2017-10-09
-categories: notes
 tags: links
+categories: notes
 created_date: 2017-10-09
 date: 2017-11-14 15:14:20
 ---
@@ -13,7 +13,6 @@ date: 2017-11-14 15:14:20
 ### 2017-12-05 
 
 - [HTML5相应布局模板](https://html5up.net/)
-- ​
 
 ### 2017-11-27
 
@@ -38,6 +37,21 @@ date: 2017-11-14 15:14:20
 [Ajax的全面总结](https://segmentfault.com/a/1190000010832550)
 
 ### 2017-10-17  
+
+数据库设计技巧：
+
+- [数据库设计中的14个技巧](http://blog.csdn.net/sirfei/article/details/434994)
+
+- [怎样设计一个好的数据库](http://blog.sina.com.cn/s/blog_735fb3b40100svet.html)
+
+- [数据库设计的 7 个常见错误](http://blog.jobbole.com/93953/)
+
+- [[图解] 11招教你如何玩转数据库设计](http://www.csdn.net/article/2012-04-11/2804419)
+
+- [数据库设计五大范式](http://www.cnblogs.com/xiaxianfei/p/5454707.html)
+
+
+
 [好软件推荐](https://tianqi.name/blog/2016/03/05/my-favourit-softwares.html)  
 
 [windows 上使用 ruby、jekyll 搭建 github pages](http://blog.csdn.net/u013009839/article/details/43742901)  

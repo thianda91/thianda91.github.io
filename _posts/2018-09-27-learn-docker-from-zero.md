@@ -3,7 +3,7 @@ layout:       article
 title:        从零开始学 docker
 key:          2018-09-27
 tags:         vps
-categories:   notes
+categories:   system
 created_date: 2018-09-27 16:03:03 +08:00:00
 date:         2019-08-27 01:13:28
 ---

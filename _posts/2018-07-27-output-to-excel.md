@@ -3,7 +3,7 @@ layout:       article
 title:        浅谈智能输出数据表到excel
 key:          2018-07-27
 tags:         excel
-categories:   tricks
+categories:   notes
 created_date: 2018-07-27 22:37:04
 date:         2018-07-27 22:37:10
 ---

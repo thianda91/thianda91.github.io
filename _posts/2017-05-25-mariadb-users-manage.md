@@ -3,7 +3,7 @@ layout: article
 title: MariaDB用户管理
 key: 2017-05-25
 tags: mysql
-categories: notes
+categories: database
 created_date: 2017-05-25 22:03:15
 date: 2017-05-25 22:03:15
 ---
@@ -20,7 +20,7 @@ MariaDB>create user user@host identified by 'password';
 ```
 
 其中：
- 
+
 `user`为用户名。  
 `host`为主机。可以使用`localhost`、`ip地址`或者`hostname`，使用`%`表示不限制主机。`user@host`构成一个唯一用户。  
 `password`为密码。

@@ -3,7 +3,7 @@ layout:       article
 title:        搭建sftp/ftp服务并配置虚拟用户
 key:          2019-06-27
 tags:         sftp
-categories:   notes
+categories:   system
 created_date: 2019-06-27 10:58:23
 date:         2019-06-27 16:58:33 +08:00:00
 ---

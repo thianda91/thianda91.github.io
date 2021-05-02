@@ -1,9 +1,9 @@
 ---
 layout: article
-title: VBS脚本运行库 ——文本文件的建立、追加、删除等
+title: VBS 脚本运行库 ——文本文件的建立、追加、删除等
 key: 2016-04-20
 tags: vbs
-categories: notes
+categories: manual
 created_date: 2016-04-20 13:25
 date: 2016-04-20 13:25
 ---

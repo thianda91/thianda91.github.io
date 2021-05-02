@@ -3,7 +3,7 @@ layout:       article
 title:        互联网技术 个人笔记
 key:          2018-09-14
 tags:         internet
-categories:   notes
+categories:   internet
 created_date: 2018-09-14 10:06:13 +08:00:00
 date:         2018-09-27 20:27:47
 ---

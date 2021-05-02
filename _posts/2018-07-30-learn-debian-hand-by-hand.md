@@ -3,7 +3,7 @@ layout:       article
 title:        亲手学Debian系统操作
 key:          2018-07-30
 tags:         Debian
-categories:   notes
+categories:   system
 created_date: 2018-07-30 11:00:00 +08:00:00
 date:         2020-04-07 20:32:30 +08:00:00
 ---

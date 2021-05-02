@@ -3,7 +3,7 @@ layout: article
 title: Apache+tomcat的整合
 key: 2016-05-19
 tags: apache
-categories: notes
+categories: apache
 created_date: 2016-05-19 12:26
 date: 2016-05-19 12:26
 ---
@@ -127,7 +127,7 @@ worker.ajp13.lbfactor=1
 
 ### 此处mod_jk的文件为你下载的文件
 
-```ini
+​```ini
 LoadModule jk_module modules/mod_jk.so
 ```
 

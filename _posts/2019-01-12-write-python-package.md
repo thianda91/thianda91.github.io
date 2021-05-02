@@ -3,7 +3,7 @@ layout:       article
 title:        编写 python 库并打包分发到 pypi
 key:          2019-01-12
 tags:         python
-categories:   python
+categories:   coding
 created_date: 2019-01-12 16:38:47
 date:         2019-03-10 21:53:52
 ---

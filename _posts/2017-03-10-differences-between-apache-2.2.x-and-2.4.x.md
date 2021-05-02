@@ -3,7 +3,7 @@ layout: article
 title: Apache2.4.x与Apache2.2.x的一些区别
 key: 2017-03-10
 tags: apache
-categories: notes
+categories: apache
 created_date: 2017-03-10 01:06
 date: 2017-03-10 01:06
 ---

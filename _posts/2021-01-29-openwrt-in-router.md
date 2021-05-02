@@ -3,9 +3,9 @@ layout:       article
 title:        路由器刷固件 openwrt 记录 
 key:          2021-01-29
 tags:         openwrt
-categories:   notes
+categories:   manual
 created_date: 2021-01-29 22:58:13 +08:00:00
-date:         2021-03-08 02:37:50 +08:00:00
+date:         2021-04-14 00:12:44 +08:00:00
 ---
 
 记录一下小米路由器 R3G 刷固件的遇到的问题以及使用新固件时的一些设置。
@@ -372,6 +372,8 @@ vsftpd
 acme.sh
 frpc
 frps
+ipv6helper
+davfs2
 ```
 
 找的好辛苦，做个记录：
@@ -383,6 +385,7 @@ frps
 | Target Profile                | Xiaomi Mi Router 3G            |          |
 | Extra packages                | automount.                     | y        |
 | Extra packages                | autosamba                      | y        |
+| Extra packages                | ipv6helper                     | y        |
 | Languages > Python            | python3-pip                    | y        |
 | LuCI > 3. Applications        | luci-app-aria2                 | y        |
 | LuCI > 3. Applications        | luci-app-diskman               | y        |
@@ -394,6 +397,7 @@ frps
 | LuCI > 3. Applications        | luci-app-vlmcsd(KMS授权服务器) | N        |
 | Network                       | acme-dnsapi                    | y        |
 | Network > File Transfer       | curl                           | y        |
+| Network > Filesystem          | davfs2                         | y        |
 | Network > NeteaseMusic        | UnblockNeteaseMusicGo          | y        |
 | Network > NeteaseMusic        | UnblockNeteaseMusicNodeJS      | y        |
 | Network > Web Servers/Proxies | --nginx-ssl                    | y        |
@@ -425,7 +429,7 @@ openwrt 功能强大， 以下记录一些注意事项。固件版本：OpenWrt 
 
  网络 -> 接口，每一个接口都需要在高级设置中，取消勾选“使用内置的 IPv6 管理”。
 
-在 LAN 接口设置中，下面的 ipv6 设置，**路由通告服务** 设置为混合模式，DHCPv6 服务 设置为禁用，**NDP 代理** 设置为禁用。
+在 LAN 接口设置中，下面的 ipv6 设置，**路由通告服务** 设置为混合模式，**DHCPv6 服务** 设置为禁用，**NDP 代理** 设置为禁用。
 
 网络 -> DHCP/DNS，高级设置，取消勾选“禁止解析 IPv6 DNS 记录”。
 
@@ -443,7 +447,7 @@ openwrt 功能强大， 以下记录一些注意事项。固件版本：OpenWrt 
 
 ### 配置 ssh 的安全
 
-系统 -> 管理权，修改 Dropbear 实例 的接口为 lan。可组织来自外部的访问。
+系统 -> 管理权，修改 Dropbear 实例 的接口为 lan。可阻止来自外部的访问。
 
 ### 对外打开防火墙
 
@@ -511,6 +515,16 @@ find /usr/share/nano -name '*.nanorc' -printf "include %p\n" > ~/.nanorc
 > - `{}`被替换为文件名。
 > - `\;`用于表示要执行到`find`命令的命令的结尾。
 > - 最后，`>> ~/.nanorc`会将输出附加到您的`~/.nanorc`文件。
+
+### 设置 openwrt 为旁路由
+
+网络 - > 接口，修改 LAN：
+
+物理设置，勾选 **桥接接口**，在下面的接口里勾选标记 WAN，LAN 的接口。
+
+基本设置，切换协议为 **DHCP 客户端**。
+
+删除多余的接口，只需保留
 
 ## 实际效果
 

@@ -2,8 +2,8 @@
 layout: article
 title: sqlmap用户手册
 key: 2017-07-14
-categories: notes
 tags: sqlmap
+categories: ctf
 date: 2017-07-14
 created_date: 2017-07-14
 ---

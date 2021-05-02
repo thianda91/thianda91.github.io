@@ -3,7 +3,7 @@ layout:       article
 title:        通信专业水平考试-中级互联网技术考试大纲解读
 key:          2018-10-03
 tags:         internet
-categories:   notes
+categories:   internet
 created_date: 2018-10-03 22:17:20 +08:00:00
 date:         2018-10-03 23:59:54
 ---

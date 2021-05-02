@@ -3,7 +3,7 @@ layout: article
 title: ThinkPHP在IIS下配置ISAPI伪静态去掉index.php
 key: 2016-08-25
 tags: thinkphp
-categories: notes
+categories: thinkphp
 created_date: 2016-08-25 22:19
 date: 2018-01-25 00:40:31
 ---

@@ -3,7 +3,7 @@ layout:       article
 title:        debian 安装 nextcloud（自建网盘）
 key:          2018-12-27
 tags:         vps php
-categories:   notes
+categories:   manual
 created_date: 2018-12-27 13:22:28 +08:00:00
 date:         2019-08-31 21:19:16 +08:00:00
 ---

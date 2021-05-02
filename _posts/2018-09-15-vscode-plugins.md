@@ -3,7 +3,7 @@ layout:       article
 title:        vscode 自用的配置与插件整理
 key:          2018-09-15 
 tags:         vscode
-categories:   notes
+categories:   coding
 created_date: 2018-09-15 23:23:28 +08:00:00
 date:         2018-09-16 03:16:09
 ---

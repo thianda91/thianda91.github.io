@@ -3,7 +3,7 @@ layout: article
 title: 基于React的AmazeUI-touch使用（如何使用react）
 key: 2017-06-01
 tags: react
-categories: notes
+categories: coding
 created_date: 2017-06-01 01:32:02
 date: 2017-06-01
 ---

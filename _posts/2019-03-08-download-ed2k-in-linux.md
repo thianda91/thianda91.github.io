@@ -3,7 +3,7 @@ layout:       article
 title:        mldonkey+aria2简介
 key:          2019-03-08
 tags:         mldonkey aria2
-categories:   notes
+categories:   manual
 created_date: 2019-03-08 17:52:43
 date:         2019-03-09 15:14:54
 ---

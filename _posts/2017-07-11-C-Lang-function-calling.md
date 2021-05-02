@@ -3,7 +3,7 @@ layout: article
 title: C语言函数调用约定
 key: 2017-07-11
 tags: C
-categories: notes
+categories: coding
 created_date: 2017-05-24 11:45:57
 date: 2017-05-24 11:45:57
 ---

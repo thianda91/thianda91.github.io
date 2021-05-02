@@ -2,8 +2,8 @@
 layout: article
 title: 推荐阅读-Xianda
 key: 2017-10-10
-categories: ppt
 tags: links
+categories: notes
 created_date: 2017-10-10
 date: 2017-11-14 15:13:53
 ---

@@ -2,8 +2,8 @@
 layout: article
 title: Git简要教程
 key: 2017-09-28
-categories: ppt
 tags: git
+categories: notes
 date: 2018-08-02
 created_date: 2018-08-02
 ---

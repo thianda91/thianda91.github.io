@@ -3,7 +3,7 @@ layout:       article
 title:        KCP 协议介绍
 key:          2018-10-24
 tags:         notes
-categories:   notes
+categories:   internet
 created_date: 2018-10-24 00:14:00
 date:         2018-10-24 13:06:28
 ---

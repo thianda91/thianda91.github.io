@@ -3,7 +3,7 @@ layout: article
 title: MySQL数据库MyISAM与InnoDB存储引擎的比较
 key: 2017-02-11
 tags: database
-categories: notes
+categories: database
 created_date: 2017-02-11 15:55
 date: 2017-02-11 15:55
 ---
@@ -57,3 +57,4 @@ alter table tablename type=InnoDB
 set table_type=InnoDB
 show variables like 'table_type'
 ```
+

@@ -3,8 +3,8 @@ layout: article
 title: 使用 Jekyll 搭建自己的 Github Pages
 key: 2017-10-30
 created_date: 2017-10-30 16:46:38
-categories: notes
-tags: jekyll 
+tags: jekyll
+categories: manual
 date: 2018-08-12 14:51:48
 ---
 

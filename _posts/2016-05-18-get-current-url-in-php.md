@@ -3,7 +3,7 @@ layout: article
 title: PHP中获取当前页面的完整URL
 key: 2016-05-18
 tags: php
-categories: notes
+categories: coding
 created_date: 2016-05-18 23:54
 date: 2016-05-18 23:54
 ---

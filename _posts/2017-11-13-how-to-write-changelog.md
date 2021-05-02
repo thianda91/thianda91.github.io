@@ -3,8 +3,8 @@ layout: article
 title: 如何记录开发项目的更新日志
 key: 2017-11-13
 created_date: 2017-11-13 11:43:39
-categories: notes
 tags: git
+categories: coding
 date: 2018-08-10 16:58:49
 ---
 

@@ -2,8 +2,8 @@
 layout: article
 title: JavaScript学习路线
 key: 2017-10-11
-categories: ppt
-tags: JavaScript
+tags: JavaScript links
+categories: manual
 created_date: 2017-10-11
 date: 2017-11-14 15:13:34
 ---

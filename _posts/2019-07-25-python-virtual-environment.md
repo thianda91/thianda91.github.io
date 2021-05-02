@@ -1,9 +1,9 @@
 ---
 layout:       article
-title:        python虚拟环境的创建
+title:        python 虚拟环境的创建
 key:          2019-07-25
 tags:         python
-categories:   notes
+categories:   python
 created_date: 2019-07-25 15:05:32 +08:00:00
 date:         2019-07-25 15:44:13 +08:00:00
 ---
