@@ -5,7 +5,7 @@ key:          2021-01-29
 tags:         openwrt
 categories:   manual
 created_date: 2021-01-29 22:58:13 +08:00:00
-date:         2021-04-14 00:12:44 +08:00:00
+date:         2021-11-13 20:12:44 +08:00:00
 ---
 
 记录一下小米路由器 R3G 刷固件的遇到的问题以及使用新固件时的一些设置。
@@ -354,64 +354,50 @@ make -j$(($(nproc) + 1)) V=s
 
 根据报错信息重新固件配置 `make menuconfig`。
 
-默认选项中不包含以下的 package，我需要手动勾选：(排名不分先后)
+默认选项中不包含以下的 package，我需要手动勾选。找的好辛苦，做个记录：
 
-```ini
-aria2
-fdisk
-syncdial
-curl
-nano
-nginx
-file
-tar
-whereis
-useradd/userdel/usermod
-nohup
-vsftpd
-acme.sh
-frpc
-frps
-ipv6helper
-davfs2
-```
+> 源码版本不同，内容存差异。当前 git 文件时间：2021-11-13
 
-找的好辛苦，做个记录：
-
-| 包路径                        | 名称                           | 是否保留 |
-| ----------------------------- | ------------------------------ | -------- |
-| Target System                 | MediaTek Ralink MIPS           |          |
-| Subtarget                     | MT7621 based boards            |          |
-| Target Profile                | Xiaomi Mi Router 3G            |          |
-| Extra packages                | automount.                     | y        |
-| Extra packages                | autosamba                      | y        |
-| Extra packages                | ipv6helper                     | y        |
-| Languages > Python            | python3-pip                    | y        |
-| LuCI > 3. Applications        | luci-app-aria2                 | y        |
-| LuCI > 3. Applications        | luci-app-diskman               | y        |
-| LuCI > 3. Applications        | luci-app-frpc                  | y        |
-| LuCI > 3. Applications        | luci-app-frps                  | y        |
-| LuCI > 3. Applications        | luci-app-syncdial              | y        |
-| LuCI > 3. Applications        | luci-app-unblockmusic          | y        |
-| LuCI > 3. Applications        | luci-app-vsftpd                | y        |
-| LuCI > 3. Applications        | luci-app-vlmcsd(KMS授权服务器) | N        |
-| Network                       | acme-dnsapi                    | y        |
-| Network > File Transfer       | curl                           | y        |
-| Network > Filesystem          | davfs2                         | y        |
-| Network > NeteaseMusic        | UnblockNeteaseMusicGo          | y        |
-| Network > NeteaseMusic        | UnblockNeteaseMusicNodeJS      | y        |
-| Network > Web Servers/Proxies | --nginx-ssl                    | y        |
-| Network > Web Servers/Proxies | Enable WebDAV module           | y        |
-| Network > Web Servers/Proxies | Enable HTTP real ip module     | y        |
-| Network > Web Servers/Proxies | Enable TS module               | y        |
-| Utilities > Disc              | fdisk                          | y        |
-| Utilities > Editors           | nano                           | y        |
-| Utilities                     | file                           | y        |
-| Utilities                     | tar                            | y        |
-| Utilities                     | whereis                        | y        |
-| Utilities > coreutils         | coreutils-nohup                | y        |
-| Utilities > coreutils         | coreutils-who                  | y        |
-| Utilities                     | shadow-utils                   | y        |
+| 包路径                          | 名称                                   | 是否保留 |
+| ------------------------------- | -------------------------------------- | -------- |
+| Target System                   | MediaTek Ralink MIPS                   |          |
+| Subtarget                       | MT7621 based boards                    |          |
+| Target Profile                  | Xiaomi Mi Router 3G                    |          |
+| Base system                     | busybox                                | y        |
+| Base system > Customize busybox | Coreutils - nohup                      | y        |
+| **Utilities > coreutils**       | coreutils-nohup                        |          |
+| Base system > Customize busybox | Init Utilities - init                  | y        |
+| Base system > Customize busybox | Linux System Utilities - fdisk         | y        |
+| **Utilities > Disc**            | fdisk                                  |          |
+| Base system > Customize busybox | Networking Utilities - wget(勾选子选项 | y        |
+| Administration                  | htop                                   | y        |
+| Extra packages                  | automount                              | y        |
+| Extra packages                  | autosamba                              | y        |
+| Extra packages                  | ipv6helper                             | y        |
+| Languages > Python              | python3-pip                            | y        |
+| LuCI > 3. Applications          | luci-app-aria2                         | y        |
+| LuCI > 3. Applications          | luci-app-diskman                       | y        |
+| LuCI > 3. Applications          | luci-app-frpc                          | y        |
+| LuCI > 3. Applications          | luci-app-frps                          | y        |
+| LuCI > 3. Applications          | luci-app-qbittorrent                   | y        |
+| LuCI > 3. Applications          | luci-app-syncdial                      | y        |
+| LuCI > 3. Applications          | luci-app-unblockmusic                  | y        |
+| LuCI > 3. Applications          | luci-app-vlmcsd(KMS授权服务器)         | N        |
+| LuCI > 3. Applications          | luci-app-vsftpd                        | y        |
+| Network > BitTorrent            | qbittorrent                            | M        |
+| Network > File Transfer         | curl                                   | y        |
+| Network > Filesystem            | davfs2                                 | y        |
+| Network > Web Servers/Proxies   | --nginx-ssl                            | y        |
+| Network > Web Servers/Proxies   | Enable WebDAV module                   | y        |
+| Network > Web Servers/Proxies   | Enable HTTP real ip module             | y        |
+| Network > Web Servers/Proxies   | Enable TS module                       | y        |
+| Network                         | acme-dnsapi                            | y        |
+| Network                         | iftop                                  | y        |
+| Network                         | iperf3                                 |          |
+| Utilities > Editors             | nano                                   | y        |
+| Utilities                       | file                                   | y        |
+| Utilities                       | tar                                    | y        |
+| Utilities                       | whereis                                | y        |
 
 ## openwrt 使用技巧
 
@@ -432,18 +418,6 @@ openwrt 功能强大， 以下记录一些注意事项。固件版本：OpenWrt 
 在 LAN 接口设置中，下面的 ipv6 设置，**路由通告服务** 设置为混合模式，**DHCPv6 服务** 设置为禁用，**NDP 代理** 设置为禁用。
 
 网络 -> DHCP/DNS，高级设置，取消勾选“禁止解析 IPv6 DNS 记录”。
-
-### ~~无线功能异常~~
-
-自己编译最新的 openwrt ，再无此问题发生。
-
-~~加密（模式）选择 WPA2PSK，修改 SSID、密码。其他不要动。~~
-
-~~经测试，openwrt 的无线功能默认关闭，或是在修改了网络相关的配置后，下次重启后无线功能关闭。必须使用网线连接路由器，手动开启无线功能。~~
-
-~~因此，为了防止无线功能关闭连接不上路由器。在修改了网络配置后，手动重启几次，直到重启后无线功能是开启状态。~~
-
-~~如果出现其他异常，如终端连接 wifi 无法获取 ip，连上 wifi 无法上网，则进入高级设置，选择恢复出厂设置，重新配置一遍 SSID、密码等。~~
 
 ### 配置 ssh 的安全
 
