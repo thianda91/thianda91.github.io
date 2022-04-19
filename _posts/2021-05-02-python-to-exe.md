@@ -10,7 +10,7 @@ date:         2022-04-18 17:08:54 +08:00:00
 
 pyinstaller 可以用来把 python 打包成可执行二进制文件，但是在打包会遇到很多问题，尤其在 windows 系统上打包 exe 时。
 
-还可以使用 nuitka。把 python 脚本编译成 c ++。
+打包编译还可以使用 nuitka。把 python 脚本编译成 C 语言。
 
 <!--more-->
 
@@ -41,6 +41,13 @@ python -m nuitka xxx.py --standalone --onefile --windows-icon-from-ico=favicon.i
 ### 运行过程
 
 首次运行，会请求下载 gcc 编译相关文件。需要输入 yes 会直接按回车继续。如果下载慢可根据提示手动下载并放到指定的目录下。请求下载的文件有 2 个。再次编译则不再重新下载。
+
+请求下载的文件有 2 个：
+
+- gcc 编译器
+- Dependency Walker。
+
+再次编译则不再重新下载。
 
 打包速度明细慢于 pyinstaller。且会将所有下载的 python 包全部打包，为了缩小体积，不得不用`pipenv`等虚拟环境。
 
