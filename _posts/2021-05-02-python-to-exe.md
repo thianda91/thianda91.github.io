@@ -5,7 +5,7 @@ key:          2021-05-02
 tags:         python
 categories:   python
 created_date: 2021-05-02 02:20:14 +08:00:00
-date:         2022-04-18 17:08:54 +08:00:00
+date:         2022-09-30 15:16:54 +08:00:00
 ---
 
 pyinstaller 可以用来把 python 打包成可执行二进制文件，但是在打包会遇到很多问题，尤其在 windows 系统上打包 exe 时。
@@ -45,13 +45,16 @@ python -m nuitka xxx.py --standalone --onefile --windows-icon-from-ico=favicon.i
 请求下载的文件有 2 个：
 
 - gcc 编译器
-- Dependency Walker。
+- ~~Dependency Walker~~
+- ccache
 
-再次编译则不再重新下载。
+再次编译则不再重新下载，若间隔时间过长，则会重新下载最新的版本。由于是从 github.com 下载，可能速度过慢，可手动复制 url 下载到指定目录下，重新运行打包。
 
-打包速度明细慢于 pyinstaller。且会将所有下载的 python 包全部打包，为了缩小体积，不得不用`pipenv`等虚拟环境。
+打包速度比 pyinstaller 慢得太多。且会将所有下载的 python 包全部打包，为了缩小体积，不得不用`pipenv`等虚拟环境。
 
-打包后会生成 2 个文件夹： `xxx.build`、`xxx.onefile-build`。exe 文件在同目录。
+打包后会生成 3 个文件夹： `xxx.build`、`xxx.onefile-build`、`xxx.dist`。
+
+涉及到二次引用其他包的情况可能会报错，比如使用了` pandas.read_excel()` 读取 excel，其实的调用了 `openpyxl`，正常不 `import openpyxl` 可以正常运行，使用 `nuitka` 打包则提示找不到包。让我不得不用 `pyinstaller`。
 
 ## pyinstaller  基本使用
 
@@ -59,7 +62,8 @@ python -m nuitka xxx.py --standalone --onefile --windows-icon-from-ico=favicon.i
 
 ```sh
 pip install pyinstaller
-pyinstaller -F xxx.py -i favicon.ico
+pyinstaller --clean -F xxx.py -i favicon.ico
+pyinstaller --clean -F xxx.spec
 ```
 
 ### 常用参数
