@@ -5,7 +5,7 @@ key:          2018-07-30
 tags:         Debian
 categories:   system
 created_date: 2018-07-30 11:00:00 +08:00:00
-date:         2020-04-07 20:32:30 +08:00:00
+date:         2022-02-17 17:00:30 +08:00:00
 ---
 
 参照本文操作 Debian 需要有些英语基础，以及`linux`的基础。在不熟悉的情况下要会在每个步骤仔细阅读给出的提示（英文），按照提示即可完成。
@@ -218,9 +218,23 @@ iface ens33 inet static # static表示使用固定ip，dhcp表述使用动态ip
 address 10.1.1.10 # 设置ip地址
 netmask 255.255.255.0 # 设置子网掩码
 gateway 10.1.1.1 # 设置网关
+metric 100
 ```
 
-`/etc/resolv.conf`（配置DNS服务器）
+### 修改 DNS 服务器
+
+ **debian 永久修改**
+
+编辑 `/etc/dhcp/dhclient.conf` 文件
+
+在末尾添加一行
+ ````
+ supersede domain-name-servers 119.29.29.29, 223.5.5.5
+ ````
+
+**临时修改**
+
+编辑`/etc/resolv.conf`
 
 ```sh
 nameserver 1.2.4.8
@@ -253,7 +267,7 @@ ip route add 10.0.0.0/8 via {gateway} dev ens{XX}
 
 ~~更新过程可能过慢，我们需要设置更新源为国内的源，具体有哪些源可自行搜索。这里以 163 为例进行设置。~~
 
-使用最小化（debian-9.x.0-amd64-netinst.iso）安装 debian 时，会提示选择软件源，直接选择中国的 163 即可。下面的操作就可以略过了。
+使用最小化安装 debian 时，会提示选择软件源，直接选择中国的 163 即可。下面的操作就可以略过了。
 
 先备份
 
@@ -498,9 +512,20 @@ dpkg-reconfigure locales
 
 正确配置下会显示：LANG =zh_CN.UTF-8
 
-> debian 9 通常不会有此问题，若显示乱码可能是 ssh 客户端没有设置 UFT-8，需要修改客户端设置。
+> 若显示乱码可能是 ssh 客户端没有设置 UFT-8，需要修改客户端设置。
 
 ### 防火墙设置
 
 默认已安装了`iptables`，需要了解如何配置。
+
+```sh
+iptables -L # 查看
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 端口 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 端口 -j ACCEPT
+# 删除防火墙规则，内容一样把 -I 换成 -D 就行了：
+iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport 端口 -j ACCEPT
+iptables -D INPUT -m state --state NEW -m udp -p udp --dport 端口 -j ACCEPT
+```
+
+
 
