@@ -5,7 +5,7 @@ key:          2021-01-29
 tags:         openwrt
 categories:   manual
 created_date: 2021-01-29 22:58:13 +08:00:00
-date:         2021-11-13 20:12:44 +08:00:00
+date:         2023-04-29 17:42:31 +08:00:00
 ---
 
 记录一下小米路由器 R3G 刷固件的遇到的问题以及使用新固件时的一些设置。
@@ -336,7 +336,7 @@ make -j$(($(nproc) + 1)) V=s
 
 ### 注意事项
 
-实测：使用最新的 Ubuntu 20.04 LTS，全程使用梯子，可顺利编译成功。
+实测：使用最新的 Ubuntu 20.04.5 LTS，全程使用梯子，可顺利编译成功。
 
 遇到的问题：
 
@@ -356,7 +356,7 @@ make -j$(($(nproc) + 1)) V=s
 
 默认选项中不包含以下的 package，我需要手动勾选。找的好辛苦，做个记录：
 
-> 源码版本不同，内容存差异。当前 git 文件时间：2021-11-13
+> 源码版本不同，内容存差异。当前 git 文件时间：2023.04.29
 
 | 包路径                          | 名称                                   | 是否保留 |
 | ------------------------------- | -------------------------------------- | -------- |
@@ -393,7 +393,9 @@ make -j$(($(nproc) + 1)) V=s
 | Network > Web Servers/Proxies   | Enable TS module                       | y        |
 | Network                         | acme-dnsapi                            | y        |
 | Network                         | iftop                                  | y        |
-| Network                         | iperf3                                 |          |
+| Network                         | iperf3                                 | y        |
+| Network                         | wg-installer-client                    | y        |
+| Network                         | wg-installer-server                    | y        |
 | Utilities > Editors             | nano                                   | y        |
 | Utilities                       | file                                   | y        |
 | Utilities                       | tar                                    | y        |
@@ -401,7 +403,7 @@ make -j$(($(nproc) + 1)) V=s
 
 ## openwrt 使用技巧
 
-openwrt 功能强大， 以下记录一些注意事项。固件版本：OpenWrt  R21.2.1。内核版本：5.4.101
+openwrt 功能强大， 以下记录一些注意事项。固件版本：OpenWrt  R23.5.1。内核版本：5.4.242
 
 ### 设置多播
 
