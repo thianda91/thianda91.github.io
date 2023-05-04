@@ -5,7 +5,7 @@ key:          2021-01-29
 tags:         openwrt
 categories:   manual
 created_date: 2021-01-29 22:58:13 +08:00:00
-date:         2023-04-29 17:42:31 +08:00:00
+date:         2023-05-04 10:27:31 +08:00:00
 ---
 
 记录一下小米路由器 R3G 刷固件的遇到的问题以及使用新固件时的一些设置。
@@ -45,25 +45,16 @@ date:         2023-04-29 17:42:31 +08:00:00
 
 > `4K（3840*2160），四核 Cortex A9 1.5GHz，2GB DDR3，16GB eMMC Flash，Android 4.3，60Hz，40W（1个低音，2个中音，2个高音），3*HDMI，蓝牙 4.0，`
 
-## 资源分享
+## 乐视 X50 air 刷机
 
-电视操作卡顿，在网上搜集到了精简版 rom：
+电视操作卡顿，在网上搜集到了**精简版 rom**，放在了我的移动云盘。
 
-链接: <https://caiyun.139.com/m/i?165CdUndzPWjI>  提取码:GgeP 
+下载固件，改成 update.zip 
+ 2，复制到 U 盘 
+ 3，在待机状态下，依次按遥控器 “3.6.9.1.开机键”便可进入。
 
-
-
-老毛子固件下载：<https://opt.cn2qq.com/padavan/>，可找到：MI-R3G_3.4.3.9-099.trx
-
-或者下载刷机资源包：https://www.90pan.com/b1709380
-
-
-
-小米路由器R3G固件 openwrt 下载。
-
-百度网盘下载地址：链接: https://pan.baidu.com/s/1Z0ZRFC6e4kToU3Fr1RtCNQ 提取码: ndct
-
-天翼网盘下载地址：https://cloud.189.cn/t/ABve2m2y2aqu（访问码：48oh）
+方法二：依次按下【设置】【音量加】【音量减】【频道减】【频道加】【开机】键，稍等片刻，电视会出现系统升级进度条；
+ 方法三：依次按下【设置】【音量加】【音量减】【频道减】【方向下键】【开机】键，稍等片刻，电视会出现系统升级进度条；
 
 ## 刷机步骤
 
@@ -154,6 +145,8 @@ mtd write /extdisks/sda1/backup/data.bin data
 
 这个步骤是刷入 Bootloader 分区，就是类似安卓的 recovery，用来恢复备份系统的。就算固件刷坏了，Bootloader 没坏，都能刷回来，不会变砖。
 
+前往：<http://breed.hackpascal.net/> 下载
+
 在刷机资源包里的 **breed-mt7621-xiaomi-r3g.bin** 文件，通过 ssh 的 sftp 功能上传到 `/tmp` 目录。
 
 执行命令：
@@ -180,7 +173,9 @@ mtd -r write /extdisks/sda1/breed-mt7621-xiaomi-r3g.bin Bootloader
 
 参考：http://www.leftso.com/blog/752.html
 
-备份完成后，切换到【小米R3G设置】里删除 `normal_firmware_md5` 一栏，然后保存。（这一步不操作好像也可以执行下面的操作。）
+访问 https://opt.cn2qq.com/padavan/，下载最新版，基本上每周都会更新，搜索关键字：R3G
+
+备份完成后，切换到【小米R3G设置】里删除 `normal_firmware_md5` 一栏，然后保存。（这一步不操作好像也可以执行下面的操作。v1.2 版 breed 没有此项）
 
 接下来切换到【固件更新】，勾选固件，将准备好的固件上传，更新完成后机器会自动重启。
 
@@ -200,7 +195,7 @@ mtd -r write /extdisks/sda1/breed-mt7621-xiaomi-r3g.bin Bootloader
 
 ## 自己编译 openwrt
 
-源码仓库地址：https://github.com/coolsnowwolf/lede。需要准备一个 Ubuntu 20.04 LTS。准备过程略。
+源码仓库地址：https://github.com/coolsnowwolf/lede。需要准备一个 Ubuntu 最新版。准备过程略。
 
 ### 编译步骤
 
@@ -270,7 +265,7 @@ sudo apt install -y build-essential asciidoc binutils bzip2 gawk gettext git lib
 ```sh
 su xxx
 cd ~
-git clone https://github.com/coolsnowwolf/lede
+git clone https://github.com/coolsnowwolf/lede --depth=1
 cd lede
 # 更新列表
 ./scripts/feeds update -a
@@ -300,10 +295,16 @@ make -j8 download V=s
 10. 检查文件完整性
 
 ```sh
-find dl -size -1024c -exec ls -l {}
+find dl -size -1024c -exec ls -l {} \;
 ```
 
-此命令可以列出下载不完整的文件（根据我多次编译的经验得出小于 1k 的文件属于下载不完整），如果存在这样的文件可以使用 `find dl -size  -1024c -exec rm -f {}` 命令将它们删除，然后重新执行`make download`下载并反复检查，确认所有文件完整可大大提高编译成功率，避免浪费时间。
+此命令可以列出下载不完整的文件（根据我多次编译的经验得出小于 1k 的文件属于下载不完整），如果存在这样的文件可以使用
+
+````sh
+find dl -size  -1024c -exec rm -f {} \;
+````
+
+将它们删除，然后重新执行`make download`下载并反复检查，确认所有文件完整可大大提高编译成功率，避免浪费时间。
 
 11. 开始编译
 
@@ -336,7 +337,7 @@ make -j$(($(nproc) + 1)) V=s
 
 ### 注意事项
 
-实测：使用最新的 Ubuntu 20.04.5 LTS，全程使用梯子，可顺利编译成功。
+实测：使用最新的 Ubuntu 20.04.2 LTS，全程使用梯子，可顺利编译成功。
 
 遇到的问题：
 
@@ -348,7 +349,33 @@ make -j$(($(nproc) + 1)) V=s
 - 上一个问题也可以通过执行 `make clean` ，删除产生的object文件（后缀为“.o”的文件）及可执行文件。
 - 建议第一次编译使用单线程 `make -j1 V=s`，再次编译可使用多线程 `make -j$(nproc) V=s`。
 
+### 一些额外包的添加方式
+
+wg-quick
+
+```sh
+git clone https://github.com/gngpp/wg-quick package/network/utils/wg-quick --depth=1
+make menuconfig # choose Network->VPN->wg-quick
+make V=s
+```
+
+实测编译后并不包含，在 `bin/packages/mipsel_24kc/base/` 下生成了 ipk 的包，可安装后使用。
+
+
+
 ### 自定义配置
+
+首先举例一些 ssh 登录后的命令操作
+
+```sh
+uci set network.lan.ipaddr=192.168.31.1
+
+uci set network.wan.proto=static
+uci set network.wan.ipaddr=192.168.1.31
+uci set network.wan.gateway=192.168.1.1
+uci set network.wan.dns=192.168.1.1
+uci commit
+```
 
 勾选所有包不太现实。受路由器本身的 Flash 存储空间和性能的限制。由于包之间有依赖关系，选择某个包会自动勾选它的依赖。有些包功能重复，如果勾选重复了，在编译时会报错。
 
@@ -356,54 +383,101 @@ make -j$(($(nproc) + 1)) V=s
 
 默认选项中不包含以下的 package，我需要手动勾选。找的好辛苦，做个记录：
 
-> 源码版本不同，内容存差异。当前 git 文件时间：2023.04.29
+> 源码版本不同，内容存差异。当前 git 文件时间：2023.05.02
 
-| 包路径                          | 名称                                   | 是否保留 |
-| ------------------------------- | -------------------------------------- | -------- |
-| Target System                   | MediaTek Ralink MIPS                   |          |
-| Subtarget                       | MT7621 based boards                    |          |
-| Target Profile                  | Xiaomi Mi Router 3G                    |          |
-| Base system                     | busybox                                | y        |
-| Base system > Customize busybox | Coreutils - nohup                      | y        |
-| **Utilities > coreutils**       | coreutils-nohup                        |          |
-| Base system > Customize busybox | Init Utilities - init                  | y        |
-| Base system > Customize busybox | Linux System Utilities - fdisk         | y        |
-| **Utilities > Disc**            | fdisk                                  |          |
-| Base system > Customize busybox | Networking Utilities - wget(勾选子选项 | y        |
-| Administration                  | htop                                   | y        |
-| Extra packages                  | automount                              | y        |
-| Extra packages                  | autosamba                              | y        |
-| Extra packages                  | ipv6helper                             | y        |
-| Languages > Python              | python3-pip                            | y        |
-| LuCI > 3. Applications          | luci-app-aria2                         | y        |
-| LuCI > 3. Applications          | luci-app-diskman                       | y        |
-| LuCI > 3. Applications          | luci-app-frpc                          | y        |
-| LuCI > 3. Applications          | luci-app-frps                          | y        |
-| LuCI > 3. Applications          | luci-app-qbittorrent                   | y        |
-| LuCI > 3. Applications          | luci-app-syncdial                      | y        |
-| LuCI > 3. Applications          | luci-app-unblockmusic                  | y        |
-| LuCI > 3. Applications          | luci-app-vlmcsd(KMS授权服务器)         | N        |
-| LuCI > 3. Applications          | luci-app-vsftpd                        | y        |
-| Network > BitTorrent            | qbittorrent                            | M        |
-| Network > File Transfer         | curl                                   | y        |
-| Network > Filesystem            | davfs2                                 | y        |
-| Network > Web Servers/Proxies   | --nginx-ssl                            | y        |
-| Network > Web Servers/Proxies   | Enable WebDAV module                   | y        |
-| Network > Web Servers/Proxies   | Enable HTTP real ip module             | y        |
-| Network > Web Servers/Proxies   | Enable TS module                       | y        |
-| Network                         | acme-dnsapi                            | y        |
-| Network                         | iftop                                  | y        |
-| Network                         | iperf3                                 | y        |
-| Network                         | wg-installer-client                    | y        |
-| Network                         | wg-installer-server                    | y        |
-| Utilities > Editors             | nano                                   | y        |
-| Utilities                       | file                                   | y        |
-| Utilities                       | tar                                    | y        |
-| Utilities                       | whereis                                | y        |
+| 包路径                          | 名称                                    | 是否保留 |
+| ------------------------------- | --------------------------------------- | -------- |
+| Target System                   | MediaTek Ralink MIPS                    |          |
+| Subtarget                       | MT7621 based boards                     |          |
+| Target Profile                  | Xiaomi Mi Router 3G                     |          |
+| Base system                     | busybox                                 | y        |
+| Base system > Customize busybox | Coreutils - nohup                       | y        |
+| **Utilities > coreutils**       | coreutils-nohup                         |          |
+| Base system > Customize busybox | Init Utilities - init                   | y        |
+| Base system > Customize busybox | Linux System Utilities - fdisk          | y        |
+| Base system > Customize busybox | Networking Utilities - wget(勾选子选项) | y        |
+| Administration                  | htop                                    | y        |
+| Extra packages                  | automount                               | y        |
+| Extra packages                  | autosamba                               | y        |
+| Extra packages                  | ipv6helper                              | y        |
+| Languages > Python              | python3-pip                             | y        |
+| LuCI > 3. Applications          | luci-app-aria2                          | y        |
+| LuCI > 3. Applications          | luci-app-commands                       | y        |
+| LuCI > 3. Applications          | luci-app-diskman (Include lsblk)        | y        |
+| LuCI > 3. Applications          | luci-app-frpc                           | y        |
+| LuCI > 3. Applications          | luci-app-frps                           | y        |
+| LuCI > 3. Applications          | luci-app-syncdial                       | y        |
+| LuCI > 3. Applications          | luci-app-ttyd                           | y        |
+| LuCI > 3. Applications          | **luci-app-unblockmusic**               | N        |
+| LuCI > 3. Applications          | **luci-app-vlmcsd(KMS授权服务器)**      | N        |
+| LuCI > 3. Applications          | luci-app-webadmin                       | y        |
+| LuCI > 3. Applications          | luci-app-wireguard                      | y        |
+| Network > BitTorrent            | qbittorrent                             | M        |
+| Network > File Transfer         | curl                                    | y        |
+| Network > Filesystem            | davfs2                                  | y        |
+| Network->VPN                    | wg-quick                                | y        |
+| Network > Web Servers/Proxies   | nginx-all-module                        | y        |
+| Network                         | iftop                                   | y        |
+| Network                         | iperf3                                  | y        |
+| Network                         | wg-installer-client                     | y        |
+| Utilities > Editors             | nano-full                               | y        |
+| Utilities > Filesystem          | ntfs-3g                                 | y        |
+| Utilities > Terminal            | screen                                  | y        |
+| Utilities                       | file                                    | y        |
+| Utilities                       | tar                                     | y        |
+| Utilities                       | whereis                                 | y        |
 
 ## openwrt 使用技巧
 
 openwrt 功能强大， 以下记录一些注意事项。固件版本：OpenWrt  R23.5.1。内核版本：5.4.242
+
+### 设置 wireguard 与 PPPoE 共存
+
+单线上联光猫时，若光猫改桥接，可从 openwrt 拨号并添加 wireguard。若从光猫拨号，则需要设置光猫下行口透传 2 个 vlan，一个是 untaged （vlan 1）的宽带，一个是自定义 vlan （比如 vlan 10），用于运行 wireguard。
+
+在 网络 -> 接口，添加新端口，起名 **wan_wg**，协议选静态地址。
+
+> 基本设置：设置 ip 和掩码。
+>
+> 高级设置：取消勾选“使用内置的 IPv6 管理”。
+>
+> 物理设置：接口 选”自定义接口“，填写`wan.10`，表示 WAN 口的 vlan 10 子接口。
+>
+> 防火墙设置：区域选 wan。
+
+ssh登录，使用命令生成 私钥、预共享秘钥（可选）
+
+```sh
+mkdir wg
+cd wg
+# 配置创建密钥的权限
+umask 077
+# 创建预共享密钥
+wg genpsk > sharekey
+# 创建服务端公钥和私钥
+wg genkey | tee server_privatekey | wg pubkey > server_publickey
+
+# 获取服务端私钥复制保存
+cat server_privatekey
+# 获取服务端公钥复制保存
+cat server_publickey
+```
+
+回到 web 端，继续添加新端口。起名 **wg0**，协议选 wireguard VPN。
+
+> 基本设置：私钥填写刚才生成的 ，设置监听端口和 ip。
+>
+> 高级设置：取消勾选“使用内置的 IPv6 管理”。
+>
+> 防火墙设置：区域选 wan。
+
+下面 peer 点击“添加”，填写对端信息。
+
+在 网络 -> 静态路由，添加相关路由，至少要包括与 allow ips 一致的地址段。allow ips 添加路由时选择接口 **wg0**，网关填写 **wan_wg** 的 ip。
+
+> 设置路由后，最好重启（先关闭再打开）对应的接口。刷新路由使其生效。
+
+可在 状态 -> WireGuard 状态，查看收发包情况。
 
 ### 设置多播
 
@@ -413,13 +487,23 @@ openwrt 功能强大， 以下记录一些注意事项。固件版本：OpenWrt 
 
 为了访问光猫的管理页面，在 网络 -> 接口，接口总览页，”添加新接口”，协议选择 DHCP 客户端。
 
-### 使用 ipv6
+### 作为主路由使用 ipv6
 
  网络 -> 接口，每一个接口都需要在高级设置中，取消勾选“使用内置的 IPv6 管理”。
 
 在 LAN 接口设置中，下面的 ipv6 设置，**路由通告服务** 设置为混合模式，**DHCPv6 服务** 设置为禁用，**NDP 代理** 设置为禁用。
 
 网络 -> DHCP/DNS，高级设置，取消勾选“禁止解析 IPv6 DNS 记录”。
+
+### 作为二级路由使用 ipv6
+
+ 网络 -> 接口，每一个接口都需要在高级设置中，取消勾选“使用内置的 IPv6 管理”。
+
+设置 LAN 和 WAN 的 协议为 静态地址，这样才能出现 dhcp 的 ipv6 设置，下面 ipv6 设置全部选择中继模式。
+
+ssh 登录，在 `/etc/config/dhcp` 文件中查找到 wan 口配置，在下面加一行 `option master '1'`
+
+在路由器下面的随便一个接口点击保存&应用，上面的改动就生效了。客户端可以获取到 ipv6地址了。
 
 ### 配置 ssh 的安全
 
@@ -466,6 +550,8 @@ https://github.com/anrip/dnspod-shell/
 
 ### nano 没有语法高亮
 
+编译前通过勾选 `nano-full`解决。
+
 找到一台有语法高亮的系统，拷贝 `/usr/share/nano/*` 到 openwrt，
 
 然后设置 `~/.nanorc`
@@ -498,9 +584,9 @@ find /usr/share/nano -name '*.nanorc' -printf "include %p\n" > ~/.nanorc
 
 物理设置，勾选 **桥接接口**，在下面的接口里勾选标记 WAN，LAN 的接口。
 
-基本设置，切换协议为 **DHCP 客户端**。
+协议切换为 **DHCP 客户端**，或切换为**静态地址**。
 
-删除多余的接口，只需保留
+删除多余的接口，只需保留 LAN。
 
 ## 实际效果
 
