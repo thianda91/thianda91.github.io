@@ -5,7 +5,7 @@ key:          2021-05-02
 tags:         python
 categories:   python
 created_date: 2021-05-02 02:20:14 +08:00:00
-date:         2022-09-30 15:16:54 +08:00:00
+date:         2025-04-11 15:35:00 +08:00:00
 ---
 
 pyinstaller 可以用来把 python 打包成可执行二进制文件，但是在打包会遇到很多问题，尤其在 windows 系统上打包 exe 时。
@@ -13,6 +13,12 @@ pyinstaller 可以用来把 python 打包成可执行二进制文件，但是在
 打包编译还可以使用 nuitka。把 python 脚本编译成 C 语言。
 
 <!--more-->
+
+```
+只是需要快速将 Python 脚本打包为二进制文件，推荐使用 PyInstaller  或 cx_Freeze 。如果对性能有较高要求，可以选择 Nuitka  或 PyOxidizer 。
+```
+
+
 
 ## nuitka 基本使用
 

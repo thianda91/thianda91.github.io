@@ -152,6 +152,12 @@ mtd -r write /extdisks/sda1/breed-mt7621-xiaomi-r3g.bin Bootloader
 
 ### 刷入 openwrt
 
+官方：https://openwrt.org/zh/start
+
+筛选 xiaomi_mi-router-3g：https://firmware-selector.openwrt.org/?version=24.10.0&target=ramips%2Fmt7621&id=xiaomi_mi-router-3g
+
+
+
 参考：http://zszmm.com/archives/136/，https://www.right.com.cn/forum/thread-1141988-1-1.html
 
 进入 padavan，在【固件更新】勾选“固件“，选择 openwrt-ramips-mt7621-xiaomi_mir3g-initramfs-kernel.bin 上传。确认刷入。

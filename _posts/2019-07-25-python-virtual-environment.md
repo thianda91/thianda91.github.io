@@ -5,12 +5,199 @@ key:          2019-07-25
 tags:         python
 categories:   python
 created_date: 2019-07-25 15:05:32 +08:00:00
-date:         2019-07-25 15:44:13 +08:00:00
+date:         2025-04-11 16:44:00 +08:00:00
 ---
 
 让项目运行在一个独立的局部的 Python 环境中，使采用不同环境的项目互不干扰。
 
 <!--more-->
+
+## uv
+
+https://github.com/astral-sh/uv
+
+### 安装
+
+```sh
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+windows 可以从 release 页面下载 二进制 `uv-x86_64-pc-windows-msvc.zip`
+
+https://github.com/astral-sh/uv/releases
+
+### 设置自动补全
+
+```bash
+echo 'eval "$(uv generate-shell-completion bash)"' >> ~/.bashrc
+```
+
+卸载
+
+```sh
+uv cache clean
+rm -r "$(uv python dir)"
+rm -r "$(uv tool dir)"
+rm ~/.local/bin/uv
+rm ~/.local/bin/uvx
+```
+
+### 管理 python
+
+```sh
+# 查看版本
+uv --version
+# 查看可用的 Python 版本
+uv python list
+# 查找已安装的 python
+uv python find
+uv python find 3.12
+#　安装指定版本
+uv python install 3.12
+# 设置当前项目固定 python 版本 （写入`.python-version`）
+uv python pin 3.13
+```
+
+### 创建基本项目、管理依赖
+
+```sh
+uv python pin 3.13
+uv init
+```
+
+```
+% tree
+.
+├── README.md
+├── main.py
+├── .python-version
+├── .gitignore
+├── .git 
+└── pyproject.toml
+
+1 directory, 3 files
+```
+
+`pyproject.toml`  内容如下 
+
+```toml
+[project]
+name = "01"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+```
+
+添加依赖
+
+```text
+uv add flask
+```
+
+`pyproject.toml`  内容会添加 flask 部分 
+
+```toml
+[project]
+name = "01"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask>=3.1.0",
+]
+```
+
+```sh
+# 添加指定版本
+uv add pandas==2.2
+# 移除依赖
+uv remove flask
+# 查看依赖树
+uv tree
+```
+
+### 运行项目
+
+```sh
+uv run main.py
+```
+
+## pyenv
+
+https://github.com/pyenv/pyenv
+
+### 安装
+
+```sh
+curl -fsSL https://pyenv.run | bash
+```
+
+windows 安装
+
+https://github.com/pyenv-win/pyenv-win
+
+```sh
+pip install pyenv
+```
+
+更新
+
+```sh
+pyenv update
+```
+
+### 用法
+
+```sh
+pyenv shell <version# 查看当前已安装的 python 版本
+pyenv versions
+# 安装指定版本
+pyenv install 3.12
+# 切换当前目录 python 版本（写入 `.python-version`）
+pyenv local <version>
+# 切换当前会话 python 版本
+pyenv shell <version>
+# 切换当前用户的全局 python 版本
+pyenv global <version>
+```
+
+### 使用虚拟环境
+
+```sh
+# 创建（不需要指定目录）
+pyenv virtualenv 3.12 myproj3.12
+# 激活
+pyenv activate myproj3.12
+# 退出
+pyenv deactivate
+# 删除
+pyenv uninstall myproj3.12
+```
+
+## venv
+
+python 发行版自带的 python 包，可以直接使用。
+
+```sh
+python -m venv venv
+```
+
+直接创建 一个虚拟环境到文件夹 venv。
+
+### 激活虚拟环境
+
+```sh
+venv/Scrpits/activate
+```
+
+使用时可也可以通过改变 python 路径实现：
+
+```sh
+venv/bin/python xxx.py
+```
 
 ## virtualenv
 

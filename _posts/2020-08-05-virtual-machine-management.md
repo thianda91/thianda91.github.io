@@ -201,3 +201,22 @@ pfSense 官网：https://www.pfsense.org/
 实际中测试在 WAN 口分配了公网 IP 地址，其他虚拟机可通过这个 IP 实现 NAT 方式连接网络，达到节省 IP 地址的目的。
 
 其他更多的功能自己去体验吧。
+
+## 爱快路由系统
+
+https://www.ikuai8.com/component/download
+
+简单易上手
+
+## openWrt
+
+https://openwrt.org/zh/start
+
+### 下载固件
+
+https://firmware-selector.openwrt.org/
+
+### 虚拟机硬盘格式转换工具
+
+https://www.starwindsoftware.com/starwind-v2v-converter
+
