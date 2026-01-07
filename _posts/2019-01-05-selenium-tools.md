@@ -4,8 +4,8 @@ title:        Python selenuim 自动测试工具搭建
 key:          2019-01-05
 tags:         python
 categories:   python
-created_date: 2019-01-05 14:29:51
-date:         2019-01-05 15:01:11
+date:         2019-01-05 14:29:51
+modify_date:  2019-01-05 15:01:11
 ---
 
 selenium 是自动测试的工具，用于 web 自动测试。本文记录一些工具和相关配置。

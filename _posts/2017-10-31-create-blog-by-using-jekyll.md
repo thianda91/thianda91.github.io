@@ -2,10 +2,10 @@
 layout: article
 title: 使用 Jekyll 搭建自己的 Github Pages
 key: 2017-10-30
-created_date: 2017-10-30 16:46:38
 tags: jekyll
 categories: manual
-date: 2018-08-12 14:51:48
+date:         2017-10-30 16:46:38
+modify_date:  2025-05-08 11:55:00
 ---
 
 记录一下本人第一次搭建git pages的过程。谨以此文记录自己的操作过程。
@@ -51,7 +51,7 @@ http://yizeng.me/2013/05/10/install-jekyll-3-on-windows/
 
 ### 安装Ruby
 
-在[官网](https://rubyinstaller.org)下载ruby，windows系统推荐使用[RubyInstaller](https://rubyinstaller.org/downloads/)（with Devkit）。本人下载了`.exe`安装，会自动添加路径到path变量中。安装结束后会要求执行`ridk install`，安装 **MSYS2**。
+在[官网](https://rubyinstaller.org)下载 ruby，windows 系统推荐使用 [RubyInstaller](https://rubyinstaller.org/downloads/)（with Devkit）。会自动添加路径到 path 变量中。安装结束后会要求安装 **MSYS2**。
 
 安装完毕可以输入`ruby -v`验证。
 
@@ -63,40 +63,45 @@ http://yizeng.me/2013/05/10/install-jekyll-3-on-windows/
 > 2. 解压zip文件并在命令行（cmd/git bash均可）cd到该目录
 > 3. 输入`ruby setup.rb`（管理员权限）
 
-`gem`命令会把包安装在 类似`D:\Ruby24-x64\lib\ruby\gems\2.4.0\gems`的目录中，安装了`jekyll`会自动安装很多它的依赖包。都在这个目录里。
+`gem`命令会把包安装在 类似`D:\Ruby[xx]-x64\lib\ruby\gems\[x.x.x]\gems`的目录中，安装了`jekyll`会自动安装很多它的依赖包。都在这个目录里。
 
 使用`gem`会自动安装帮助文档（`ri`或`rdoc`格式），因为我们可以在线查看，不需要下载，因此可以在`~\.gemrc`文件中添加两行：
 
 ```ini
-install: "--no-ri --no-rdoc"
-update: "--no-ri --no-rdoc"
+# nano ~/.gemrc
+install: --no-document
+update: --no-document
 ```
 
-可以执行`touch ~/.genrc`来创建文件名以`.`开头的文件。
+这样使用`gem`命令时不安装帮助文档（否则它通常安装在`D:\Ruby[xx]-x64\lib\ruby\gems\[x.x.x]\doc`目录）。
 
-这样使用`gem`命令时不安装帮助文档（否则它通常安装在`D:\Ruby24-x64\lib\ruby\gems\2.4.0\doc`目录）。
+Gem 命令的其他操作：
 
-GEM 命令的其他操作：
-
-```bash
-#查看通过gem已安装插件：
-$ gem list
-#查看gem的源：
-$ gem sources list
-#可以添加/删除源：
-$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
-#清理旧的包：
-$ gem cleanup
-#基于`Gemfile`指定的依赖包执行命令：
-$ bundle exec <command>
+```sh
+# 查看通过gem已安装插件：
+gem list
+# 查看 RubyGems 配置详情
+gem environment
+# 查看gem的源：
+gem sources list
+# 可以添加/删除源：
+gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
+# 或者
+gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
+# 清理旧的包：
+gem cleanup
+# 基于`Gemfile`指定的依赖包执行命令：
+bundle exec <command>
 ```
 
 ##### 如果你使用 Gemfile 和 Bundler (例如：Rails 项目)
 
-你可以用 Bundler 的 [Gem 源代码镜像命令](http://bundler.io/v1.5/bundle_config.html#gem-source-mirrors)。
+你可以用 Bundler 的 [Gem 源代码镜像命令](https://bundler.io/man/bundle-config.1.html#MIRRORS-OF-GEM-SOURCES)。
 
 ```bash
-$ bundle config mirror.https://rubygems.org https://gems.ruby-china.com
+bundle config --global mirror.https://rubygems.org https://gems.ruby-china.com
+# 或者
+bundle config --global mirror.https://rubygems.org https://mirrors.tuna.tsinghua.edu.cn/rubygems/
 ```
 
 接下来继续安装Bundler
@@ -107,6 +112,13 @@ gem install bundler # 安装bundler
 
 安装完毕可以输入`bundle -v`验证。
 
+设置指定安装路径：
+
+```sh
+bundle config --global path 'vendor/bundle'
+bundle config path 'vendor/bundle'
+```
+
 现在我们可以根据项目根目录下`Gemfile`来安装/更新依赖：
 
 ```sh
@@ -115,28 +127,36 @@ bundle install
 bundle update
 ```
 
+用于是通过 `bundle` 安装的依赖，所以执行命令都要通过`bundle exec xxx `来执行。比如：
+
+```sh
+bundle exec jekyll -v
+bundle exec jekyll build --watch
+bundle exec jekyll serve
+```
+
 
 
 ### 安装Jekyll
 
-执行`gem install jekyll`即可自动安装jekyll的所以依赖包。也许或弹出防火墙提示，允许即可。依赖包数量比较多安装过程会慢，耐心等待安装完毕即可。
+执行`gem install jekyll`即可自动安装 jekyll 的所有依赖包。也许或弹出防火墙提示，允许即可。依赖包数量比较多安装过程会慢，耐心等待安装完毕即可。
 
 安装完毕输入`jekyll -v`验证。
 
 
 #### 如果安装jekyll出错
 
-提示执行`ridk install`，则说明当前安装的是Ruby 2.4.x。需要在cmd运行`ridk install`安装 [MSYS2 toolkit](http://www.msys2.org/) ，执行后输入`1`即可。如果下载过慢，可手动复制下载链接进行下载安装。
+提示执行`ridk install`，则说明当前安装的是 Ruby 2.4.x。需要在 cmd 运行`ridk install`安装 [MSYS2 toolkit](http://www.msys2.org/) ，执行后输入`1`即可。如果下载过慢，可手动复制下载链接进行下载安装。
 
-提示`make`不是内部或外部命令，则说明当前安装的是Ruby2.0-2.3。需要安装`DEVELOPMENT KIT`。按照下面方式操作：
+提示`make`不是内部或外部命令，则说明当前安装的是 Ruby2.0-2.3。需要安装`DEVELOPMENT KIT`。按照下面方式操作：
 
-从[官网](https://rubyinstaller.org/downloads/)下载`DEVELOPMENT KIT`，它是个自解压文件，运行后推荐解压到`C:\RubyDevKit\`。然后用git for windows的MingW64执行
+从[官网](https://rubyinstaller.org/downloads/)下载`DEVELOPMENT KIT`，它是个自解压文件，运行后推荐解压到`C:\RubyDevKit\`。然后用 git for windows 的 MingW64 执行
 
 ```sh
 # 切换到 解压文件夹
-$ cd /C/RubyDevKit
+cd /C/RubyDevKit
 # 初始化安装，会自动检查Ruby的安装路径
-$ ruby dk.rb init
+ruby dk.rb init
 ```
 
 不过上一步可能会检查不出来，提示如下：
@@ -153,10 +173,10 @@ of the installed Rubies you want enhanced by the DevKit.
 - C:/Ruby23-x64
 ```
 
-安装DevKit到ruby
+安装 DevKit 到 ruby
 
 ```sh
-$ ruby dk.rb install
+ruby dk.rb install
 ```
 
 不出意外会提示：
@@ -169,7 +189,7 @@ $ ruby dk.rb install
 然后再尝试安装jekyll
 
 ```
-$ gem install jekyll
+gem install jekyll
 ```
 
 笔者使用Ruby2.4，Ruby2.3均运行成功。
@@ -178,25 +198,25 @@ $ gem install jekyll
 
 ### Jekyll 操作教程
 
-想要读懂或编辑`jekyll`模板看这里：[Jekyll/Liquid API 语法文档](http://alfred-sun.github.io/blog/2015/01/10/jekyll-liquid-syntax-documentation/)
+想要读懂或编辑`jekyll`模板看这里：https://jekyllrb.com/docs/
 
 
 ```shell
-$ jekyll build
+jekyll build
 # => 当前文件夹中的内容将会生成到 ./_site 文件夹中。
 
-$ jekyll build --destination <destination>
+jekyll build --destination <destination>
 # => 当前文件夹中的内容将会生成到目标文件夹<destination>中。
 
-$ jekyll build --source <source> --destination <destination>
+jekyll build --source <source> --destination <destination>
 # => 指定源文件夹<source>中的内容将会生成到目标文件夹<destination>中。
 
-$ jekyll build --watch
+jekyll build --watch
 
 # => 当前文件夹中的内容将会生成到 ./_site 文件夹中，
 # 查看改变，并且自动再生成。
 
-$ jekyll serve
+jekyll serve
 
 # => 当前文件夹中的内容将会生成到 ./_site 文件夹中。并搭建web服务。
 # 可访问 http://localhost:4000 查看，方便本地调试。
@@ -220,13 +240,18 @@ gem 'tzinfo-data'
 
 ###　.svg 文件转 .png 和 .ico 文件工具
 
-首先需要nodejs环境，官网下载即可。然后需要使用npm下载，npm服务器下载比较慢，可以选择淘宝镜像，具体操作见：<https://npm.taobao.org/>
+首先需要nodejs环境，官网下载即可。然后需要使用npm下载，npm服务器下载比较慢，可以选择淘宝镜像，具体操作见：<https://npmmirror.com/>
 
 ```bash
-npm install -g cnpm --registry=https://registry.npm.taobao.org
+npm install -g cnpm --registry=https://registry.npmmirror.com
+
+npm install svg2img png-to-ico
+npm install svg-to-ico
 ```
 
-可参考：[网站图标生成](https://github.com/kitian616/jekyll-TeXt-theme#%E7%BD%91%E7%AB%99%E5%9B%BE%E6%A0%87)  。
+也可使用 ImageMagick，https://imagemagick.org/script/download.php
+
+
 
 
 
@@ -249,86 +274,4 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 > <https://github.com/thx/thx.github.io/blob/master/README.md>
 
 
-
-
-
-
-
-
-
-
-
-
-
-## CentOS上使用jekyll（未完停更）
-
-本人安装的是`CentOS-7-x86_64-DVD-1708.iso`镜像，提前安装好 VMWare Workstation。安装时软件选择->基本环境选的`GNOME桌面`，语言`中文简体`。然后点击`开始安装`，安装时设置好root账户密码。等待安装时过程中可以设置一个非root账户，结束后需要重启。然后进入 centos，右键打开终端，开始安装 jekyll 。
-
-> 如果不是root账户，安装过程中也许会提示权限不足，请在执行的命令前加上`sudo `，本人以下操作均是在root账户下操作。
-
-### 参考：
-
-[Ruby on Rails 入门之：(1) Ruby, Rails, gem, bundler相关软件的安装](http://blog.csdn.net/watkinsong/article/details/8012742)
-
-### 安装 rvm
-
-```shell
-curl -sSL https://get.rvm.io | bash -s stable
-```
-
-等待安装完毕，载入RVM环境（或者重新打开终端会自动载入）：
-
-```shell
-source ~/.rvm/scripts/rvm
-```
-
-修改 RVM 下载 Ruby 的源，到 Ruby China 的镜像:
-
-```shell
-echo "ruby_url=https://cache.ruby-china.org/pub/ruby" > ~/.rvm/user/db
-```
-
-### 用 RVM 安装 Ruby 环境
-
-检查一下rvm是否安装正确
-
-```shell
-rvm -v
-rvm 1.29.3 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
-```
-
-```shell
-rvm requirements	//检查先决条件并安装
-rvm list known		//写出已知的ruby版本
-```
-
-根据显示的版本信息，我选择了个当前最新版本：（`ruby-head`为dev版本）
-
-```shell
-rvm install ruby-2.4.1
-```
-等待安装结束，
-
-```shell
-vim Gemfile
-```
-
-按`I`键，进入编辑模式，输入：
-
-```shell
-gem 'execjs'
-gem 'therubyracer'
-```
-
-然后按`ESC`，输入`:wq`保存退出，然后
-
- ```shell
-bundle install
- ```
-
-......
-
-折腾了好久，越弄入的坑越多。。。决定放弃。。。
-
-### 教程未完，本人放弃了centos，回归熟悉的windows
 

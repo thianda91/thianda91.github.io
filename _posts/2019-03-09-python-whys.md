@@ -4,8 +4,8 @@ title:        学习 python 遇到的十万个为什么
 key:          2019-03-09
 tags:         python
 categories:   python
-created_date: 2019-03-09 22:46:42 +08:00:00
-date:         2019-08-18 23:36:46 +08:00:00
+date:         2019-03-09 22:46:42 +0800
+modify_date:  2019-08-18 23:36:46 +0800
 ---
 
  收集 python 中的一些常识。

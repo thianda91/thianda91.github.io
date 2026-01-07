@@ -4,8 +4,8 @@ title:        搭建sftp/ftp服务并配置虚拟用户
 key:          2019-06-27
 tags:         sftp
 categories:   system
-created_date: 2019-06-27 10:58:23
-date:         2019-06-27 16:58:33 +08:00:00
+date:         2019-06-27 10:58:23
+modify_date:  2019-06-27 16:58:33 +0800
 ---
 
 linux 的文件传输可以使用 sftp，sftp 基于 openssh 通过 ssh 通道进行数据传输，使用 linux 的系统用户来鉴权，访问操作权限也与系统用户一致。

@@ -4,8 +4,8 @@ title:        vscode 自用的配置与插件整理
 key:          2018-09-15 
 tags:         vscode
 categories:   coding
-created_date: 2018-09-15 23:23:28 +08:00:00
-date:         2018-09-16 03:16:09
+date:         2018-09-15 23:23:28 +0800
+modify_date:  2018-09-16 03:16:09
 ---
 
 记录一些使用 vscode 时的配置与自用的插件。方便在新环境安装 vscode 时快速配置使用。

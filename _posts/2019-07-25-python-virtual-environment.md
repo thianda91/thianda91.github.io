@@ -4,8 +4,8 @@ title:        python 虚拟环境的创建
 key:          2019-07-25
 tags:         python
 categories:   python
-created_date: 2019-07-25 15:05:32 +08:00:00
-date:         2025-04-11 16:44:00 +08:00:00
+date:         2019-07-25 15:05:32 +0800
+modify_date:  2025-04-11 16:44:00 +0800
 ---
 
 让项目运行在一个独立的局部的 Python 环境中，使采用不同环境的项目互不干扰。
@@ -152,7 +152,7 @@ pyenv update
 ### 用法
 
 ```sh
-pyenv shell <version# 查看当前已安装的 python 版本
+# 查看当前已安装的 python 版本
 pyenv versions
 # 安装指定版本
 pyenv install 3.12

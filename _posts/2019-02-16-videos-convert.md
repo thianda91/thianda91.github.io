@@ -4,8 +4,8 @@ title:        基于 ffmpeg 的视频文件编辑操作
 key:          2019-02-16
 tags:         ffmpeg
 categories:   notes
-created_date: 2019-02-16 23:26:35
-date:         2019-03-11 02:15:43
+date:         2019-02-16 23:26:35
+modify_date:  2019-03-11 02:15:43
 ---
 
 使用`ffmpeg`，将下载的视频文件进行格式转换等编辑操作。

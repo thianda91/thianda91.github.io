@@ -4,8 +4,8 @@ title: Git简要教程
 key: 2017-09-28
 tags: git
 categories: notes
-date: 2018-08-02
-created_date: 2018-08-02
+date:         2018-08-02 00:00:00 +0800
+modify_date:  2025-05-13 15:35:35 +0800
 ---
 
 文章首发于 http://blog.csdn.net/xianda9133/article/details/78121349
@@ -280,9 +280,9 @@ git filter-branch --commit-filter '
 效果等同于执行：
 
 ```bash
-git config --global alias.lg log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-git config --global alias.lgg log --no-merges --color --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
-git config --global alias.ls log --no-merges --color --stat --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Cblue %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+git config --global alias.lgg "log --no-merges --color --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset'"
+git config --global alias.ls "log --no-merges --color --stat --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Cblue %s %Cgreen(%cd) %C(bold blue)<%an>%Creset'"
 ```
 
 ## 使用github.com

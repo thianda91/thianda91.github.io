@@ -2,9 +2,10 @@
 layout: article
 title: Ruby 时间日期用法
 key: 2017-10-25
-created_date: 2017-10-25 22:51:47
 categories: manual
 tags: notes
+date:         2017-10-25 22:51:47
+modify_date:  2017-10-25 22:51:47
 ---
 
 ### Time类相关

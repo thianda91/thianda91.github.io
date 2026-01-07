@@ -4,8 +4,8 @@ title:        python 打包 exe 总结
 key:          2021-05-02
 tags:         python
 categories:   python
-created_date: 2021-05-02 02:20:14 +08:00:00
-date:         2025-04-11 15:35:00 +08:00:00
+date:         2021-05-02 02:20:14 +0800
+modify_date:  2025-04-11 15:35:00 +0800
 ---
 
 pyinstaller 可以用来把 python 打包成可执行二进制文件，但是在打包会遇到很多问题，尤其在 windows 系统上打包 exe 时。

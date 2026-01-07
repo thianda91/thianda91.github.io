@@ -4,8 +4,8 @@ title: OSI参考模型与TCP/IP模型
 key: 2017-12-04
 tags: osi
 categories: mdcn
-created_date: 2017-12-04 10:37:12
-date: 2017-12-04 16:45:26
+date:         2017-12-04 10:37:12
+modify_date:  2017-12-04 16:45:26
 ---
 
 ## OSI模型

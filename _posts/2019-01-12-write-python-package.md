@@ -4,8 +4,8 @@ title:        编写 python 库并打包分发到 pypi
 key:          2019-01-12
 tags:         python
 categories:   coding
-created_date: 2019-01-12 16:38:47
-date:         2019-03-10 21:53:52
+date:         2019-01-12 16:38:47
+modify_date:  2019-03-10 21:53:52
 ---
 
 Python 有非常丰富的第三方库可以使用，很多开发者会向 [pypi](https://pypi.org/) 上提交自己的 Python 包。要想向 pypi 包仓库提交自己开发的包，首先要将自己的代码打包，才能上传分发。

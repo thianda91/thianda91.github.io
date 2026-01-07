@@ -4,8 +4,8 @@ title:        互联网技术 第十、十一、十二章
 key:          2018-09-24
 tags:         internet
 categories:   internet
-created_date: 2018-09-24 13:00:53 +08:00:00
-date:         2018-09-27 14:56:48
+date:         2018-09-24 13:00:53 +0800
+modify_date:  2018-09-27 14:56:48
 ---
 
 《互联网技术》教材 内容节选

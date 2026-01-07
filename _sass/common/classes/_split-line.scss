@@ -8,7 +8,7 @@
   @if $width == default {
     $width: 1px;
   }
-  border: 0 solid $color;
+
   @if $direction == top {
     border-top-width: $width;
   }

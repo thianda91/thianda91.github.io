@@ -4,7 +4,8 @@ title: 记录本人学习CentOS的安装使用-停更
 key: 2017-10-18
 tags: centos
 categories: system
-date: 2017-10-22
+date:         2017-10-22
+modify_date:  2017-10-22
 ---
 # CentOS 7 minimal 使用
 

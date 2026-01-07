@@ -1,5 +1,3 @@
-
-
 ## X.Da 的博客
 
 - 基于 jekyll 的博客
@@ -7,13 +5,29 @@
 
 ## 修改内容
 
-1. `_includes\header.html`增加`sub-title`显示`site.description`
+### favicon.ico
+
+根据 F12 修改对应路径下的 `.ico` 和 `.png`
+
+> /asset/ 目录下
+
+打开 `_includes/svg/logo.svg`，修改颜色：
+
+```svg
+.st0{fill:#00ce00;}
+```
+
+
+
+### header
+
+`_includes\header.html` line 17 增加`sub-title`显示`site.description`
 
 ```html
 <div class="site-sub-title">{{ site.description }}</div>
 ```
 
-2. `_sass\components\_header.scss`增加样式
+`_sass\components\_header.scss` line 83 增加样式
 
 ```scss
 & > .site-sub-title {
@@ -24,74 +38,99 @@
 }
 ```
 
-3. `_sass\skins\_default.scss`中：
+导航 删除 `.html`后缀
 
-  `$main-color-1`修改为绿色：`#50cf4d`
+修改 `_data/navigation.yml`：
 
-4. `_sass\common\_variables.scss`中：
-
-  `content-max-width`改为`1050px`
-
-5. 文章模板`_layouts\atticle.html`
-
-  - 将`<footer>`中的`<span> dateModified`（page.modify_date）移动到`.article__content`前。并添加 class :`.dateModified`。
-
-  - `.article__footer`前面新增：
-
-```html
-<hr style="background-color:#50cf4d;height:1px;width:30%;border:none;">
+```yaml
+# 添加 
+  - titles:
+      zh      : &ZH_HANS  主页
+    url: /
+# 删除 归档和 关于的 .html 后缀
 ```
 
-6. `_sass\components\_main.scss`中
+修改 `_config.yml`：（默认`none`，带 `.html`后缀）
 
-  - 新增`.dateModified`，其`color`为`$main-color-1`
-  - `.full-width`的`width`改为`95%`
+```yaml
+permalink: /:categories/:title # none
+```
 
-7. 主页摘要的下边框：
+### 主题风格
 
-  `_includes\home.html`中在`</article>`后面添加：
+`_sass\skins\_default.scss`中改成绿色：
+
+```
+$main-color-1：#50cf4d;
+```
+
+`_sass\common\_variables.scss`中：
+
+```
+content-max-width: 1050px;
+```
+
+`_includes\tags.html` line 22， `Show All` 改成 `全部`
+
+### footer
+
+模板`_inclides\atticle-footer.html`
+
+将`<footer>`中的`<span> dateModified`（page.modify_date）复制到
+
+模版`_layouts\article.html`的`<div class="layout--article">`里面。需要包含 `{%- include -%}` 和 `{%- if -%}` 标签。并给 `<span>`标签 添加  ` class="dateModified"`。
+
+模板`_inclides\atticle-footer.html` 的`<footer class="article__footer">`前面新增：
+
+```html
+<hr style="background-color:#50cf4d;height:1px;width:40%;border:none;">
+```
+
+`_sass\components\_main.scss`中
+
+新增：`.dateModified {color: $main-color-1;}`
+
+`.full-width`的`width`改为`95%`
+
+主页摘要的下边框：
+
+  `_includes\article-list.html`中，在 line 81 `</article>`后面添加：
 
 ```html
 <div class="xda__border"></div>
 ```
 
-8. 在`_sass\layout\_home.scss`注释掉`bottom`的相关样式并添加：
+在`_sass\layout\_home.scss`最底部添加：
 
-```
-& > .xda__border {
+```scss
+.xda__border {
     margin-top: 5px;
     height: 3px;
     background: linear-gradient(to right, #00cf4d 0%, #004c83 50%, #00cf4d 100%);
 }
 ```
 
-9. footer增加cnzz统计
-10. 修改文章排序按更新时间
+在 `_sass/common/classes/_split-line.scss`里，
+
+删除 line 11（` border: 0 solid $color;`）
+
+### 三方css本地化
+
+放在 asserts 目录下：
 
 ```ini
-修改每一个`_posts/`中的 .md 文件，在 yaml 头中
-  将 date 替换成 created_date
-  将 modify_date 替换成 date
-  没有 created_date/date 的，补充 created_date/date
-```
+# assets/font_awesome/all.css
+https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/css/all.css
 
-​	修改模板：
+# assets/webfonts/fa-regular-400.woff2
+https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/webfonts/fa-regular-400.woff2
 
-```ini
-在`_includes/article-info.html`、 `_includes/article.html`中
-  搜索 page.date 酌情替换为 page.created_date
-  酌情将多个 page.modify_date 替换为 page.date
-#在`_includes/scripts/article-list.html`中
-#  搜索 _post.date 替换为 _post.created_date
-```
+# assets/webfonts/fa-solid-900.woff2
+https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/webfonts/fa-solid-900.woff2
 
-1.  修改三方 css （三方访问过慢）
+# /assets/jquery.min.js
+https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js
 
-```ini
-在 `_data/variables.yml` 中
-原：
-https://use.fontawesome.com/releases/v5.0.13/css/all.css
-修改到：
-`https://cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/css/all.css`
+#　其他待补充
 ```
 

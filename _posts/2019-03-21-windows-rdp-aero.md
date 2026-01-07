@@ -4,8 +4,8 @@ title:        win7 远程桌面时开启 aero 主题
 key:          2019-03-21
 tags:         notes
 categories:   system
-created_date: 2019-03-21 00:23:21
-date:         2019-03-21 00:34:18
+date:         2019-03-21 00:23:21
+modify_date:  2019-03-21 00:34:18
 ---
 
  win7 远程桌面时开启 aero 主题的方法。

@@ -4,8 +4,8 @@ title:        linux 上使用 squid 搭建 web 代理
 key:          2020-01-07
 tags:         linux
 categories:   system
-created_date: 2020-01-07 11:22:20 +08:00:00
-date:         2020-01-07 15:45:53 +08:00:00
+date:         2020-01-07 11:22:20 +0800
+modify_date:  2020-01-07 15:45:53 +0800
 ---
 
 简单的 web 代理。在 linux 上可以使用  squid。本文记录 squid 的配置。
