@@ -22,4 +22,15 @@ show_title: false
       window.history.back();
     }
   }, 1000);
+  
+  // 动态设置404页面背景图
+  document.addEventListener('DOMContentLoaded', function() {
+    const pageContent = document.querySelector('.page__content');
+    if (pageContent) {
+      pageContent.style.backgroundImage = 'url("/assets/images/404.png")';
+      pageContent.style.backgroundSize = 'auto';
+      pageContent.style.backgroundRepeat = 'no-repeat';
+      pageContent.style.backgroundPosition = 'center';
+    }
+  });
 </script>

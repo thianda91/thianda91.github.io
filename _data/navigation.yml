@@ -26,7 +26,7 @@ header:
       fr-LU   : *FR
       tr      : &TR       Arşivdekiler
       # @end locale config
-    url: /archive
+    url: /archive/
 
   - titles:
       # @start locale config
@@ -52,4 +52,4 @@ header:
       fr-LU   : *FR
       tr      : &TR       Hakkında
       # @end locale config
-    url: /about
+    url: /about/

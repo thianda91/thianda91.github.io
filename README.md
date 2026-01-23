@@ -17,8 +17,6 @@
 .st0{fill:#00ce00;}
 ```
 
-
-
 ### header
 
 `_includes\header.html` line 17 增加`sub-title`显示`site.description`
@@ -38,24 +36,6 @@
 }
 ```
 
-导航 删除 `.html`后缀
-
-修改 `_data/navigation.yml`：
-
-```yaml
-# 添加 
-  - titles:
-      zh      : &ZH_HANS  主页
-    url: /
-# 删除 归档和 关于的 .html 后缀
-```
-
-修改 `_config.yml`：（默认`none`，带 `.html`后缀）
-
-```yaml
-permalink: /:categories/:title # none
-```
-
 ### 主题风格
 
 `_sass\skins\_default.scss`中改成绿色：
@@ -71,6 +51,16 @@ content-max-width: 1050px;
 ```
 
 `_includes\tags.html` line 22， `Show All` 改成 `全部`
+
+`_include\scripts\article.js`里添加：
+
+```javascript
+  document.querySelectorAll('a').forEach(link => {
+    if (link.hostname !== window.location.hostname) {
+      link.setAttribute('target', '_blank');
+    }
+  });
+```
 
 ### footer
 
@@ -114,6 +104,44 @@ content-max-width: 1050px;
 
 删除 line 11（` border: 0 solid $color;`）
 
+### 404 页面自定义
+
+修改 `_layouts\404.html` ，详见原文件。
+
+### 路由
+
+`archive.html` 移动到 `archive\index.md`
+
+`about.md` 移动到 `about\index.md`
+
+`_data\navigation.yml`里：
+
+```ini
+# 添加 
+  - titles:
+      zh      : &ZH_HANS  主页
+    url: /
+# ---------
+/archive.html 改成 /archive/
+/about.html 改成 /about/
+```
+
+修改 `_config.yml`
+
+```yaml
+text_skin: dark
+
+permalink: /:categories/:title/index.html
+```
+
+### Gemfile
+
+添加
+
+```sh
+gem "tzinfo-data"
+```
+
 ### 三方css本地化
 
 放在 asserts 目录下：
@@ -132,5 +160,57 @@ https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/webfonts/fa-solid-900.woff
 https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js
 
 #　其他待补充
+```
+
+## permalink 的效果
+
+关于`_config.yml` 的配置 permalink，
+
+### about 页面 和 archive 页面
+
+和文章地址一样随`permalink`的设置变化。`<a>` 链接会根据 `_data\navigation.yml` 配置生成。实际访问时自动根据 `permalink` 的配置跳转。
+
+### 404页面
+
+```
+/:categories/:title/index.html
+```
+
+
+和
+
+```
+/:categories/:title
+```
+
+页面生成的结果不一样。
+
+以 404 页面为例：
+前者生成 `/404.html`。 可访问 `/404` 查看。github pages 404 显示正常。
+后者生成 `/404/index.html`。手动访问 `/404` 会跳转到 `/404/` 。github pages 404 显示不正常。
+
+非 github page 环境可使用后者，在 nginx 中另配置 404 页面。
+
+```
+/:categories/:title
+```
+
+和
+
+```
+/:categories/:title.html
+```
+
+效果一样。
+
+## 无用文件
+
+```
+.editorconfig
+.eslintrc
+.stylelintignore
+.stylelintrc
+.travis.yml
+HOW_TO_RELEASE.md
 ```
 
