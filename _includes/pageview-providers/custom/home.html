@@ -1,3 +1,6 @@
 <!-- start custom pageview snippet (for Home layout) -->
-
+<script>
+    page_keys = page_keys.filter(item => item !== '');
+    viewCounter.getMultiCounts(page_keys, post_url + 's')
+</script>
 <!-- end custom pageview snippet (for Home layout) -->

@@ -6,7 +6,7 @@
     target=site.data.variables.default.page.show_date
     source0=layout.show_date source1=include.article.show_date -%}
   {%- assign _show_date = __return -%}
-  {%- if _show_date and include.article.date -%}
+  {%- if _show_date and include.article.modify_date -%}
     {%- assign _show_date = true -%}
   {%- else -%}
     {%- assign _show_date = false -%}
@@ -71,7 +71,8 @@
             {%- if site.pageview.provider -%}
               {%- include snippets/get-locale-string.html key='VIEWS' -%}
               {%- assign _locale_views = __return -%}
-              <li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="{{ include.article.key }}">0</span> {{ _locale_views }}</li>
+              {% assign parts = include.article_url | default: page.url | split: '/' %}
+              <li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="{{ parts | last }}">0</span> {{ _locale_views }}</li>
             {%- endif -%}
           {%- endif -%}
         </ul>
@@ -80,14 +81,19 @@
     </div>
   {%- endif -%}
 {%- endif -%}
-
+<script>
+  if (typeof page_keys === 'undefined') {
+    page_keys = [];
+  }
+  page_keys.push('{{ parts | last }}');
+</script>
 
 {%- if include.semantic != false -%}
   {%- if _author -%}
     <meta itemprop="author" content="{{ _author.name }}"/>
   {%- endif -%}
-  {%- if include.article.date -%}
-    <meta itemprop="datePublished" content="{{ include.article.date | date_to_xmlschema }}">
+  {%- if include.article.modify_date -%}
+    <meta itemprop="datePublished" content="{{ include.article.modify_date | date_to_xmlschema }}">
   {%- endif -%}
   {%- if include.article.tags[0] -%}
     {%- assign _keywords = include.article.tags | join: ',' %}

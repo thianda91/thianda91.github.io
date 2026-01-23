@@ -52,6 +52,7 @@ sources:
     mathjax: 'https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML'
     mermaid: 'https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js'
   local:
+  # 如果使用本地静态文件，需要手动添加 site.baseurl 前缀
     font_awesome: '/assets/font_awesome/all.css'
     jquery: '/assets/jquery.min.js'
     leancloud_js_sdk: '//cdn.jsdelivr.net/npm/leancloud-storage@3.13.2/dist/av-min.js'

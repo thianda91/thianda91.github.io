@@ -1,11 +1,11 @@
 ---
-layout: article
-title: 配置php连接SQLServer2008r2
-key: 2017-02-12
-tags: php SQLServer
-categories: database
-date:         2017-02-12 19:42
-modify_date:  2018-07-11 16:48
+layout:       article
+title:        配置php连接SQLServer2008r2
+key:          2017-02-12
+tags:         php SQLServer
+categories:   database
+date:         2017-02-12 19:42:00 +08:00
+modify_date:  2018-07-11 16:48:00 +08:00
 ---
 
 ## php连接SQLServer2008

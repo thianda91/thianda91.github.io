@@ -251,7 +251,9 @@ layout: base
     {%- include scripts/lib/gallery.js -%}
     {%- include scripts/components/lightbox.js -%}
   {%- endif -%}
-  {%- include scripts/page.js -%}
+  {%- if site.pageview.provider == 'local' -%}
+    {%- include scripts/page.js -%}
+  {%- endif -%}
 </script>
 
 {%- if page.sidebar -%}

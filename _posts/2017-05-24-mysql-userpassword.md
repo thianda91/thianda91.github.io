@@ -1,11 +1,11 @@
 ---
-layout: article
-title: 详解MySQL的用户密码过期功能
-key: 2017-05-24
-tags: mysql
-categories: database
-date:         2017-05-24 20:55:01
-modify_date:  2017-05-24 20:55:01
+layout:       article
+title:        详解MySQL的用户密码过期功能
+key:          2017-05-24
+tags:         mysql
+categories:   database
+date:         2017-05-24 20:55:01 +0800
+modify_date:  2017-05-24 20:55:01 +0800
 ---
 
 ### 写在前面

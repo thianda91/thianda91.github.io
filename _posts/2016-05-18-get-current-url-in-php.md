@@ -1,11 +1,11 @@
 ---
-layout: article
-title: PHP中获取当前页面的完整URL
-key: 2016-05-18
-tags: php
-categories: coding
-date:         2016-05-18 23:54
-modify_date:  2016-05-18 23:54
+layout:       article
+title:        PHP中获取当前页面的完整URL
+key:          2016-05-18
+tags:         php
+categories:   coding
+date:         2016-05-18 23:54:00 +0800
+modify_date:  2016-05-18 23:54:00 +0800
 ---
 
 假设我们当前的测试网址是: http://localhost/blog/testurl.php?id=5

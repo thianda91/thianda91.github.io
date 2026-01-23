@@ -1,11 +1,11 @@
 ---
-layout: article
-title: 国内顶尖团队的开源地址 
-key: 2017-11-17
-tags: links
-categories: notes
-date:         2017-11-17 14:07:07
-modify_date:  2017-11-17 14:07:07
+layout:       article
+title:        国内顶尖团队的开源地址 
+key:          2017-11-17
+tags:         links
+categories:   notes
+date:         2017-11-17 14:07:07 +0800
+modify_date:  2017-11-17 14:07:07 +0800
 ---
 
 ## 概述

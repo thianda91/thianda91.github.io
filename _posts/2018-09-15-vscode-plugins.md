@@ -5,7 +5,7 @@ key:          2018-09-15
 tags:         vscode
 categories:   coding
 date:         2018-09-15 23:23:28 +0800
-modify_date:  2018-09-16 03:16:09
+modify_date:  2018-09-16 03:16:09 +0800
 ---
 
 记录一些使用 vscode 时的配置与自用的插件。方便在新环境安装 vscode 时快速配置使用。

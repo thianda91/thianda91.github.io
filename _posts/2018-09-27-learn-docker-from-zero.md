@@ -5,7 +5,7 @@ key:          2018-09-27
 tags:         vps
 categories:   system
 date:         2018-09-27 16:03:03 +0800
-modify_date:  2019-08-27 01:13:28
+modify_date:  2019-08-27 01:13:28 +0800
 ---
 
 搭建服务器，使用 vps，为了方便维护和快速重新搭建，使用 docker 最适合了。

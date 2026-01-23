@@ -1,11 +1,11 @@
 ---
-layout: article
-title: Apache+tomcat的整合
-key: 2016-05-19
-tags: apache
-categories: apache
-date:         2016-05-19 12:26
-modify_date:  2016-05-19 12:26
+layout:       article
+title:        Apache+tomcat的整合
+key:          2016-05-19
+tags:         apache
+categories:   apache
+date:         2016-05-19 12:26:00 +0800
+modify_date:  2016-05-19 12:26:00 +0800
 ---
 
 为什么要做这个整合呢？当然，首先想到是就是Apache和Tomcat的区别。正因为有区别，有各自的优缺点才需要整合，取二者所长，弃二者所短。

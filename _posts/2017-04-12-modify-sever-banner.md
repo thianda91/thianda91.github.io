@@ -1,11 +1,11 @@
 ---
-layout: article
-title: 修改常见服务器的banner
-key: 2017-04-12
-tags: safe
-categories: coding
-date:         2017-04-12 10:35
-modify_date:  2018-01-25 00:41:28
+layout:       article
+title:        修改常见服务器的banner
+key:          2017-04-12
+tags:         safe
+categories:   coding
+date:         2017-04-12 10:35:00 +0800
+modify_date:  2018-01-25 00:41:28 +0800
 ---
 
 ## 干货写在前面

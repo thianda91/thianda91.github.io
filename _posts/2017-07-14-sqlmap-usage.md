@@ -1,11 +1,11 @@
 ---
-layout: article
-title: sqlmap用户手册
-key: 2017-07-14
-tags: sqlmap
-categories: ctf
-modify_date:  2017-07-14
-date:         2017-07-14
+layout:       article
+title:        sqlmap用户手册
+key:          2017-07-14
+tags:         sqlmap
+categories:   ctf
+modify_date:  2017-07-14 12:00:00 +0800
+date:         2017-07-14 12:00:00 +0800
 ---
 
 > 说明：本文为转载，对原文中一些明显的拼写错误进行修正，并标注对自己有用的信息。

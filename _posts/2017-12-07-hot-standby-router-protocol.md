@@ -1,11 +1,11 @@
 ---
-layout: article
-title: 热备份路由器协议（HSRP概述）
-key: 2017-12-07
-tags: HSRP
-categories: mdcn
-date:         2017-12-07 09:02:37
-modify_date:  2017-12-07 16:56:30
+layout:       article
+title:        热备份路由器协议（HSRP概述）
+key:          2017-12-07
+tags:         HSRP
+categories:   mdcn
+date:         2017-12-07 09:02:37 +0800
+modify_date:  2017-12-07 16:56:30 +0800
 ---
 
 ## HSRP

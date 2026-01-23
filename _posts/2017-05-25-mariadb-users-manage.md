@@ -1,11 +1,11 @@
 ---
-layout: article
-title: MariaDB用户管理
-key: 2017-05-25
-tags: mysql
-categories: database
-date:         2017-05-25 22:03:15
-modify_date:  2017-05-25 22:03:15
+layout:       article
+title:        MariaDB用户管理
+key:          2017-05-25
+tags:         mysql
+categories:   database
+date:         2017-05-25 22:03:15 +0800
+modify_date:  2017-05-25 22:03:15 +0800
 ---
 
 ### 创建用户

@@ -1,9 +1,9 @@
 ---
-layout: article
-title: Git简要教程
-key: 2017-09-28
-tags: git
-categories: notes
+layout:       article
+title:        Git简要教程
+key:          2017-09-28
+tags:         git
+categories:   notes
 date:         2018-08-02 00:00:00 +0800
 modify_date:  2025-05-13 15:35:35 +0800
 ---

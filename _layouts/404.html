@@ -3,11 +3,23 @@ layout: page
 title: 404
 show_title: false
 ---
-<!--
 <div class="layout--404">
   <div class="sign">
-    <h1>404</h1>
+    <h1>页面不存在</h1>
+    <div id="countdown" style="color: white; text-align: center; font-size: 24px; margin-top: 20px;"></div>
   </div>
 </div>
--->
 {{ content }}
+
+<script>
+  let seconds = 5;
+  const countdownElement = document.getElementById('countdown');
+  const timer = setInterval(() => {
+    seconds--;
+    countdownElement.textContent = `${seconds}秒后自动返回`;
+    if (seconds <= 0) {
+      clearInterval(timer);
+      window.history.back();
+    }
+  }, 1000);
+</script>

@@ -1,11 +1,11 @@
 ---
-layout: article
-title: ThinkPHP在IIS下配置ISAPI伪静态去掉index.php
-key: 2016-08-25
-tags: thinkphp
-categories: thinkphp
-date:         2016-08-25 22:19
-modify_date:  2018-01-25 00:40:31
+layout:       article
+title:        ThinkPHP在IIS下配置ISAPI伪静态去掉index.php
+key:          2016-08-25
+tags:         thinkphp
+categories:   thinkphp
+date:         2016-08-25 22:19:00 +0800
+modify_date:  2018-01-25 00:40:31 +0800
 ---
 
 ### rewrite语句

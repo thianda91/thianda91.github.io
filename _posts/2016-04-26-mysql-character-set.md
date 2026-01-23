@@ -1,11 +1,11 @@
 ---
-layout: article
-title: MySQL字符集 GBK、GB2312、UTF8区别 解决 MYSQL中文乱码问题
-key: 2016-04-26
-tags: mysql
-categories: database
-date:         2016-04-26 22:32
-modify_date:  2016-04-26 22:32
+layout:       article
+title:        MySQL字符集 GBK、GB2312、UTF8区别 解决 MYSQL中文乱码问题
+key:          2016-04-26
+tags:         mysql
+categories:   database
+date:         2016-04-26 22:32:00 +0800
+modify_date:  2016-04-26 22:32:00 +0800
 ---
 
 

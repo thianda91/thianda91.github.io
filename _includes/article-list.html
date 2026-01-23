@@ -7,7 +7,7 @@
 
 {%- assign _sorted_list = include.articles -%}
 {%- if include.group_by == 'year' -%}
-  {%- assign _sorted_list = _sorted_list | sort: 'date' -%}
+  {%- assign _sorted_list = _sorted_list | sort: 'modify_date' -%}
 {%- endif -%}
 {%- if include.reverse -%}
   {%- assign _sorted_list = _sorted_list | reverse -%}
@@ -74,7 +74,7 @@
             {%- include snippets/assign.html target=site.data.variables.default.page.pageview
               source0=_article.pageview -%}
             {%- assign _show_pageview = __return -%}
-            {%- include article-info.html article=_article show_pageview=_show_pageview -%}
+            {%- include article-info.html article=_article show_pageview=_show_pageview article_url=_article_url -%}
           {%- endif -%}
         </div>
       </article>
@@ -92,7 +92,7 @@
         {%- endif -%}
       {%- endfor -%}
       {%- if include.group_by == 'year' -%}
-        {%- assign _currentdate = _article.date | date: '%Y' -%}
+        {%- assign _currentdate = _article.modify_date | date: '%Y' -%}
         {%- if _currentdate != _date -%}
           {%- unless forloop.first -%}</ul></section>{%- endunless -%}
           <section><h2 class="article-list__group-header">{{ _currentdate }}</h2><ul class="items">
@@ -103,7 +103,7 @@
       <li class="item" itemscope itemtype="http://schema.org/BlogPosting" data-tags="{{ _tags }}">
         <div class="item__content">
           {%- if include.show_info -%}
-            <span class="item__meta">{{ _article.date | date: __return }}</span>
+            <span class="item__meta">{{ _article.modify_date | date: __return }}</span>
           {%- endif -%}
           <a itemprop="headline" class="item__header" href="{{ _article_url }}">{{ _article.title }}</a></div>
       </li>

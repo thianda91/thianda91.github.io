@@ -1,11 +1,11 @@
 ---
-layout: article
-title: JavaScript学习路线
-key: 2017-10-11
-tags: JavaScript links
-categories: manual
-date:         2017-10-11
-modify_date:  2017-11-14 15:13:34
+layout:       article
+title:        JavaScript学习路线
+key:          2017-10-11
+tags:         JavaScript links
+categories:   manual
+date:         2017-10-11 12:00:00 +0800
+modify_date:  2017-11-14 15:13:34 +0800
 ---
 
 [如何评价《深入理解ES6》这本书？](https://www.zhihu.com/question/61333866 )  

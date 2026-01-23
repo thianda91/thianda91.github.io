@@ -1,11 +1,11 @@
 ---
-layout: article
-title: 基于React的AmazeUI-touch使用（如何使用react）
-key: 2017-06-01
-tags: react
-categories: coding
-date:         2017-06-01 01:32:02
-modify_date:  2017-06-01 01:32:02
+layout:       article
+title:        基于React的AmazeUI-touch使用（如何使用react）
+key:          2017-06-01
+tags:         react
+categories:   coding
+date:         2017-06-01 01:32:02 +0800
+modify_date:  2017-06-01 01:32:02 +0800
 ---
 
 想做个手机端web应用，想使用AmazeUI-touch，官方文档不是很入门级。

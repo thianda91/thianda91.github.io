@@ -1,11 +1,11 @@
 ---
-layout: article
-title: 使用 Jekyll 搭建自己的 Github Pages
-key: 2017-10-30
-tags: jekyll
-categories: manual
-date:         2017-10-30 16:46:38
-modify_date:  2025-05-08 11:55:00
+layout:       article
+title:        使用 Jekyll 搭建自己的 Github Pages
+key:          2017-10-30
+tags:         jekyll
+categories:   manual
+date:         2017-10-30 16:46:38 +0800
+modify_date:  2025-05-08 11:55:00 +0800
 ---
 
 记录一下本人第一次搭建git pages的过程。谨以此文记录自己的操作过程。
