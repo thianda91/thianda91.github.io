@@ -1,3 +1,6 @@
+body {
+  background-color: $background-color;
+}
 body,
 html,
 .root,
@@ -37,7 +40,6 @@ html,
   @include flexbox();
   @include flex-direction(column);
   min-height: 100%;
-  background-color: $background-color;
 }
 
 .page__content {

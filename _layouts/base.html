@@ -26,5 +26,52 @@ layout: none
             cursor: url('{{ site.baseurl }}/assets/cursor.ico'), auto;
         }
     </style>
+    <div class="animate"></div>
   </body>
+  <style>
+    .animate {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      width: 100%;
+      min-height: 100%;
+      z-index: -1
+    }
+  </style>
+  <script async="" src="//cdn.jsdelivr.net/npm/es-module-shims/dist/es-module-shims.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "//cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.min.js",
+        "universe-bg": "//cdn.jsdelivr.net/npm/universe-bg/dist/universe-bg.mjs"
+      }
+    }
+  </script>
+  <!-- <script async="" src="{{ site.baseurl }}/assets/universe-bg/es-module-shims.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "{{ site.baseurl }}/assets/universe-bg/three.module.min.js",
+        "universe-bg": "{{ site.baseurl }}/assets/universe-bg/universe-bg.mjs"
+      }
+    }
+  </script> -->
+  <script type="module">
+    import UniverseBg from 'universe-bg'
+    window.UB = UniverseBg
+    window.x = new UniverseBg({
+      className: 'animate',
+      // starSize: 0.1,
+      // shootingStarSize: 0.2,
+      shootingStarColor: 0x666666,
+      starColor: 0x666666,
+      bgColor: 0x121212,
+      starCount: 10000,
+      starDistance: 100,
+      shootingStarCount: 300,
+      shootingStarDistance: 80
+    })
+  </script>
 </html>
