@@ -1,4 +1,3 @@
-
 window.viewCounter = {
   // 单个初始化方法
   init: function (key, url) {
@@ -51,7 +50,4 @@ window.viewCounter = {
 
 (function () {
   window.post_url = document.location.origin + '/view_count';
-  var pathname = document.location.pathname;
-  pageKey = viewCounter.getPathName(pathname);
-  viewCounter.init(pageKey, post_url);
 })();

@@ -9,6 +9,8 @@
       {%- include pageview-providers/leancloud/home.html -%}
     {%- elsif site.pageview.provider == 'custom' -%}
       {%- include pageview-providers/custom/home.html -%}
+    {%- elsif site.pageview.provider == 'local' -%}
+      {%- include pageview-providers/local/home.html -%}
     {%- endif -%}
   {%- endif -%}
 
@@ -22,6 +24,8 @@
         {%- include pageview-providers/leancloud/post.html -%}
       {%- elsif site.pageview.provider == 'custom' -%}
         {%- include pageview-providers/custom/post.html -%}
+      {%- elsif site.pageview.provider == 'local' -%}
+        {%- include pageview-providers/local/post.html -%}
       {%- endif -%}
     {%- endif -%}
 
