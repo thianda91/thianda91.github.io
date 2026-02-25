@@ -1,7 +1,7 @@
- <script>
+<script>
     {%- include pageview-providers/local/pageview.js -%}
 </script>
 <script>
-    page_keys = page_keys.filter(item => item !== '');
+    var page_keys = page_keys.filter(item => item !== '');
     viewCounter.getMultiCounts(page_keys, post_url + 's')
 </script>

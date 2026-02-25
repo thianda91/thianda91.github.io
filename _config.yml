@@ -146,7 +146,12 @@ comments:
 ## => Pageview
 ##############################
 pageview:
-  provider:  # false (default), "leancloud", "custom"
+  provider: superbase # false (default), "leancloud", "custom", "local", "superbase"
+
+  ## superbase
+  superbase:
+    superbase_url     : https://vmjglwbgnfwkmwmbfzxy.supabase.co/functions/v1/viewCounter-edit
+    superbase_api_key : sb_publishable_yvbGdcAvMEB8AmGu295vJQ_kbqfsHmn
 
   ## Leancloud
   leancloud:

@@ -1,10 +1,10 @@
- <script>
+<script>
     {%- include pageview-providers/local/pageview.js -%}
 </script>
 <script>
 (function () {
   var pathname = document.location.pathname;
-  pageKey = viewCounter.getPathName(pathname);
+  var pageKey = viewCounter.getPathName(pathname);
   viewCounter.init(pageKey, post_url);
 })();
 </script>

@@ -72,7 +72,14 @@
               {%- include snippets/get-locale-string.html key='VIEWS' -%}
               {%- assign _locale_views = __return -%}
               {% assign parts = include.article_url | default: page.url | split: '/' %}
-              <li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="{{ parts | last }}">0</span> {{ _locale_views }}</li>
+              {% assign last_part = parts | last %}
+              {% assign second_last_part = parts | slice: -2, 1 %}
+              {% if last_part == "index.html" %}
+                {% assign data_key = second_last_part %}
+              {% else %}
+                {% assign data_key = last_part %}
+              {% endif %}
+              <li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="{{ data_key }}"> </span> {{ _locale_views }}</li>
             {%- endif -%}
           {%- endif -%}
         </ul>

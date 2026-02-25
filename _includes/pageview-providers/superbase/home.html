@@ -1,0 +1,7 @@
+<script>
+    {%- include pageview-providers/superbase/superbase.js -%}
+</script>
+<script>
+    var page_keys = page_keys.filter(item => item !== '');
+    superbaseViewCounter.getMultiCounts(page_keys)
+</script>

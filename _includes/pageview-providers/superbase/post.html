@@ -1,0 +1,10 @@
+ <script>
+    {%- include pageview-providers/superbase/superbase.js -%}
+</script>
+<script>
+(function () {
+  var pathname = document.location.pathname;
+  var pageKey = superbaseViewCounter.getPathName(pathname);
+  superbaseViewCounter.init(pageKey);
+})();
+</script>
